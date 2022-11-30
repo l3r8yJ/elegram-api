@@ -21,19 +21,25 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 package com.l3r8yj.elegramapi;
 
+import javax.naming.OperationNotSupportedException;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
 /**
- * The Default bot.
+ * Test case for {@link DefaultBot}.
  *
  * @since 0.0.0
  */
-public interface Bot {
+class DefaultBotTest {
 
-    /**
-     * Starts the bot.
-     *
-     * @throws Exception If something went wrong
-     */
-    void start() throws Exception;
+    @Test
+    void start() {
+        Assertions.assertThrows(
+            OperationNotSupportedException.class,
+            () -> new DefaultBot().start()
+        );
+    }
 }

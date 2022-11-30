@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-20.04, windows-2022, macos-12]
-        java: [17]
+        java: [11]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
@@ -27,4 +27,4 @@ jobs:
           key: ${{ runner.os }}-jdk-${{ matrix.java }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-jdk-${{ matrix.java }}-maven-
-      - run: mvn clean install --errors --batch-mode
+      - run: mvn clean install -Pqulice --errors --batch-mode

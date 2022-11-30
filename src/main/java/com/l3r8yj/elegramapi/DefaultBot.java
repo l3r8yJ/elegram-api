@@ -21,19 +21,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 package com.l3r8yj.elegramapi;
 
+import javax.naming.OperationNotSupportedException;
+
 /**
- * The Default bot.
+ * The default implementation of {@link Bot}.
  *
  * @since 0.0.0
  */
-public interface Bot {
+public final class DefaultBot implements Bot {
 
-    /**
-     * Starts the bot.
-     *
-     * @throws Exception If something went wrong
-     */
-    void start() throws Exception;
+    @Override
+    public void start() throws Exception {
+        throw new OperationNotSupportedException("Operation not supported...");
+    }
+
 }
