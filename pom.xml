@@ -23,11 +23,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <parent>
-    <groupId>com.jcabi</groupId>
-    <artifactId>parent</artifactId>
-    <version>0.64.1</version>
-  </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.l3r8yj</groupId>
   <artifactId>elegram-api</artifactId>
@@ -91,12 +86,38 @@ SOFTWARE.
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.1</version>
         <configuration combine.self="override">
-          <source>11</source>
-          <target>11</target>
+          <source>1.8</source>
+          <target>1.8</target>
           <compilerArgs>
             <arg>-Xpkginfo:always</arg>
           </compilerArgs>
         </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>1.8</version>
+        <executions>
+          <execution>
+            <phase>verify</phase>
+            <configuration>
+              <target>
+                <apply executable="xcop" failonerror="true">
+                  <arg value="--license"/>
+                  <arg value="LICENSE.txt"/>
+                  <fileset dir=".">
+                    <include name="**/*.xml"/>
+                    <include name="**/*.xsd"/>
+                    <exclude name="target/**/*"/>
+                    <exclude name=".idea/**/*"/>
+                  </fileset>
+                </apply>
+              </target>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>com.qulice</groupId>
@@ -105,6 +126,13 @@ SOFTWARE.
         <configuration>
           <license>file:${basedir}/LICENSE.txt</license>
         </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>org.l3r8yj</groupId>
+            <artifactId>elegram-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+          </dependency>
+        </dependencies>
         <executions>
           <execution>
             <goals>
@@ -115,4 +143,8 @@ SOFTWARE.
       </plugin>
     </plugins>
   </build>
+  <properties>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
 </project>
