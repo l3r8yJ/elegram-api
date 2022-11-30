@@ -1,0 +1,10 @@
+architect:
+  - l3r8yJ
+merge:
+  script:
+    - "mvn clean install --errors --batch-mode"
+release:
+  pre: false
+  script: |-
+    [[ "${tag}" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || exit -1
+    git commit -am "${tag}"
