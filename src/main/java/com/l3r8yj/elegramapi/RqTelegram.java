@@ -25,15 +25,10 @@
 package com.l3r8yj.elegramapi;
 
 /**
- * The default implementation of {@link Bot}.
+ * Request to telegram-api.
  *
  * @since 0.0.0
  */
-public final class DefaultBot implements Bot {
-
-    @Override
-    public void execute(final RqTelegram req) {
-        throw new UnsupportedOperationException("Operation not supported...");
-    }
+public interface RqTelegram {
 
 }

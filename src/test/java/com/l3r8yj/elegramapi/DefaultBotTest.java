@@ -24,7 +24,6 @@
 
 package com.l3r8yj.elegramapi;
 
-import javax.naming.OperationNotSupportedException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -36,10 +35,10 @@ import org.junit.jupiter.api.Test;
 class DefaultBotTest {
 
     @Test
-    void start() {
+    void execute() {
         Assertions.assertThrows(
-            OperationNotSupportedException.class,
-            () -> new DefaultBot().start()
+            UnsupportedOperationException.class,
+            () -> new DefaultBot().execute(new RqTelegram() { })
         );
     }
 }

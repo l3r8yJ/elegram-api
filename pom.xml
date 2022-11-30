@@ -28,25 +28,6 @@ SOFTWARE.
   <artifactId>elegram-api</artifactId>
   <packaging>jar</packaging>
   <description>The EO styled wrapper of Telegram bots api</description>
-  <version>1.0-SNAPSHOT</version>
-  <developers>
-    <developer>
-      <id>1</id>
-      <name>Ivanchuck Ivan</name>
-      <email>clicker.heroes.acg@gmail.com</email>
-      <roles>
-        <role>Architect</role>
-        <role>Developer</role>
-      </roles>
-      <timezone>+3</timezone>
-    </developer>
-  </developers>
-  <pluginRepositories>
-    <pluginRepository>
-      <id>oss.sonatype.org</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-    </pluginRepository>
-  </pluginRepositories>
   <dependencies>
     <dependency>
       <groupId>org.junit</groupId>
@@ -76,10 +57,29 @@ SOFTWARE.
     <dependency>
       <groupId>org.junit-pioneer</groupId>
       <artifactId>junit-pioneer</artifactId>
-      <version>1.7.2</version>
+      <version>1.8.0</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
+  <version>1.0-SNAPSHOT</version>
+  <developers>
+    <developer>
+      <id>1</id>
+      <name>Ivanchuck Ivan</name>
+      <email>clicker.heroes.acg@gmail.com</email>
+      <roles>
+        <role>Architect</role>
+        <role>Developer</role>
+      </roles>
+      <timezone>+3</timezone>
+    </developer>
+  </developers>
+  <pluginRepositories>
+    <pluginRepository>
+      <id>oss.sonatype.org</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+    </pluginRepository>
+  </pluginRepositories>
   <build>
     <plugins>
       <plugin>
@@ -91,6 +91,17 @@ SOFTWARE.
           <compilerArgs>
             <arg>-Xpkginfo:always</arg>
           </compilerArgs>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.0.0-M7</version>
+        <configuration>
+          <includes>
+            <include>**/*Spec.*</include>
+            <include>**/*Test.*</include>
+          </includes>
         </configuration>
       </plugin>
       <plugin>

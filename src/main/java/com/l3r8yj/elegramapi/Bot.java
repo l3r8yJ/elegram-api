@@ -31,9 +31,10 @@ package com.l3r8yj.elegramapi;
 public interface Bot {
 
     /**
-     * Starts the bot.
+     * Execute the command.
      *
+     * @param req The request to api
      * @throws Exception If something went wrong
      */
-    void start() throws Exception;
+    void execute(RqTelegram req) throws Exception;
 }
