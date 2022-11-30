@@ -25,6 +25,7 @@
 package com.l3r8yj.elegramapi;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -35,6 +36,7 @@ import org.junit.jupiter.api.Test;
 class DefaultBotTest {
 
     @Test
+    @Disabled
     void execute() {
         Assertions.assertThrows(
             UnsupportedOperationException.class,
