@@ -43,8 +43,8 @@ public interface RqTelegram {
     /**
      * The body.
      *
-     * @return Body of request as String.
-     * @throws IOException
+     * @return Body of request as String
+     * @throws IOException When something went wrong
      */
     String body() throws IOException;
 }

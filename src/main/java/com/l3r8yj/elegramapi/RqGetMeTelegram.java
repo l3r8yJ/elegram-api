@@ -20,7 +20,6 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
- *
  */
 
 package com.l3r8yj.elegramapi;
@@ -28,7 +27,7 @@ package com.l3r8yj.elegramapi;
 import java.io.IOException;
 
 /**
- * GetMe request to telegram api
+ * GetMe request to telegram api.
  *
  * @since 0.0.0
  */
@@ -37,22 +36,24 @@ public class RqGetMeTelegram implements RqTelegram {
     /**
      * The origin request.
      */
-    final RqTelegram origin;
+    private final RqTelegram origin;
 
     /**
-     * @param origin the Origin request
+     * Ctor.
+     *
+     * @param origin The origin request
      */
     public RqGetMeTelegram(final RqTelegram origin) {
         this.origin = origin;
     }
 
     @Override
-    public String plainText() {
+    public final String plainText() {
         return this.origin.plainText().concat("getMe");
     }
 
     @Override
-    public String body() throws IOException {
+    public final String body() throws IOException {
         return this.origin.body();
     }
 }

@@ -31,7 +31,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
- * Test case for {@link RqGetMeTelegram}
+ * Test case for {@link RqGetMeTelegram}.
  *
  * @since 0.0.0
  */
@@ -50,6 +50,6 @@ class RqGetMeTelegramTest {
     @Test
     @Disabled
     void body() {
-
+        throw new UnsupportedOperationException();
     }
 }

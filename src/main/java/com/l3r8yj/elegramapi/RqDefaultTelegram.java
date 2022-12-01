@@ -53,7 +53,7 @@ public class RqDefaultTelegram implements RqTelegram {
     /**
      * Ctor.
      *
-     * @param token  The uri
+     * @param token The uri
      * @param method The http method
      */
     public RqDefaultTelegram(final String token, final String method) {
@@ -63,7 +63,7 @@ public class RqDefaultTelegram implements RqTelegram {
     }
 
     @Override
-    public String plainText() {
+    public final String plainText() {
         return String.format(
             "%s%s/",
             this.address,
@@ -72,7 +72,7 @@ public class RqDefaultTelegram implements RqTelegram {
     }
 
     @Override
-    public String body() throws IOException {
+    public final String body() throws IOException {
         return new JdkRequest(
             this.plainText()
         ).method(this.method).fetch().body();
