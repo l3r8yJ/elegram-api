@@ -25,6 +25,8 @@
 package com.l3r8yj.elegramapi;
 
 import java.io.IOException;
+import org.cactoos.text.Concatenated;
+import org.cactoos.text.TextOf;
 
 /**
  * GetMe request to telegram api.
@@ -49,7 +51,10 @@ public class RqGetMeTelegram implements RqTelegram {
 
     @Override
     public final String plainText() {
-        return this.origin.plainText().concat("getMe");
+        return new Concatenated(
+            new TextOf(this.origin.plainText()),
+            new TextOf("getMe")
+        ).toString();
     }
 
     @Override

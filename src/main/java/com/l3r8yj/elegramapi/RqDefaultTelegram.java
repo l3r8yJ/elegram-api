@@ -26,7 +26,8 @@ package com.l3r8yj.elegramapi;
 
 import com.jcabi.http.request.JdkRequest;
 import java.io.IOException;
-import java.util.Locale;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.Upper;
 
 /**
  * Default request to telegram api without a method.
@@ -58,17 +59,17 @@ public class RqDefaultTelegram implements RqTelegram {
      */
     public RqDefaultTelegram(final String token, final String method) {
         this.token = token;
-        this.method = method.toUpperCase(Locale.ROOT);
+        this.method = new Upper(method).toString();
         this.address = "https://api.telegram.org/bot";
     }
 
     @Override
     public final String plainText() {
-        return String.format(
+        return new FormattedText(
             "%s%s/",
             this.address,
             this.token
-        );
+        ).toString();
     }
 
     @Override

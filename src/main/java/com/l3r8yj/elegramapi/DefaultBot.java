@@ -23,8 +23,8 @@
  */
 package com.l3r8yj.elegramapi;
 
-import java.util.Arrays;
 import java.util.List;
+import org.cactoos.list.ListOf;
 
 /**
  * The default implementation of {@link Bot}.
@@ -51,7 +51,7 @@ public final class DefaultBot implements Bot {
      */
     public DefaultBot(final String token, final Command... commands) {
         this.token = token;
-        this.commands = Arrays.asList(commands);
+        this.commands = new ListOf<>(commands);
     }
 
     @Override
