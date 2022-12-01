@@ -73,9 +73,8 @@ public class RqDefaultTelegram implements RqTelegram {
 
     @Override
     public String body() throws IOException {
-        return new JdkRequest(this.plainText())
-           .method(this.method)
-           .fetch()
-           .body();
+        return new JdkRequest(
+            this.plainText()
+        ).method(this.method).fetch().body();
     }
 }
