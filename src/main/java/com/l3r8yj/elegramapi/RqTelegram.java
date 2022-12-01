@@ -45,7 +45,7 @@ public interface RqTelegram {
     String plainText();
 
     /**
-     * The body.
+     * The response.
      *
      * @return Body of request as String
      * @throws IOException When something went wrong
