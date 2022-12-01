@@ -21,7 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
+/*
+ * @todo #0pdd_test test issue for zero puzzle.
+ */
 package com.l3r8yj.elegramapi;
 
 import java.util.Arrays;
@@ -57,9 +59,6 @@ public final class DefaultBot implements Bot {
 
     @Override
     public void run() {
-        /*
-         @todo #0pdd_test test issue for zero puzzle.
-        */
         throw new UnsupportedOperationException("Operation not supported...");
     }
 
