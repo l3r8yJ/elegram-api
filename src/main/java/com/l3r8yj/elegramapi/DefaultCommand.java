@@ -22,9 +22,6 @@
  * SOFTWARE.
  */
 /*
- * @todo #13 implement RqDefaultTelegram
- */
-/*
  * @todo #14 implement default command which sending RqDefaultTelegram
  */
 package com.l3r8yj.elegramapi;
