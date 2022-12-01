@@ -29,6 +29,8 @@ import java.io.IOException;
 
 /**
  * GetMe request to telegram api
+ *
+ * @since 0.0.0
  */
 public class RqGetMeTelegram implements RqTelegram {
 
@@ -40,7 +42,7 @@ public class RqGetMeTelegram implements RqTelegram {
     /**
      * @param origin the Origin request
      */
-    public RqGetMeTelegram(final RqDefaultTelegram origin) {
+    public RqGetMeTelegram(final RqTelegram origin) {
         this.origin = origin;
     }
 

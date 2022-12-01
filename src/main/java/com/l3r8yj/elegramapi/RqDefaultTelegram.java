@@ -30,6 +30,8 @@ import java.util.Locale;
 
 /**
  * Default request to telegram api without a method.
+ *
+ * @since 0.0.0
  */
 public class RqDefaultTelegram implements RqTelegram {
 
