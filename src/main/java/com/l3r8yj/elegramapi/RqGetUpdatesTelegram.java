@@ -25,27 +25,41 @@
 package com.l3r8yj.elegramapi;
 
 import com.jcabi.http.Response;
+import com.jcabi.http.request.JdkRequest;
 import java.io.IOException;
+import org.cactoos.text.Concatenated;
 
 /**
- * Request to telegram-api.
+ * GetUpdates request to telegram api.
  *
  * @since 0.0.0
  */
-public interface RqTelegram {
+public final class RqGetUpdatesTelegram implements RqTelegram {
 
     /**
-    * Represents RqTelegram in plain String.
-    *
-    * @return String value of RqTelegram
-    */
-    String plainText();
-
-    /**
-     * The body.
-     *
-     * @return Body of request as String
-     * @throws IOException When something went wrong
+     * The origin request.
      */
-    Response response() throws IOException;
+    private final RqTelegram origin;
+
+    /**
+     * Ctor.
+     *
+     * @param origin The origin request
+     */
+    public RqGetUpdatesTelegram(final RqTelegram origin) {
+        this.origin = origin;
+    }
+
+    @Override
+    public String plainText() {
+        return new Concatenated(
+            this.origin.plainText(),
+            "getUpdates"
+        ).toString();
+    }
+
+    @Override
+    public Response response() throws IOException {
+        return new JdkRequest(this.plainText()).fetch();
+    }
 }

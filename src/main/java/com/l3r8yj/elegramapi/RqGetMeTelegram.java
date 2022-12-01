@@ -24,6 +24,8 @@
 
 package com.l3r8yj.elegramapi;
 
+import com.jcabi.http.Response;
+import com.jcabi.http.request.JdkRequest;
 import java.io.IOException;
 import org.cactoos.text.Concatenated;
 import org.cactoos.text.TextOf;
@@ -33,7 +35,7 @@ import org.cactoos.text.TextOf;
  *
  * @since 0.0.0
  */
-public class RqGetMeTelegram implements RqTelegram {
+public final class RqGetMeTelegram implements RqTelegram {
 
     /**
      * The origin request.
@@ -50,7 +52,7 @@ public class RqGetMeTelegram implements RqTelegram {
     }
 
     @Override
-    public final String plainText() {
+    public String plainText() {
         return new Concatenated(
             new TextOf(this.origin.plainText()),
             new TextOf("getMe")
@@ -58,7 +60,7 @@ public class RqGetMeTelegram implements RqTelegram {
     }
 
     @Override
-    public final String body() throws IOException {
-        return this.origin.body();
+    public Response response() throws IOException {
+        return new JdkRequest(this.plainText()).fetch();
     }
 }

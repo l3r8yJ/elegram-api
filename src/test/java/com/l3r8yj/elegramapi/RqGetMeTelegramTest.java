@@ -21,13 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-/*
- * @todo #16 implement body test.
- */
+
 package com.l3r8yj.elegramapi;
 
+import java.io.IOException;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -37,10 +35,15 @@ import org.junit.jupiter.api.Test;
  */
 class RqGetMeTelegramTest {
 
+    /**
+     * The link.
+     */
+    private static final String LINK = "https://api.telegram.org/bottkn/getMe";
+
     @Test
-    void plainText() {
+    final void plainText() {
         Assertions.assertEquals(
-            "https://api.telegram.org/bottkn/getMe",
+            RqGetMeTelegramTest.LINK,
             new RqGetMeTelegram(
                 new RqDefaultTelegram("tkn", "GET")
             ).plainText()
@@ -48,8 +51,13 @@ class RqGetMeTelegramTest {
     }
 
     @Test
-    @Disabled
-    void body() {
-        throw new UnsupportedOperationException();
+    final void response() throws IOException {
+        Assertions.assertEquals(
+            RqGetMeTelegramTest.LINK,
+            new RqGetMeTelegram(
+                new RqDefaultTelegram("tkn", "GET")
+            )
+                .response().back().uri().toString()
+        );
     }
 }

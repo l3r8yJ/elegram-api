@@ -24,28 +24,40 @@
 
 package com.l3r8yj.elegramapi;
 
-import com.jcabi.http.Response;
 import java.io.IOException;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
- * Request to telegram-api.
+ * Test case for {@link RqGetUpdatesTelegram}.
  *
  * @since 0.0.0
  */
-public interface RqTelegram {
+class RqGetUpdatesTelegramTest {
 
     /**
-    * Represents RqTelegram in plain String.
-    *
-    * @return String value of RqTelegram
-    */
-    String plainText();
-
-    /**
-     * The body.
-     *
-     * @return Body of request as String
-     * @throws IOException When something went wrong
+     * The link.
      */
-    Response response() throws IOException;
+    private static final String LINK = "https://api.telegram.org/bottkn/getUpdates";
+
+    @Test
+    final void plainText() {
+        Assertions.assertEquals(
+            RqGetUpdatesTelegramTest.LINK,
+            new RqGetUpdatesTelegram(
+                new RqDefaultTelegram("tkn", "GET")
+            ).plainText()
+        );
+    }
+
+    @Test
+    final void response() throws IOException {
+        Assertions.assertEquals(
+            RqGetUpdatesTelegramTest.LINK,
+            new RqGetUpdatesTelegram(
+                new RqDefaultTelegram("tkn", "GET")
+            )
+            .response().back().uri().toString()
+        );
+    }
 }

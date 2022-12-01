@@ -24,6 +24,7 @@
 
 package com.l3r8yj.elegramapi;
 
+import com.jcabi.http.Response;
 import com.jcabi.http.request.JdkRequest;
 import java.io.IOException;
 import org.cactoos.text.FormattedText;
@@ -73,9 +74,9 @@ public class RqDefaultTelegram implements RqTelegram {
     }
 
     @Override
-    public final String body() throws IOException {
+    public final Response response() throws IOException {
         return new JdkRequest(
             this.plainText()
-        ).method(this.method).fetch().body();
+        ).method(this.method).fetch();
     }
 }
