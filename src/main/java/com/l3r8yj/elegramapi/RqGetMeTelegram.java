@@ -48,7 +48,7 @@ public class RqGetMeTelegram implements RqTelegram {
 
     @Override
     public String plainText() {
-        return this.origin.plainText().concat("/getMe");
+        return this.origin.plainText().concat("getMe");
     }
 
     @Override
