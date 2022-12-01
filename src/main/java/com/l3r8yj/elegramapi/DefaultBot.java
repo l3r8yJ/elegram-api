@@ -23,6 +23,7 @@
  */
 /*
  * @todo #0pdd_test test issue for zero puzzle.
+ *  Make new issue via 0pdd.
  */
 package com.l3r8yj.elegramapi;
 
