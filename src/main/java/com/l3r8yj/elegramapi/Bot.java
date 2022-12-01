@@ -31,7 +31,7 @@ package com.l3r8yj.elegramapi;
 public interface Bot {
 
     /**
-     * Execute the command.
+     * Runs the bot.
      *
      * @throws Exception If something went wrong
      */

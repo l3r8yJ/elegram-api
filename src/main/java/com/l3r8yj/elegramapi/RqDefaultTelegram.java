@@ -24,27 +24,56 @@
 
 package com.l3r8yj.elegramapi;
 
+import com.jcabi.http.request.JdkRequest;
 import java.io.IOException;
+import java.util.Locale;
 
 /**
- * Request to telegram-api.
- *
- * @since 0.0.0
+ * Default request to telegram api without a method.
  */
-public interface RqTelegram {
+public class RqDefaultTelegram implements RqTelegram {
 
     /**
-    * Represents RqTelegram in plain String.
-    *
-    * @return String value of RqTelegram
-    */
-    String plainText();
-
-    /**
-     * The body.
-     *
-     * @return Body of request as String.
-     * @throws IOException
+     * Default telegram address.
      */
-    String body() throws IOException;
+    private final String address;
+
+    /**
+     * The uri to make request.
+     */
+    private final String token;
+
+    /**
+     * Http method.
+     */
+    private final String method;
+
+    /**
+     * Ctor.
+     *
+     * @param token  The uri
+     * @param method The http method
+     */
+    public RqDefaultTelegram(final String token, final String method) {
+        this.token = token;
+        this.method = method.toUpperCase(Locale.ROOT);
+        this.address = "https://api.telegram.org/bot";
+    }
+
+    @Override
+    public String plainText() {
+        return String.format(
+            "%s%s/",
+            this.address,
+            this.token
+        );
+    }
+
+    @Override
+    public String body() throws IOException {
+        return new JdkRequest(this.plainText())
+           .method(this.method)
+           .fetch()
+           .body();
+    }
 }

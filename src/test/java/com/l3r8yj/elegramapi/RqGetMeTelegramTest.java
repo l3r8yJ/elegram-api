@@ -21,30 +21,35 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
+/*
+ * @todo #16 implement body test.
+ */
 package com.l3r8yj.elegramapi;
 
-import java.io.IOException;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 /**
- * Request to telegram-api.
+ * Test case for {@link RqGetMeTelegram}
  *
  * @since 0.0.0
  */
-public interface RqTelegram {
+class RqGetMeTelegramTest {
 
-    /**
-    * Represents RqTelegram in plain String.
-    *
-    * @return String value of RqTelegram
-    */
-    String plainText();
+    @Test
+    void plainText() {
+        Assertions.assertEquals(
+            "https://api.telegram.org/bottkn/getMe",
+            new RqGetMeTelegram(
+                new RqDefaultTelegram("tkn", "GET")
+            ).plainText()
+        );
+    }
 
-    /**
-     * The body.
-     *
-     * @return Body of request as String.
-     * @throws IOException
-     */
-    String body() throws IOException;
+    @Test
+    @Disabled
+    void body() {
+
+    }
 }

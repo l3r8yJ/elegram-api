@@ -28,6 +28,18 @@ SOFTWARE.
   <artifactId>elegram-api</artifactId>
   <packaging>jar</packaging>
   <description>The EO styled wrapper of Telegram bots api</description>
+  <developers>
+    <developer>
+      <id>1</id>
+      <name>Ivanchuck Ivan</name>
+      <email>clicker.heroes.acg@gmail.com</email>
+      <roles>
+        <role>Architect</role>
+        <role>Developer</role>
+      </roles>
+      <timezone>+3</timezone>
+    </developer>
+  </developers>
   <dependencies>
     <dependency>
       <groupId>org.junit</groupId>
@@ -60,20 +72,13 @@ SOFTWARE.
       <version>1.8.0</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>com.jcabi</groupId>
+      <artifactId>jcabi-http</artifactId>
+      <version>1.20.1</version>
+    </dependency>
   </dependencies>
   <version>1.0-SNAPSHOT</version>
-  <developers>
-    <developer>
-      <id>1</id>
-      <name>Ivanchuck Ivan</name>
-      <email>clicker.heroes.acg@gmail.com</email>
-      <roles>
-        <role>Architect</role>
-        <role>Developer</role>
-      </roles>
-      <timezone>+3</timezone>
-    </developer>
-  </developers>
   <pluginRepositories>
     <pluginRepository>
       <id>oss.sonatype.org</id>
