@@ -35,7 +35,7 @@ import org.junit.jupiter.api.Test;
 class DefaultBotTest {
 
     @Test
-    void execute() {
+    final void execute() {
         Assertions.assertThrows(
             UnsupportedOperationException.class,
             () ->
@@ -43,8 +43,7 @@ class DefaultBotTest {
                 "tkn",
                     new DefaultCommand(),
                     new DefaultCommand()
-                )
-                    .run()
+                ).run()
         );
     }
 }

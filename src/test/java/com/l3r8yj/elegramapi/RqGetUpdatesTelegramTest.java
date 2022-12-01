@@ -25,7 +25,8 @@
 package com.l3r8yj.elegramapi;
 
 import java.io.IOException;
-import org.junit.jupiter.api.Assertions;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -42,22 +43,25 @@ class RqGetUpdatesTelegramTest {
 
     @Test
     final void plainText() {
-        Assertions.assertEquals(
+        MatcherAssert.assertThat(
             RqGetUpdatesTelegramTest.LINK,
-            new RqGetUpdatesTelegram(
-                new RqDefaultTelegram("tkn", "GET")
-            ).plainText()
+            Matchers.equalTo(
+                new RqGetUpdatesTelegram(
+                    new RqDefaultTelegram("tkn", "GET")
+                ).plainText()
+            )
         );
     }
 
     @Test
     final void response() throws IOException {
-        Assertions.assertEquals(
+        MatcherAssert.assertThat(
             RqGetUpdatesTelegramTest.LINK,
-            new RqGetUpdatesTelegram(
-                new RqDefaultTelegram("tkn", "GET")
+            Matchers.equalTo(
+                new RqGetUpdatesTelegram(
+                    new RqDefaultTelegram("tkn", "GET")
+                ).response().back().uri().toString()
             )
-            .response().back().uri().toString()
         );
     }
 }
