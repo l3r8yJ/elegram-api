@@ -57,6 +57,9 @@ public final class DefaultBot implements Bot {
 
     @Override
     public void run() {
+        /*
+         @todo #0pdd_test test issue for zero puzzle.
+        */
         throw new UnsupportedOperationException("Operation not supported...");
     }
 
