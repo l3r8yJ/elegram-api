@@ -21,7 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
+/*
+ * @todo #FixJavadoc
+ * Need to fix response() method javadoc.
+ */
 package com.l3r8yj.elegramapi;
 
 import com.jcabi.http.Response;
