@@ -42,8 +42,14 @@ public final class DefaultBot implements Bot {
     /**
      * The token.
      */
-    final String token;
+    private final String token;
 
+    /**
+     * Ctor.
+     *
+     * @param token The token
+     * @param commands All custom commands
+     */
     public DefaultBot(final String token, final Command... commands) {
         this.token = token;
         this.commands = Arrays.asList(commands);
