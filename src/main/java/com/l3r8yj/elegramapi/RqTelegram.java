@@ -31,9 +31,11 @@ package com.l3r8yj.elegramapi;
  */
 public interface RqTelegram {
 
-  /**
-   * Represents RqTelegram in plain String
-   * @return string value of RqTelegram
-   */
-  String plainText();
+    /**
+    * Represents RqTelegram in plain String.
+    *
+    * @return String value of RqTelegram
+    */
+    String plainText();
+
 }

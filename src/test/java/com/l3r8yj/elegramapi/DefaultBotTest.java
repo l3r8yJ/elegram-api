@@ -38,7 +38,13 @@ class DefaultBotTest {
     void execute() {
         Assertions.assertThrows(
             UnsupportedOperationException.class,
-            () -> new DefaultBot("tkn").run()
+            () ->
+                new DefaultBot(
+                "tkn",
+                    new DefaultCommand(),
+                    new DefaultCommand()
+                )
+                    .run()
         );
     }
 }
