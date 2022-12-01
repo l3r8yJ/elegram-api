@@ -42,9 +42,9 @@ public interface RqTelegram {
     String plainText();
 
     /**
-     * The response.
+     * The response from request.
      *
-     * @return Body of request as String
+     * @return The response
      * @throws IOException When something went wrong
      */
     Response response() throws IOException;
