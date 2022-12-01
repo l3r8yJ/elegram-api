@@ -13,7 +13,7 @@ __Elegram-api__ it's a wrapper over the telegram bots api, but in the style of E
 
 This is a concept, if you have ideas, feel free to create an issue!
 
-```
+```java
 new Bot(
   "your token",
   new TxtCommand(
