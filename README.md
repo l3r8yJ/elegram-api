@@ -4,6 +4,8 @@
 [![DevOps By Rultor.com](http://www.rultor.com/b/objectionary/eo)](http://www.rultor.com/p/objectionary/eo)
 [![We recommend IntelliJ IDEA](https://www.elegantobjects.org/intellij-idea.svg)](https://www.jetbrains.com/idea/)
 
+[![codecov](https://codecov.io/gh/l3r8yJ/elegram-api/branch/master/graph/badge.svg?token=JTWR1LR9QX)](https://codecov.io/gh/l3r8yJ/elegram-api)
+
 __Elegram-api__ it's a wrapper over the telegram bots api, but in the style of EO. More object-oriented, more maintainable.
 
 ## Concept
