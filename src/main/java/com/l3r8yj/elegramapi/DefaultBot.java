@@ -24,6 +24,9 @@
 
 package com.l3r8yj.elegramapi;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * The default implementation of {@link Bot}.
  *
@@ -31,8 +34,23 @@ package com.l3r8yj.elegramapi;
  */
 public final class DefaultBot implements Bot {
 
+    /**
+     * All commands.
+     */
+    private final List<Command> commands;
+
+    /**
+     * The token.
+     */
+    final String token;
+
+    public DefaultBot(final String token, final Command... commands) {
+        this.token = token;
+        this.commands = Arrays.asList(commands);
+    }
+
     @Override
-    public void execute(final RqTelegram req) {
+    public void run() {
         throw new UnsupportedOperationException("Operation not supported...");
     }
 

@@ -40,7 +40,7 @@ class DefaultBotTest {
     void execute() {
         Assertions.assertThrows(
             UnsupportedOperationException.class,
-            () -> new DefaultBot().execute(new RqTelegram() { })
+            () -> new DefaultBot("tkn").run()
         );
     }
 }

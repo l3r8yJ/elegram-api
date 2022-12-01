@@ -33,8 +33,7 @@ public interface Bot {
     /**
      * Execute the command.
      *
-     * @param req The request to api
      * @throws Exception If something went wrong
      */
-    void execute(RqTelegram req) throws Exception;
+    void run() throws Exception;
 }
