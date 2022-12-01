@@ -21,10 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-/*
- * @todo #zero test issue for zero puzzle.
- *  Make new issue via 0pdd.
- */
 package com.l3r8yj.elegramapi;
 
 import java.util.Arrays;
