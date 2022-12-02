@@ -42,10 +42,7 @@ public final class RqGetMeTelegram extends RqDefaultTelegram {
      * @param token The token
      */
     public RqGetMeTelegram(final String token) {
-        super(
-            new Concatenated(token, "/getMe").toString(),
-            RqDefaultTelegram.ADDR
-        );
+        super(new Concatenated(token, "/getMe").toString());
     }
 
 }

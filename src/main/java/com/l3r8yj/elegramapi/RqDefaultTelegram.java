@@ -53,7 +53,7 @@ public class RqDefaultTelegram implements RqTelegram {
     /**
      * Default url.
      */
-    protected static final String ADDR = "https://api.telegram.org/bot";
+    private static final String ADDR = "https://api.telegram.org/bot";
 
     /**
      * Default telegram address.
