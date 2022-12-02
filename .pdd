@@ -1,5 +1,4 @@
 --source=.
 --verbose
 --exclude target/**
---exclude xargs/**
 --rule min-words:10
