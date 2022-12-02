@@ -21,11 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-/*
- * @todo #Tests/RqFileTelegram.
- * Write tests for methods response(), plainText().
- * The response must come from the api file.
- */
+
 package com.l3r8yj.elegramapi;
 
 /**

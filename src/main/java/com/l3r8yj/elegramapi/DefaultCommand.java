@@ -21,10 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-/*
- * @todo #14 Core/Default command.
- * Implement default command with base attrs.
- */
+
 package com.l3r8yj.elegramapi;
 
 /**
