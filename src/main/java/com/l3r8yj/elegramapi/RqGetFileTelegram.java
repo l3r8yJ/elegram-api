@@ -21,10 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-/*
-* @todo #41 Add file path encapsulation.
-* RqFileTelegram must encapsulate the file path.
-* */
+
 package com.l3r8yj.elegramapi;
 
 import org.cactoos.text.Concatenated;
