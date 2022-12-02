@@ -21,7 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
+/*
+ * @todo #Redesign/RqGetUpdatesTelegram.
+ * Change the design of this class and make it like RqFileTelegram.
+ */
 package com.l3r8yj.elegramapi;
 
 import com.jcabi.http.Response;
@@ -54,7 +57,7 @@ public final class RqGetUpdatesTelegram implements RqTelegram {
     public String plainText() {
         return new Concatenated(
             this.origin.plainText(),
-            "getUpdates"
+            "/getUpdates"
         ).toString();
     }
 

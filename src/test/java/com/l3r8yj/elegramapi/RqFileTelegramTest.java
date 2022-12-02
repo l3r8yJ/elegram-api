@@ -24,65 +24,37 @@
 
 package com.l3r8yj.elegramapi;
 
-import com.jcabi.http.Response;
-import com.jcabi.http.request.JdkRequest;
 import java.io.IOException;
-import org.cactoos.text.Concatenated;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Test;
 
 /**
- * Default request to telegram api without a method.
+ * Test case for {@link RqFileTelegram}.
  *
  * @since 0.0.0
  */
-public class RqDefaultTelegram implements RqTelegram {
+class RqFileTelegramTest {
 
     /**
-     * Default url.
+     * The address.
      */
-    private static final String ADDR = "https://api.telegram.org/bot";
+    private static final String ADDRESS = "https://api.telegram.org/file/bottkn";
 
-    /**
-     * Default telegram address.
-     */
-    private final String address;
-
-    /**
-     * The uri to make request.
-     */
-    private final String token;
-
-    /**
-     * Ctor.
-     *
-     * @param token The uri
-     */
-    public RqDefaultTelegram(final String token) {
-        this(token, RqDefaultTelegram.ADDR);
+    @Test
+    final void plainTextRight() {
+        MatcherAssert.assertThat(
+            new RqFileTelegram("tkn").plainText(),
+            Matchers.equalTo(RqFileTelegramTest.ADDRESS)
+        );
     }
 
-    /**
-     * Ctor.
-     *
-     * @param token The token
-     * @param address The address
-     */
-    public RqDefaultTelegram(final String token, final String address) {
-        this.token = token;
-        this.address = address;
-    }
-
-    @Override
-    public final String plainText() {
-        return new Concatenated(
-            this.address,
-            this.token
-        ).toString();
-    }
-
-    @Override
-    public final Response response() throws IOException {
-        return new JdkRequest(
-            this.plainText()
-        ).fetch();
+    @Test
+    final void responseFromRightApi() throws IOException {
+        MatcherAssert.assertThat(
+            new RqFileTelegram("tkn")
+                .response().back().uri().toString(),
+            Matchers.equalTo(RqFileTelegramTest.ADDRESS)
+        );
     }
 }
