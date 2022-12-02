@@ -22,82 +22,68 @@
  * SOFTWARE.
  */
 /*
- * @todo #Refactor/ refactor design of this class, for now it's a bit wrong.
+ * @todo #Tests/RqFileTelegram write tests for this class.
  */
 package com.l3r8yj.elegramapi;
 
 import com.jcabi.http.Response;
 import com.jcabi.http.request.JdkRequest;
 import java.io.IOException;
-import org.cactoos.text.FormattedText;
+import org.cactoos.text.Concatenated;
 
 /**
- * Default request to telegram api without a method.
+ * Request to file api.
  *
  * @since 0.0.0
  */
-public class RqDefaultTelegram implements RqTelegram {
+public class RqFileTelegram implements RqTelegram {
 
     /**
-     * Default url.
+     * The default address.
      */
-    private static final String ADDR = "https://api.telegram.org/bot";
+    private static final String ADDRESS = "https://api.telegram.org/file/bot";
 
     /**
-     * Default telegram address.
+     * The address.
      */
-    private final String address;
+    private final String addr;
 
     /**
-     * The uri to make request.
+     * The token.
      */
     private final String token;
-
-    /**
-     * Http method.
-     */
-    private final String method;
-
-    /**
-     * Ctor.
-     *
-     * @param token The uri
-     * @param method The http method
-     */
-    public RqDefaultTelegram(final String token, final String method) {
-        this(token, RqDefaultTelegram.ADDR, method);
-    }
 
     /**
      * Ctor.
      *
      * @param token The token
-     * @param address The address
-     * @param method The http method
      */
-    public RqDefaultTelegram(
-        final String token,
-        final String address,
-        final String method
-    ) {
+    public RqFileTelegram(final String token) {
+        this(RqFileTelegram.ADDRESS, token);
+    }
+
+    /**
+     * Ctor.
+     *
+     * @param address The address of api
+     * @param token The token
+     */
+    public RqFileTelegram(final String address, final String token) {
         this.token = token;
-        this.address = address;
-        this.method = method;
+        this.addr = address;
     }
 
     @Override
     public final String plainText() {
-        return new FormattedText(
-            "%s%s/",
-            this.address,
+        return new Concatenated(
+            RqFileTelegram.ADDRESS,
+            "/",
             this.token
         ).toString();
     }
 
     @Override
     public final Response response() throws IOException {
-        return new JdkRequest(
-            this.plainText()
-        ).method(this.method).fetch();
+        return new JdkRequest(this.plainText()).fetch();
     }
 }
