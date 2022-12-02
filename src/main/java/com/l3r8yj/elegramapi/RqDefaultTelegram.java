@@ -25,6 +25,17 @@
  * @todo #37 Abstraction level.
  * After closing #38 we should this class abstract.
  */
+/*
+* @todo #41 Design/ change scope.
+* In RqDefaultTelegram we have to change
+* the scope of the ADDR field to private
+* and change the Ctors in the inheritors.
+* */
+/*
+ * @todo #41 Design/ add request encapsulation.
+ * RqDefaultTelegram have to encapsulate the
+ * Request on main ctor.
+ * */
 package com.l3r8yj.elegramapi;
 
 import com.jcabi.http.Response;
@@ -84,8 +95,6 @@ public class RqDefaultTelegram implements RqTelegram {
 
     @Override
     public final Response response() throws IOException {
-        return new JdkRequest(
-            this.plainText()
-        ).fetch();
+        return new JdkRequest(this.plainText()).fetch();
     }
 }

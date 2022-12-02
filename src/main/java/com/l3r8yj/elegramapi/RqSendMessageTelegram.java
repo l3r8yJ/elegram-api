@@ -21,31 +21,24 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-/*
-* @todo #41 Add file path encapsulation.
-* RqFileTelegram must encapsulate the file path.
-* */
+
 package com.l3r8yj.elegramapi;
 
+import org.cactoos.text.Concatenated;
+
 /**
- * Request to file api.
+ * Request to send message to the api.
  *
  * @since 0.0.0
  */
-public class RqFileTelegram extends RqDefaultTelegram {
-
-    /**
-     * The default address.
-     */
-    private static final String ADDRESS = "https://api.telegram.org/file/bot";
+public class RqSendMessageTelegram extends RqDefaultTelegram {
 
     /**
      * Ctor.
      *
      * @param token The token
      */
-    public RqFileTelegram(final String token) {
-        super(token, RqFileTelegram.ADDRESS);
+    public RqSendMessageTelegram(final String token) {
+        super(new Concatenated(token, "/sendMessage").toString());
     }
-
 }

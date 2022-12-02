@@ -21,31 +21,40 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-/*
-* @todo #41 Add file path encapsulation.
-* RqFileTelegram must encapsulate the file path.
-* */
+
 package com.l3r8yj.elegramapi;
 
+import java.io.IOException;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Test;
+
 /**
- * Request to file api.
+ * The test case for {@link RqSendMessageTelegram}.
  *
  * @since 0.0.0
  */
-public class RqFileTelegram extends RqDefaultTelegram {
+class RqSendMessageTelegramTest {
 
     /**
-     * The default address.
+     * The link.
      */
-    private static final String ADDRESS = "https://api.telegram.org/file/bot";
+    private static final String LINK = "https://api.telegram.org/bottkn/sendMessage";
 
-    /**
-     * Ctor.
-     *
-     * @param token The token
-     */
-    public RqFileTelegram(final String token) {
-        super(token, RqFileTelegram.ADDRESS);
+    @Test
+    final void plainText() {
+        MatcherAssert.assertThat(
+            new RqSendMessageTelegram("tkn").plainText(),
+            Matchers.equalTo(RqSendMessageTelegramTest.LINK)
+        );
     }
 
+    @Test
+    final void response() throws IOException {
+        MatcherAssert.assertThat(
+            new RqSendMessageTelegram("tkn")
+                .response().back().uri().toString(),
+            Matchers.equalTo(RqSendMessageTelegramTest.LINK)
+        );
+    }
 }
