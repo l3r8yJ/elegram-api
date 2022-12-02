@@ -22,7 +22,9 @@
  * SOFTWARE.
  */
 /*
- * @todo #Tests/RqFileTelegram write tests for this class.
+ * @todo #Tests/RqFileTelegram.
+ * Write tests for methods response(), plainText().
+ * The response must come from the api file.
  */
 package com.l3r8yj.elegramapi;
 
