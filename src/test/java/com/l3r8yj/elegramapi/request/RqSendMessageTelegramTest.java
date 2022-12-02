@@ -22,13 +22,39 @@
  * SOFTWARE.
  */
 
-package com.l3r8yj.elegramapi;
+package com.l3r8yj.elegramapi.request;
+
+import java.io.IOException;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Test;
 
 /**
- * The base command.
+ * The test case for {@link RqSendMessageTelegram}.
  *
  * @since 0.0.0
  */
-public interface Command {
+class RqSendMessageTelegramTest {
 
+    /**
+     * The link.
+     */
+    private static final String LINK = "https://api.telegram.org/bottkn/sendMessage";
+
+    @Test
+    final void plainText() {
+        MatcherAssert.assertThat(
+            new RqSendMessageTelegram("tkn").plainText(),
+            Matchers.equalTo(RqSendMessageTelegramTest.LINK)
+        );
+    }
+
+    @Test
+    final void response() throws IOException {
+        MatcherAssert.assertThat(
+            new RqSendMessageTelegram("tkn")
+                .response().back().uri().toString(),
+            Matchers.equalTo(RqSendMessageTelegramTest.LINK)
+        );
+    }
 }

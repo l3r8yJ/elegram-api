@@ -22,30 +22,23 @@
  * SOFTWARE.
  */
 
-package com.l3r8yj.elegramapi;
+package com.l3r8yj.elegramapi.request;
 
-import com.jcabi.http.Response;
-import java.io.IOException;
+import org.cactoos.text.Concatenated;
 
 /**
- * Request to telegram-api.
+ * GetUpdates request to telegram api.
  *
  * @since 0.0.0
  */
-public interface RqTelegram {
+public final class RqGetUpdatesTelegram extends RqDefaultTelegram {
 
     /**
-    * Represents RqTelegram in plain String.
-    *
-    * @return String value of RqTelegram
-    */
-    String plainText();
-
-    /**
-     * The response from request.
+     * Ctor.
      *
-     * @return The response
-     * @throws IOException When something went wrong
+     * @param token The token
      */
-    Response response() throws IOException;
+    public RqGetUpdatesTelegram(final String token) {
+        super(new Concatenated(token, "/getUpdates").toString());
+    }
 }

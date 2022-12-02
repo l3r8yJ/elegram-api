@@ -21,42 +21,24 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.l3r8yj.elegramapi;
+package com.l3r8yj.elegramapi.request;
 
-import java.util.List;
-import org.cactoos.list.ListOf;
+import org.cactoos.text.Concatenated;
 
 /**
- * The default implementation of {@link Bot}.
+ * GetMe request to telegram api.
  *
  * @since 0.0.0
  */
-public final class DefaultBot implements Bot {
-
-    /**
-     * All commands.
-     */
-    private final List<Command> commands;
-
-    /**
-     * The token.
-     */
-    private final String token;
+public final class RqGetMeTelegram extends RqDefaultTelegram {
 
     /**
      * Ctor.
      *
      * @param token The token
-     * @param commands All custom commands
      */
-    public DefaultBot(final String token, final Command... commands) {
-        this.token = token;
-        this.commands = new ListOf<>(commands);
-    }
-
-    @Override
-    public void run() {
-        throw new UnsupportedOperationException("Operation not supported...");
+    public RqGetMeTelegram(final String token) {
+        super(new Concatenated(token, "/getMe").toString());
     }
 
 }

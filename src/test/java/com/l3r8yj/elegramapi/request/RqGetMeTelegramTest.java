@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package com.l3r8yj.elegramapi;
+package com.l3r8yj.elegramapi.request;
 
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;

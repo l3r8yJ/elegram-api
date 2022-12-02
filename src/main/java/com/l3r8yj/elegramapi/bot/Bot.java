@@ -21,27 +21,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-/*
- * @todo #Redesign/RqGetUpdatesTelegram.
- * Change the design of this class and make it like RqFileTelegram.
- */
-package com.l3r8yj.elegramapi;
-
-import org.cactoos.text.Concatenated;
+package com.l3r8yj.elegramapi.bot;
 
 /**
- * GetUpdates request to telegram api.
+ * The Default bot.
  *
  * @since 0.0.0
  */
-public final class RqGetUpdatesTelegram extends RqDefaultTelegram {
+public interface Bot {
 
     /**
-     * Ctor.
+     * Runs the bot.
      *
-     * @param token The token
+     * @throws Exception If something went wrong
      */
-    public RqGetUpdatesTelegram(final String token) {
-        super(new Concatenated(token, "/getUpdates").toString());
-    }
+    void run() throws Exception;
 }

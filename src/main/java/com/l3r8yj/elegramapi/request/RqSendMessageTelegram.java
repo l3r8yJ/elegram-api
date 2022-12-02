@@ -22,33 +22,23 @@
  * SOFTWARE.
  */
 
-package com.l3r8yj.elegramapi;
+package com.l3r8yj.elegramapi.request;
 
 import org.cactoos.text.Concatenated;
 
 /**
- * Request to file api.
+ * Request to send message to the api.
  *
  * @since 0.0.0
  */
-public class RqGetFileTelegram extends RqDefaultTelegram {
-
-    /**
-     * The default address.
-     */
-    private static final String ADDRESS = "https://api.telegram.org/file/bot";
+public class RqSendMessageTelegram extends RqDefaultTelegram {
 
     /**
      * Ctor.
      *
      * @param token The token
-     * @param path The path
      */
-    public RqGetFileTelegram(final String token, final String path) {
-        super(
-            new Concatenated(token, "/", path).toString(),
-            RqGetFileTelegram.ADDRESS
-        );
+    public RqSendMessageTelegram(final String token) {
+        super(new Concatenated(token, "/sendMessage").toString());
     }
-
 }

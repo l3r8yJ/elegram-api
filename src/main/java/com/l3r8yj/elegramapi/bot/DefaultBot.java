@@ -21,40 +21,43 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package com.l3r8yj.elegramapi.bot;
 
-package com.l3r8yj.elegramapi;
-
-import java.io.IOException;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.jupiter.api.Test;
+import com.l3r8yj.elegramapi.command.Command;
+import java.util.List;
+import org.cactoos.list.ListOf;
 
 /**
- * The test case for {@link RqSendMessageTelegram}.
+ * The default implementation of {@link Bot}.
  *
  * @since 0.0.0
  */
-class RqSendMessageTelegramTest {
+public final class DefaultBot implements Bot {
 
     /**
-     * The link.
+     * All commands.
      */
-    private static final String LINK = "https://api.telegram.org/bottkn/sendMessage";
+    private final List<Command> commands;
 
-    @Test
-    final void plainText() {
-        MatcherAssert.assertThat(
-            new RqSendMessageTelegram("tkn").plainText(),
-            Matchers.equalTo(RqSendMessageTelegramTest.LINK)
-        );
+    /**
+     * The token.
+     */
+    private final String token;
+
+    /**
+     * Ctor.
+     *
+     * @param token The token
+     * @param commands All custom commands
+     */
+    public DefaultBot(final String token, final Command... commands) {
+        this.token = token;
+        this.commands = new ListOf<>(commands);
     }
 
-    @Test
-    final void response() throws IOException {
-        MatcherAssert.assertThat(
-            new RqSendMessageTelegram("tkn")
-                .response().back().uri().toString(),
-            Matchers.equalTo(RqSendMessageTelegramTest.LINK)
-        );
+    @Override
+    public void run() {
+        throw new UnsupportedOperationException("Operation not supported...");
     }
+
 }

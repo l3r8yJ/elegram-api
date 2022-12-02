@@ -22,39 +22,9 @@
  * SOFTWARE.
  */
 
-package com.l3r8yj.elegramapi;
-
-import java.io.IOException;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.jupiter.api.Test;
-
 /**
- * Test case for {@link RqGetUpdatesTelegram}.
+ * Requests to telegram api.
  *
  * @since 0.0.0
  */
-class RqGetUpdatesTelegramTest {
-
-    /**
-     * The link.
-     */
-    private static final String LINK = "https://api.telegram.org/bottkn/getUpdates";
-
-    @Test
-    final void plainText() {
-        MatcherAssert.assertThat(
-            new RqGetUpdatesTelegram("tkn").plainText(),
-            Matchers.equalTo(RqGetUpdatesTelegramTest.LINK)
-        );
-    }
-
-    @Test
-    final void response() throws IOException {
-        MatcherAssert.assertThat(
-            new RqGetUpdatesTelegram("tkn")
-                .response().back().uri().toString(),
-            Matchers.equalTo(RqGetUpdatesTelegramTest.LINK)
-        );
-    }
-}
+package com.l3r8yj.elegramapi.request;

@@ -22,23 +22,9 @@
  * SOFTWARE.
  */
 
-package com.l3r8yj.elegramapi;
-
-import org.cactoos.text.Concatenated;
-
 /**
- * Request to send message to the api.
+ * The commands package.
  *
  * @since 0.0.0
  */
-public class RqSendMessageTelegram extends RqDefaultTelegram {
-
-    /**
-     * Ctor.
-     *
-     * @param token The token
-     */
-    public RqSendMessageTelegram(final String token) {
-        super(new Concatenated(token, "/sendMessage").toString());
-    }
-}
+package com.l3r8yj.elegramapi.command;

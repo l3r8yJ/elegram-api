@@ -21,19 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.l3r8yj.elegramapi;
 
 /**
- * The Default bot.
+ * The test module for requests.
  *
  * @since 0.0.0
  */
-public interface Bot {
-
-    /**
-     * Runs the bot.
-     *
-     * @throws Exception If something went wrong
-     */
-    void run() throws Exception;
-}
+package com.l3r8yj.elegramapi.request;

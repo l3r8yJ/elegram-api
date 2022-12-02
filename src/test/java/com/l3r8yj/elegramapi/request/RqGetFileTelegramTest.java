@@ -22,13 +22,39 @@
  * SOFTWARE.
  */
 
-package com.l3r8yj.elegramapi;
+package com.l3r8yj.elegramapi.request;
+
+import java.io.IOException;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Test;
 
 /**
- * The DefaultCommand.
+ * Test case for {@link RqGetFileTelegram}.
  *
  * @since 0.0.0
  */
-public class DefaultCommand implements Command {
+class RqGetFileTelegramTest {
 
+    /**
+     * The address.
+     */
+    private static final String ADDRESS = "https://api.telegram.org/file/bottkn/path";
+
+    @Test
+    final void plainTextRight() {
+        MatcherAssert.assertThat(
+            new RqGetFileTelegram("tkn", "path").plainText(),
+            Matchers.equalTo(RqGetFileTelegramTest.ADDRESS)
+        );
+    }
+
+    @Test
+    final void responseFromRightApi() throws IOException {
+        MatcherAssert.assertThat(
+            new RqGetFileTelegram("tkn", "path")
+                .response().back().uri().toString(),
+            Matchers.equalTo(RqGetFileTelegramTest.ADDRESS)
+        );
+    }
 }

@@ -21,28 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-/*
- * @todo #Redesign/RqGetMeTelegram.
- * Change the design of this class and make it like RqFileTelegram.
- */
-package com.l3r8yj.elegramapi;
 
-import org.cactoos.text.Concatenated;
+package com.l3r8yj.elegramapi.command;
 
 /**
- * GetMe request to telegram api.
+ * The DefaultCommand.
  *
  * @since 0.0.0
  */
-public final class RqGetMeTelegram extends RqDefaultTelegram {
-
-    /**
-     * Ctor.
-     *
-     * @param token The token
-     */
-    public RqGetMeTelegram(final String token) {
-        super(new Concatenated(token, "/getMe").toString());
-    }
+public class DefaultCommand implements Command {
 
 }

@@ -22,28 +22,30 @@
  * SOFTWARE.
  */
 
-package com.l3r8yj.elegramapi;
+package com.l3r8yj.elegramapi.request;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import com.jcabi.http.Response;
+import java.io.IOException;
 
 /**
- * Test case for {@link DefaultBot}.
+ * Request to telegram-api.
  *
  * @since 0.0.0
  */
-class DefaultBotTest {
+public interface RqTelegram {
 
-    @Test
-    final void execute() {
-        Assertions.assertThrows(
-            UnsupportedOperationException.class,
-            () ->
-                new DefaultBot(
-                "tkn",
-                    new DefaultCommand(),
-                    new DefaultCommand()
-                ).run()
-        );
-    }
+    /**
+    * Represents RqTelegram in plain String.
+    *
+    * @return String value of RqTelegram
+    */
+    String plainText();
+
+    /**
+     * The response from request.
+     *
+     * @return The response
+     * @throws IOException When something went wrong
+     */
+    Response response() throws IOException;
 }
