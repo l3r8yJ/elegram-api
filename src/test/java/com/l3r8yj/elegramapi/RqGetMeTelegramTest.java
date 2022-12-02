@@ -44,24 +44,20 @@ class RqGetMeTelegramTest {
     @Test
     final void plainText() {
         MatcherAssert.assertThat(
-            RqGetMeTelegramTest.LINK,
-            Matchers.equalTo(
-                new RqGetMeTelegram(
-                    new RqDefaultTelegram("tkn", "GET")
-                ).plainText()
-            )
+            new RqGetMeTelegram(
+                new RqDefaultTelegram("tkn")
+            ).plainText(),
+            Matchers.equalTo(RqGetMeTelegramTest.LINK)
         );
     }
 
     @Test
     final void response() throws IOException {
         MatcherAssert.assertThat(
-            RqGetMeTelegramTest.LINK,
-            Matchers.equalTo(
-                new RqGetMeTelegram(
-                    new RqDefaultTelegram("tkn", "GET")
-                ).response().back().uri().toString()
-            )
+            new RqGetMeTelegram(
+                new RqDefaultTelegram("tkn")
+            ).response().back().uri().toString(),
+            Matchers.equalTo(RqGetMeTelegramTest.LINK)
         );
     }
 }

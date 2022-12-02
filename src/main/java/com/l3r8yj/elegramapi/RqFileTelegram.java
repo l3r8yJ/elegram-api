@@ -26,17 +26,12 @@
  */
 package com.l3r8yj.elegramapi;
 
-import com.jcabi.http.Response;
-import com.jcabi.http.request.JdkRequest;
-import java.io.IOException;
-import org.cactoos.text.Concatenated;
-
 /**
  * Request to file api.
  *
  * @since 0.0.0
  */
-public class RqFileTelegram implements RqTelegram {
+public class RqFileTelegram extends RqDefaultTelegram {
 
     /**
      * The default address.
@@ -44,46 +39,12 @@ public class RqFileTelegram implements RqTelegram {
     private static final String ADDRESS = "https://api.telegram.org/file/bot";
 
     /**
-     * The address.
-     */
-    private final String addr;
-
-    /**
-     * The token.
-     */
-    private final String token;
-
-    /**
      * Ctor.
      *
      * @param token The token
      */
     public RqFileTelegram(final String token) {
-        this(RqFileTelegram.ADDRESS, token);
+        super(token, RqFileTelegram.ADDRESS);
     }
 
-    /**
-     * Ctor.
-     *
-     * @param address The address of api
-     * @param token The token
-     */
-    public RqFileTelegram(final String address, final String token) {
-        this.token = token;
-        this.addr = address;
-    }
-
-    @Override
-    public final String plainText() {
-        return new Concatenated(
-            RqFileTelegram.ADDRESS,
-            "/",
-            this.token
-        ).toString();
-    }
-
-    @Override
-    public final Response response() throws IOException {
-        return new JdkRequest(this.plainText()).fetch();
-    }
 }

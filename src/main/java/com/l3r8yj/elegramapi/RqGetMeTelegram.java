@@ -28,7 +28,6 @@ import com.jcabi.http.Response;
 import com.jcabi.http.request.JdkRequest;
 import java.io.IOException;
 import org.cactoos.text.Concatenated;
-import org.cactoos.text.TextOf;
 
 /**
  * GetMe request to telegram api.
@@ -54,8 +53,8 @@ public final class RqGetMeTelegram implements RqTelegram {
     @Override
     public String plainText() {
         return new Concatenated(
-            new TextOf(this.origin.plainText()),
-            new TextOf("getMe")
+            this.origin.plainText(),
+            "getMe"
         ).toString();
     }
 

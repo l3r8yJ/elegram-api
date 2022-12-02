@@ -21,15 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-/*
- * @todo #Refactor/ refactor design of this class, for now it's a bit wrong.
- */
+
 package com.l3r8yj.elegramapi;
 
 import com.jcabi.http.Response;
 import com.jcabi.http.request.JdkRequest;
 import java.io.IOException;
-import org.cactoos.text.FormattedText;
+import org.cactoos.text.Concatenated;
 
 /**
  * Default request to telegram api without a method.
@@ -54,18 +52,12 @@ public class RqDefaultTelegram implements RqTelegram {
     private final String token;
 
     /**
-     * Http method.
-     */
-    private final String method;
-
-    /**
      * Ctor.
      *
      * @param token The uri
-     * @param method The http method
      */
-    public RqDefaultTelegram(final String token, final String method) {
-        this(token, RqDefaultTelegram.ADDR, method);
+    public RqDefaultTelegram(final String token) {
+        this(token, RqDefaultTelegram.ADDR);
     }
 
     /**
@@ -73,24 +65,18 @@ public class RqDefaultTelegram implements RqTelegram {
      *
      * @param token The token
      * @param address The address
-     * @param method The http method
      */
-    public RqDefaultTelegram(
-        final String token,
-        final String address,
-        final String method
-    ) {
+    public RqDefaultTelegram(final String token, final String address) {
         this.token = token;
         this.address = address;
-        this.method = method;
     }
 
     @Override
     public final String plainText() {
-        return new FormattedText(
-            "%s%s/",
+        return new Concatenated(
             this.address,
-            this.token
+            this.token,
+            "/"
         ).toString();
     }
 
@@ -98,6 +84,6 @@ public class RqDefaultTelegram implements RqTelegram {
     public final Response response() throws IOException {
         return new JdkRequest(
             this.plainText()
-        ).method(this.method).fetch();
+        ).fetch();
     }
 }
