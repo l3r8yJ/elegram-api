@@ -27,12 +27,14 @@
 * */
 package com.l3r8yj.elegramapi;
 
+import org.cactoos.text.Concatenated;
+
 /**
  * Request to file api.
  *
  * @since 0.0.0
  */
-public class RqFileTelegram extends RqDefaultTelegram {
+public class RqGetFileTelegram extends RqDefaultTelegram {
 
     /**
      * The default address.
@@ -43,9 +45,13 @@ public class RqFileTelegram extends RqDefaultTelegram {
      * Ctor.
      *
      * @param token The token
+     * @param path The path
      */
-    public RqFileTelegram(final String token) {
-        super(token, RqFileTelegram.ADDRESS);
+    public RqGetFileTelegram(final String token, final String path) {
+        super(
+            new Concatenated(token, "/", path).toString(),
+            RqGetFileTelegram.ADDRESS
+        );
     }
 
 }
