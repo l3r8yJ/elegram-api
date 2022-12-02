@@ -44,9 +44,7 @@ class RqGetMeTelegramTest {
     @Test
     final void plainText() {
         MatcherAssert.assertThat(
-            new RqGetMeTelegram(
-                new RqDefaultTelegram("tkn")
-            ).plainText(),
+            new RqGetMeTelegram("tkn").plainText(),
             Matchers.equalTo(RqGetMeTelegramTest.LINK)
         );
     }
@@ -54,9 +52,8 @@ class RqGetMeTelegramTest {
     @Test
     final void response() throws IOException {
         MatcherAssert.assertThat(
-            new RqGetMeTelegram(
-                new RqDefaultTelegram("tkn")
-            ).response().back().uri().toString(),
+            new RqGetMeTelegram("tkn")
+                .response().back().uri().toString(),
             Matchers.equalTo(RqGetMeTelegramTest.LINK)
         );
     }

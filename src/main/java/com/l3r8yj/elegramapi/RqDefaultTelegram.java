@@ -21,7 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
+/*
+ * @todo #37 Abstraction level.
+ * After closing #38 we should this class abstract.
+ */
 package com.l3r8yj.elegramapi;
 
 import com.jcabi.http.Response;
@@ -39,7 +42,7 @@ public class RqDefaultTelegram implements RqTelegram {
     /**
      * Default url.
      */
-    private static final String ADDR = "https://api.telegram.org/bot";
+    protected static final String ADDR = "https://api.telegram.org/bot";
 
     /**
      * Default telegram address.
