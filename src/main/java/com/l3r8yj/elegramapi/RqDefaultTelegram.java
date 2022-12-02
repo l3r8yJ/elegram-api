@@ -21,15 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-/*
- * @todo #37 Abstraction level.
- * After closing #38 we should this class abstract.
- */
-/*
- * @todo #41 Design/ add request encapsulation.
- * RqDefaultTelegram have to encapsulate the
- * Request on main ctor.
- * */
+
 package com.l3r8yj.elegramapi;
 
 import com.jcabi.http.Request;
