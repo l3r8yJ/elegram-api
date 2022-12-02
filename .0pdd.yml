@@ -1,16 +1,5 @@
-threshold: 10
 errors:
-  - clicker.heroes.acg@gmail.com
-alerts:
-  suppress:
-    - on-found-puzzle
-    - on-lost-puzzle
-    - on-scope
-  github:
-    - l3r8yJ
-format:
-  - short-title
-  - title-length=100
+  - сlicker.heroes.acg@gmail.com
 tags:
   - pdd
   - bug
