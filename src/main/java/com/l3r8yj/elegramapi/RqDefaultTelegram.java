@@ -32,6 +32,7 @@
  * */
 package com.l3r8yj.elegramapi;
 
+import com.jcabi.http.Request;
 import com.jcabi.http.Response;
 import com.jcabi.http.request.JdkRequest;
 import java.io.IOException;
@@ -42,7 +43,7 @@ import org.cactoos.text.Concatenated;
  *
  * @since 0.0.0
  */
-public class RqDefaultTelegram implements RqTelegram {
+public abstract class RqDefaultTelegram implements RqTelegram {
 
     /**
      * Default url.
@@ -60,12 +61,26 @@ public class RqDefaultTelegram implements RqTelegram {
     private final String token;
 
     /**
+     * The http request.
+     */
+    private final Request request;
+
+    /**
      * Ctor.
      *
-     * @param token The uri
+     * @param token The token
      */
-    public RqDefaultTelegram(final String token) {
-        this(token, RqDefaultTelegram.ADDR);
+    protected RqDefaultTelegram(final String token) {
+        this(
+            token,
+            RqDefaultTelegram.ADDR,
+            new JdkRequest(
+                new Concatenated(
+                    RqDefaultTelegram.ADDR,
+                    token
+                ).toString()
+            )
+        );
     }
 
     /**
@@ -74,9 +89,34 @@ public class RqDefaultTelegram implements RqTelegram {
      * @param token The token
      * @param address The address
      */
-    public RqDefaultTelegram(final String token, final String address) {
+    protected RqDefaultTelegram(final String token, final String address) {
+        this(
+            token,
+            address,
+            new JdkRequest(
+                new Concatenated(
+                    address,
+                    token
+                ).toString()
+            )
+        );
+    }
+
+    /**
+     * Ctor.
+     *
+     * @param token The token
+     * @param address The address
+     * @param request The http request
+     */
+    protected RqDefaultTelegram(
+        final String token,
+        final String address,
+        final Request request
+    ) {
         this.token = token;
         this.address = address;
+        this.request = request;
     }
 
     @Override
@@ -89,6 +129,6 @@ public class RqDefaultTelegram implements RqTelegram {
 
     @Override
     public final Response response() throws IOException {
-        return new JdkRequest(this.plainText()).fetch();
+        return this.request.fetch();
     }
 }
