@@ -24,7 +24,7 @@
 /*
  * @todo #53 Design/ UpdatedBot change.
  * We have to rework design of UpdatedBot.
- * Implement some work updates.
+ * Implement some interaction with updates.
  * */
 package com.l3r8yj.elegramapi.bot;
 
