@@ -26,6 +26,7 @@
  * need to design proper implementation for DefaultBot
  */
 package com.l3r8yj.elegramapi.bot;
+
 import com.l3r8yj.elegramapi.command.Command;
 import java.util.List;
 import org.cactoos.list.ListOf;
