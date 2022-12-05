@@ -55,12 +55,13 @@ public final class DefaultBot implements Bot {
         this.commands = new ListOf<>(commands);
     }
 
+    /**
+     *
+     *  @todo: #1 implement Bot#run
+     *  need to design proper implementation for DefaultBot
+     */
     @Override
     public void run() {
-        /*
-        @todo: #1 implement Bot#run
-        need to design proper implementation for DefaultBot
-         */
         throw new UnsupportedOperationException("Operation not supported...");
     }
 
