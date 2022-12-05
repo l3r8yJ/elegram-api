@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 /*
- * @todo: #70 Design/ Implement Bot#run
- * need to design proper implementation for DefaultBot
- */
+ * @todo #70 Design/ Implement run().
+ * Need to design proper implementation for DefaultBot.
+ * */
 package com.l3r8yj.elegramapi.bot;
 
 import com.l3r8yj.elegramapi.command.Command;
