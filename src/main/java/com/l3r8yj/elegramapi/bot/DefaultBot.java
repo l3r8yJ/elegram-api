@@ -21,8 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+/*
+ * @todo: #70 Design/ Implement Bot#run
+ * need to design proper implementation for DefaultBot
+ */
 package com.l3r8yj.elegramapi.bot;
-
 import com.l3r8yj.elegramapi.command.Command;
 import java.util.List;
 import org.cactoos.list.ListOf;
@@ -31,8 +34,6 @@ import org.cactoos.list.ListOf;
  * The default implementation of {@link Bot}.
  *
  * @since 0.0.0
- * @todo: #1 Design/ implement Bot#run
- * need to design proper implementation for DefaultBot
  */
 public final class DefaultBot implements Bot {
 
