@@ -21,42 +21,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.l3r8yj.elegramapi;
-
-import java.util.List;
-import org.cactoos.list.ListOf;
+/*
+* @todo #53 Design/ Update change.
+* We have to rework design of Update interface.
+* */
+package com.l3r8yj.elegramapi.update;
 
 /**
- * The default implementation of {@link Bot}.
+ * The update from api.
  *
  * @since 0.0.0
  */
-public final class DefaultBot implements Bot {
-
-    /**
-     * All commands.
-     */
-    private final List<Command> commands;
-
-    /**
-     * The token.
-     */
-    private final String token;
-
-    /**
-     * Ctor.
-     *
-     * @param token The token
-     * @param commands All custom commands
-     */
-    public DefaultBot(final String token, final Command... commands) {
-        this.token = token;
-        this.commands = new ListOf<>(commands);
-    }
-
-    @Override
-    public void run() {
-        throw new UnsupportedOperationException("Operation not supported...");
-    }
-
+public interface Update {
 }

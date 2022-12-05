@@ -22,13 +22,13 @@
  * SOFTWARE.
  */
 
-package com.l3r8yj.elegramapi;
+package com.l3r8yj.elegramapi.command;
 
 /**
- * The base command.
+ * The DefaultCommand.
  *
  * @since 0.0.0
  */
-public interface Command {
+public class DefaultCommand implements Command {
 
 }

@@ -1,0 +1,4 @@
+--source=.
+--verbose
+--exclude target/**
+--rule min-words:10

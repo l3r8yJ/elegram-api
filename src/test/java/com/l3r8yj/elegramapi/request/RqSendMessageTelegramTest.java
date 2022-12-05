@@ -22,61 +22,39 @@
  * SOFTWARE.
  */
 
-package com.l3r8yj.elegramapi;
+package com.l3r8yj.elegramapi.request;
 
-import com.jcabi.http.Response;
-import com.jcabi.http.request.JdkRequest;
 import java.io.IOException;
-import org.cactoos.text.FormattedText;
-import org.cactoos.text.Upper;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Test;
 
 /**
- * Default request to telegram api without a method.
+ * The test case for {@link RqSendMessageTelegram}.
  *
  * @since 0.0.0
  */
-public class RqDefaultTelegram implements RqTelegram {
+class RqSendMessageTelegramTest {
 
     /**
-     * Default telegram address.
+     * The link.
      */
-    private final String address;
+    private static final String LINK = "https://api.telegram.org/bottkn/sendMessage";
 
-    /**
-     * The uri to make request.
-     */
-    private final String token;
-
-    /**
-     * Http method.
-     */
-    private final String method;
-
-    /**
-     * Ctor.
-     *
-     * @param token The uri
-     * @param method The http method
-     */
-    public RqDefaultTelegram(final String token, final String method) {
-        this.token = token;
-        this.method = new Upper(method).toString();
-        this.address = "https://api.telegram.org/bot";
+    @Test
+    final void plainText() {
+        MatcherAssert.assertThat(
+            new RqSendMessageTelegram("tkn").plainText(),
+            Matchers.equalTo(RqSendMessageTelegramTest.LINK)
+        );
     }
 
-    @Override
-    public final String plainText() {
-        return new FormattedText(
-            "%s%s/",
-            this.address,
-            this.token
-        ).toString();
-    }
-
-    @Override
-    public final Response response() throws IOException {
-        return new JdkRequest(
-            this.plainText()
-        ).method(this.method).fetch();
+    @Test
+    final void response() throws IOException {
+        MatcherAssert.assertThat(
+            new RqSendMessageTelegram("tkn")
+                .response().back().uri().toString(),
+            Matchers.equalTo(RqSendMessageTelegramTest.LINK)
+        );
     }
 }

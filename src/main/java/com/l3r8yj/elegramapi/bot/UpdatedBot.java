@@ -21,19 +21,45 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.l3r8yj.elegramapi;
+/*
+ * @todo #53 Design/ UpdatedBot change.
+ * We have to rework design of UpdatedBot.
+ * Implement some interaction with updates.
+ * */
+package com.l3r8yj.elegramapi.bot;
+
+import com.l3r8yj.elegramapi.update.Update;
 
 /**
- * The Default bot.
+ * UpdatedBot, a decorator for {@link Bot} that encapsulates updates.
  *
  * @since 0.0.0
  */
-public interface Bot {
+public class UpdatedBot implements Bot {
 
     /**
-     * Runs the bot.
-     *
-     * @throws Exception If something went wrong
+     * The origin.
      */
-    void run() throws Exception;
+    private final Bot origin;
+
+    /**
+     * The update.
+     */
+    private final Update update;
+
+    /**
+     * Ctor.
+     *
+     * @param origin The origin
+     * @param update The update
+     */
+    public UpdatedBot(final Bot origin, final Update update) {
+        this.origin = origin;
+        this.update = update;
+    }
+
+    @Override
+    public final void run() throws Exception {
+        this.origin.run();
+    }
 }

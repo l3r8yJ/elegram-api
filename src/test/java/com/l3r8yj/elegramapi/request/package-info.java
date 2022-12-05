@@ -22,30 +22,9 @@
  * SOFTWARE.
  */
 
-package com.l3r8yj.elegramapi;
-
-import com.jcabi.http.Response;
-import java.io.IOException;
-
 /**
- * Request to telegram-api.
+ * The test module for requests.
  *
  * @since 0.0.0
  */
-public interface RqTelegram {
-
-    /**
-    * Represents RqTelegram in plain String.
-    *
-    * @return String value of RqTelegram
-    */
-    String plainText();
-
-    /**
-     * The response.
-     *
-     * @return Body of request as String
-     * @throws IOException When something went wrong
-     */
-    Response response() throws IOException;
-}
+package com.l3r8yj.elegramapi.request;

@@ -22,45 +22,9 @@
  * SOFTWARE.
  */
 
-package com.l3r8yj.elegramapi;
-
-import com.jcabi.http.Response;
-import com.jcabi.http.request.JdkRequest;
-import java.io.IOException;
-import org.cactoos.text.Concatenated;
-import org.cactoos.text.TextOf;
-
 /**
- * GetMe request to telegram api.
+ * Requests to telegram api.
  *
  * @since 0.0.0
  */
-public final class RqGetMeTelegram implements RqTelegram {
-
-    /**
-     * The origin request.
-     */
-    private final RqTelegram origin;
-
-    /**
-     * Ctor.
-     *
-     * @param origin The origin request
-     */
-    public RqGetMeTelegram(final RqTelegram origin) {
-        this.origin = origin;
-    }
-
-    @Override
-    public String plainText() {
-        return new Concatenated(
-            new TextOf(this.origin.plainText()),
-            new TextOf("getMe")
-        ).toString();
-    }
-
-    @Override
-    public Response response() throws IOException {
-        return new JdkRequest(this.plainText()).fetch();
-    }
-}
+package com.l3r8yj.elegramapi.request;

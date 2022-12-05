@@ -22,29 +22,7 @@
  * SOFTWARE.
  */
 
-package com.l3r8yj.elegramapi;
-
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
 /**
- * Test case for {@link DefaultBot}.
- *
- * @since 0.0.0
+ * The update package.
  */
-class DefaultBotTest {
-
-    @Test
-    void execute() {
-        Assertions.assertThrows(
-            UnsupportedOperationException.class,
-            () ->
-                new DefaultBot(
-                "tkn",
-                    new DefaultCommand(),
-                    new DefaultCommand()
-                )
-                    .run()
-        );
-    }
-}
+package com.l3r8yj.elegramapi.update;

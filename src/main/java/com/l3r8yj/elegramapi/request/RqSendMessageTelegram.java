@@ -22,42 +22,23 @@
  * SOFTWARE.
  */
 
-package com.l3r8yj.elegramapi;
+package com.l3r8yj.elegramapi.request;
 
-import java.io.IOException;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.cactoos.text.Concatenated;
 
 /**
- * Test case for {@link RqGetMeTelegram}.
+ * Request to send message to the api.
  *
  * @since 0.0.0
  */
-class RqGetMeTelegramTest {
+public class RqSendMessageTelegram extends RqDefaultTelegram {
 
     /**
-     * The link.
+     * Ctor.
+     *
+     * @param token The token
      */
-    private static final String LINK = "https://api.telegram.org/bottkn/getMe";
-
-    @Test
-    final void plainText() {
-        Assertions.assertEquals(
-            RqGetMeTelegramTest.LINK,
-            new RqGetMeTelegram(
-                new RqDefaultTelegram("tkn", "GET")
-            ).plainText()
-        );
-    }
-
-    @Test
-    final void response() throws IOException {
-        Assertions.assertEquals(
-            RqGetMeTelegramTest.LINK,
-            new RqGetMeTelegram(
-                new RqDefaultTelegram("tkn", "GET")
-            )
-                .response().back().uri().toString()
-        );
+    public RqSendMessageTelegram(final String token) {
+        super(new Concatenated(token, "/sendMessage").toString());
     }
 }
