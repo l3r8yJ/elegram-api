@@ -31,7 +31,7 @@ import org.cactoos.list.ListOf;
  * The default implementation of {@link Bot}.
  *
  * @since 0.0.0
- * @todo: #1 implement Bot#run
+ * @todo: #1 Design/ implement Bot#run
  * need to design proper implementation for DefaultBot
  */
 public final class DefaultBot implements Bot {
