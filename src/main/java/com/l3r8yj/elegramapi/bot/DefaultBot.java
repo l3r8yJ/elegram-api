@@ -57,6 +57,10 @@ public final class DefaultBot implements Bot {
 
     @Override
     public void run() {
+        /*
+        @todo: #1 implement Bot#run
+        need to design proper implementation for DefaultBot
+         */
         throw new UnsupportedOperationException("Operation not supported...");
     }
 
