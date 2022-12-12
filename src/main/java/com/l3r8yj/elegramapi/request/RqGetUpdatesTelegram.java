@@ -31,7 +31,7 @@ import org.cactoos.text.Concatenated;
  *
  * @since 0.0.0
  */
-public final class RqGetUpdatesTelegram extends RqDefaultTelegram {
+public final class RqGetUpdatesTelegram extends RqEnvelopeTelegram {
 
     /**
      * Ctor.

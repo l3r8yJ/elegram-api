@@ -35,7 +35,7 @@ import org.cactoos.text.Concatenated;
  *
  * @since 0.0.0
  */
-public abstract class RqDefaultTelegram implements RqTelegram {
+public abstract class RqEnvelopeTelegram implements RqTelegram {
 
     /**
      * Default url.
@@ -62,13 +62,13 @@ public abstract class RqDefaultTelegram implements RqTelegram {
      *
      * @param token The token
      */
-    protected RqDefaultTelegram(final String token) {
+    protected RqEnvelopeTelegram(final String token) {
         this(
             token,
-            RqDefaultTelegram.ADDR,
+            RqEnvelopeTelegram.ADDR,
             new JdkRequest(
                 new Concatenated(
-                    RqDefaultTelegram.ADDR,
+                    RqEnvelopeTelegram.ADDR,
                     token
                 ).toString()
             )
@@ -81,7 +81,7 @@ public abstract class RqDefaultTelegram implements RqTelegram {
      * @param token The token
      * @param address The address
      */
-    protected RqDefaultTelegram(final String token, final String address) {
+    protected RqEnvelopeTelegram(final String token, final String address) {
         this(
             token,
             address,
@@ -101,7 +101,7 @@ public abstract class RqDefaultTelegram implements RqTelegram {
      * @param address The address
      * @param request The http request
      */
-    protected RqDefaultTelegram(
+    protected RqEnvelopeTelegram(
         final String token,
         final String address,
         final Request request

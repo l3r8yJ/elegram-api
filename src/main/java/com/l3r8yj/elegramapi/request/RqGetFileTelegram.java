@@ -31,7 +31,7 @@ import org.cactoos.text.Concatenated;
  *
  * @since 0.0.0
  */
-public class RqGetFileTelegram extends RqDefaultTelegram {
+public class RqGetFileTelegram extends RqEnvelopeTelegram {
 
     /**
      * The default address.
