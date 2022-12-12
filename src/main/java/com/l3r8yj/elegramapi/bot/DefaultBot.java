@@ -28,6 +28,8 @@
 package com.l3r8yj.elegramapi.bot;
 
 import com.l3r8yj.elegramapi.command.Command;
+import com.l3r8yj.elegramapi.request.RqGetUpdatesTelegram;
+import java.io.IOException;
 import java.util.List;
 import org.cactoos.list.ListOf;
 
@@ -62,6 +64,18 @@ public final class DefaultBot implements Bot {
     @Override
     public void run() {
         throw new UnsupportedOperationException("Operation not supported...");
+    }
+
+    private void handleUpdates() throws InterruptedException, IOException {
+        final String before = new RqGetUpdatesTelegram(this.token)
+            .response()
+            .body();
+        while (true) {
+            final String current = new RqGetUpdatesTelegram(this.token)
+                .response()
+                .body();
+            Thread.sleep(1500L);
+        }
     }
 
 }
