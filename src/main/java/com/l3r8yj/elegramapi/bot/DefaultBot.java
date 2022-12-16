@@ -27,6 +27,7 @@
  * */
 package com.l3r8yj.elegramapi.bot;
 
+import com.jcabi.http.Response;
 import com.l3r8yj.elegramapi.command.Command;
 import com.l3r8yj.elegramapi.request.RqGetUpdatesTelegram;
 import java.io.IOException;
@@ -67,13 +68,9 @@ public final class DefaultBot implements Bot {
     }
 
     private void handleUpdates() throws InterruptedException, IOException {
-        final String before = new RqGetUpdatesTelegram(this.token)
-            .response()
-            .body();
         while (true) {
-            final String current = new RqGetUpdatesTelegram(this.token)
-                .response()
-                .body();
+            final Response response = new RqGetUpdatesTelegram(this.token)
+                .response();
             Thread.sleep(1500L);
         }
     }
