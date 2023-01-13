@@ -27,12 +27,14 @@
  * */
 package com.l3r8yj.elegramapi.bot;
 
-import com.jcabi.http.Response;
 import com.l3r8yj.elegramapi.command.Command;
 import com.l3r8yj.elegramapi.request.RqGetUpdatesTelegram;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import org.cactoos.list.ListOf;
+import org.json.JSONObject;
 
 /**
  * The default implementation of {@link Bot}.
@@ -67,12 +69,14 @@ public final class DefaultBot implements Bot {
         throw new UnsupportedOperationException("Operation not supported...");
     }
 
-    private void handleUpdates() throws InterruptedException, IOException {
+    private void handleUpdates() throws IOException {
+        final List<Map<String, Object>> updates = new ArrayList<>(0);
         while (true) {
-            final Response response = new RqGetUpdatesTelegram(this.token)
-                .response();
-            Thread.sleep(1500L);
+            final Map<String, Object> data = new JSONObject(
+                new JSONObject(
+                    new RqGetUpdatesTelegram(this.token).response().body()
+                ).get("result")
+            ).toMap();
         }
     }
-
 }

@@ -27,10 +27,12 @@
 * */
 package com.l3r8yj.elegramapi.update;
 
+import com.jcabi.http.Response;
+
 /**
  * The update from api.
  *
  * @since 0.0.0
  */
-public interface Update {
+public interface Update extends Response {
 }
