@@ -50,6 +50,8 @@ You will need [Maven 3.3+](https://maven.apache.org) and Java 8+ installed
   - [Getters/Setters.](https://www.yegor256.com/2014/09/16/getters-and-setters-are-evil.html)
   - [Static methods.](https://www.yegor256.com/2017/02/07/private-method-is-new-class.html)
   - [Pull request with feature but without a unit-tests.](https://www.yegor256.com/2022/08/04/code-and-tests-different-pull-requests.html)
+## Tests
+We're using [this plugin](https://github.com/volodya-lombrozo/test-naming-conventions) to control naming for tests, please note that.
 
 This little list is to make you understand that __we aren't picking on you__, it's just a __level of quality below which we can't accept__. 
 
