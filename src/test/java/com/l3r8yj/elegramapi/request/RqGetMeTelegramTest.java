@@ -42,7 +42,7 @@ class RqGetMeTelegramTest {
     private static final String LINK = "https://api.telegram.org/bottkn/getMe";
 
     @Test
-    final void plainText() {
+    final void representsAsPlainText() {
         MatcherAssert.assertThat(
             new RqGetMeTelegram("tkn").plainText(),
             Matchers.equalTo(RqGetMeTelegramTest.LINK)
@@ -50,7 +50,7 @@ class RqGetMeTelegramTest {
     }
 
     @Test
-    final void response() throws IOException {
+    final void responsesFromRightApiWorks() throws IOException {
         MatcherAssert.assertThat(
             new RqGetMeTelegram("tkn")
                 .response().back().uri().toString(),

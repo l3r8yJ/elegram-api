@@ -42,7 +42,7 @@ class RqGetFileTelegramTest {
     private static final String ADDRESS = "https://api.telegram.org/file/bottkn/path";
 
     @Test
-    final void plainTextRight() {
+    final void representsAsPlainText() {
         MatcherAssert.assertThat(
             new RqGetFileTelegram("tkn", "path").plainText(),
             Matchers.equalTo(RqGetFileTelegramTest.ADDRESS)
@@ -50,7 +50,7 @@ class RqGetFileTelegramTest {
     }
 
     @Test
-    final void responseFromRightApi() throws IOException {
+    final void responsesFromRightApiWorks() throws IOException {
         MatcherAssert.assertThat(
             new RqGetFileTelegram("tkn", "path")
                 .response().back().uri().toString(),
