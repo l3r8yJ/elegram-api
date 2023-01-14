@@ -79,11 +79,13 @@ public final class DefaultBot implements Bot {
 
     /**
      * Handles the updates.
+     *
+     * @throws InterruptedException When something went wrong
      */
     private void handleUpdates() throws InterruptedException {
         final BlockingQueue<JSONObject> updates = new LinkedBlockingQueue<>(0);
         this.getUpdateThread(updates).start();
-        while(true) {
+        while (true) {
             final JSONObject update = updates.take();
             if (update.has("message")) {
                 final JSONObject msg = update.getJSONObject("message");
