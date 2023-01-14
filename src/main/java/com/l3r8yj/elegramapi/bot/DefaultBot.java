@@ -25,14 +25,21 @@
  * @todo #70 Design/ Implement run().
  * Need to design proper implementation for DefaultBot.
  * */
+/*
+ * @todo #60 Design/ Handling.
+ * Base handling written we have to write the handling from messages.
+ * Warning implementation of handleUpdates is experimental!
+ * */
 package com.l3r8yj.elegramapi.bot;
 
 import com.l3r8yj.elegramapi.command.Command;
 import com.l3r8yj.elegramapi.request.RqGetUpdatesTelegram;
+import com.l3r8yj.elegramapi.request.RqWithOffsetTelegram;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.atomic.AtomicInteger;
 import org.cactoos.list.ListOf;
 import org.json.JSONObject;
 
@@ -69,14 +76,80 @@ public final class DefaultBot implements Bot {
         throw new UnsupportedOperationException("Operation not supported...");
     }
 
-    private void handleUpdates() throws IOException {
-        final List<Map<String, Object>> updates = new ArrayList<>(0);
-        while (true) {
-            final Map<String, Object> data = new JSONObject(
-                new JSONObject(
-                    new RqGetUpdatesTelegram(this.token).response().body()
-                ).get("result")
-            ).toMap();
+    /**
+     * Handles the updates.
+     */
+    private void handleUpdates() {
+        final BlockingQueue<JSONObject> updates = new LinkedBlockingQueue<>(0);
+        this.getUpdateThread(updates).start();
+    }
+
+    /**
+     * Creates thread for handling updates.
+     *
+     * @param updates Queue with updates
+     * @return The thread
+     */
+    private Thread getUpdateThread(final BlockingQueue<JSONObject> updates) {
+        return new Thread(
+            () -> {
+                while (!Thread.currentThread().isInterrupted()) {
+                    this.parseResponse(updates);
+                }
+            }
+        );
+    }
+
+    /**
+     * Parsing response for updates.
+     *
+     * @param updates Queue with updates
+     */
+    private void parseResponse(final BlockingQueue<JSONObject> updates) {
+        final AtomicInteger offset = new AtomicInteger();
+        try {
+            new JSONObject(this.getUpdatesBody(offset))
+                .getJSONArray("result")
+                .forEach(upd -> putUpdateInQueue(updates, offset, upd));
+        } catch (final IOException ex) {
+            throw new IllegalStateException(ex);
         }
+    }
+
+    /**
+     * Puts update into a queue.
+     *
+     * @param updates Queue with updates
+     * @param offset The offset
+     * @param upd The single update
+     */
+    private static void putUpdateInQueue(
+        final BlockingQueue<JSONObject> updates,
+        final AtomicInteger offset,
+        final Object upd
+    ) {
+        final int id = new JSONObject(upd).getInt("update_id");
+        offset.set(id + 1);
+        try {
+            updates.put(new JSONObject(upd));
+        } catch (final InterruptedException ex) {
+            throw new IllegalStateException(ex);
+        }
+    }
+
+    /**
+     * Just update body.
+     *
+     * @param offset The offset
+     * @return The body as string
+     * @throws IOException When something went wrong
+     */
+    private String getUpdatesBody(final AtomicInteger offset) throws IOException {
+        return new RqWithOffsetTelegram(
+            new RqGetUpdatesTelegram(this.token),
+            offset.get()
+        )
+            .response()
+            .body();
     }
 }
