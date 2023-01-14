@@ -42,6 +42,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.cactoos.list.ListOf;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -122,31 +123,14 @@ public final class DefaultBot implements Bot {
     private void parseResponse(final BlockingQueue<JSONObject> updates) {
         final AtomicInteger offset = new AtomicInteger();
         try {
-            new JSONObject(this.getUpdatesBody(offset))
-                .getJSONArray("result")
-                .forEach(upd -> putUpdateInQueue(updates, offset, upd));
-        } catch (final IOException ex) {
-            throw new IllegalStateException(ex);
-        }
-    }
-
-    /**
-     * Puts update into a queue.
-     *
-     * @param updates Queue with updates
-     * @param offset The offset
-     * @param upd The single update
-     */
-    private static void putUpdateInQueue(
-        final BlockingQueue<JSONObject> updates,
-        final AtomicInteger offset,
-        final Object upd
-    ) {
-        final int id = new JSONObject(upd).getInt("update_id");
-        offset.set(id + 1);
-        try {
-            updates.put(new JSONObject(upd));
-        } catch (final InterruptedException ex) {
+            final JSONArray ups = new JSONObject(this.getUpdatesBody(offset))
+                .getJSONArray("result");
+            for (final Object upd : ups) {
+                final int id = new JSONObject(upd).getInt("update_id");
+                offset.set(id + 1);
+                updates.put(new JSONObject(upd));
+            }
+        } catch (final IOException | InterruptedException ex) {
             throw new IllegalStateException(ex);
         }
     }

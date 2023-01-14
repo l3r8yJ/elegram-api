@@ -22,21 +22,8 @@
  * SOFTWARE.
  */
 
-package com.l3r8yj.elegramapi.command;
+package com.l3r8yj.elegramapi.message;
 
-import com.l3r8yj.elegramapi.update.Update;
+public class Message {
 
-/**
- * The base command.
- *
- * @since 0.0.0
- */
-public interface Command {
-
-    /**
-     * Handler for update.
-     *
-     * @param upd The update
-     */
-    void onUpdate(final Update upd);
 }

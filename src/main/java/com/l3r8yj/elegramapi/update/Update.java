@@ -22,9 +22,10 @@
  * SOFTWARE.
  */
 /*
-* @todo #53 Design/ Update change.
-* We have to rework design of Update interface.
-* */
+ * @todo #60 Design/ Update change.
+ * We have to rework design of Update interface.
+ * Write all fields from telegram api documentation.
+ * */
 package com.l3r8yj.elegramapi.update;
 
 import com.jcabi.http.Response;
@@ -35,4 +36,5 @@ import com.jcabi.http.Response;
  * @since 0.0.0
  */
 public interface Update extends Response {
+
 }
