@@ -31,6 +31,11 @@
  * Add handling for each type of response.
  * Warning implementation of handleUpdates is experimental!
  * */
+/*
+ * @todo #60 Design/ Testing.
+ * Write tests for DefaultBot class after closing other issues in DefaultBot class.
+ * */
+
 package com.l3r8yj.elegramapi.bot;
 
 import com.l3r8yj.elegramapi.command.Command;
@@ -92,6 +97,7 @@ public final class DefaultBot implements Bot {
             for (final Command com : this.commands) {
                 com.onUpdate(new DefaultUpdate(update));
             }
+            Thread.sleep(500L);
         }
     }
 
