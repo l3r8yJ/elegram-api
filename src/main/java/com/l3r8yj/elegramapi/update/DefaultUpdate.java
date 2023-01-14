@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2022 Ivanchuck Ivan.
+ * Copyright (c) 2023 Ivanchuck Ivan.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,18 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-/*
- * @todo #60 Design/ Update change.
- * We have to rework design of Update interface.
- * Write all fields from telegram api documentation.
- * */
+
 package com.l3r8yj.elegramapi.update;
 
-/**
- * The update from api.
- *
- * @since 0.0.0
- */
-public interface Update {
+import org.json.JSONObject;
 
+public class DefaultUpdate implements Update {
+
+    public DefaultUpdate(final JSONObject update) {
+    }
 }

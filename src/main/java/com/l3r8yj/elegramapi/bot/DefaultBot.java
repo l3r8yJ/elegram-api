@@ -36,6 +36,7 @@ package com.l3r8yj.elegramapi.bot;
 import com.l3r8yj.elegramapi.command.Command;
 import com.l3r8yj.elegramapi.request.RqGetUpdatesTelegram;
 import com.l3r8yj.elegramapi.request.RqWithOffsetTelegram;
+import com.l3r8yj.elegramapi.update.DefaultUpdate;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
@@ -88,13 +89,8 @@ public final class DefaultBot implements Bot {
         this.getUpdateThread(updates).start();
         while (true) {
             final JSONObject update = updates.take();
-            if (update.has("message")) {
-                final JSONObject msg = update.getJSONObject("message");
-                final String txt = msg.getString("text");
-                final String sender =
-                    msg.getJSONObject("from").getString("username");
-            } else if (update.has("callback_query")) {
-                new JSONObject(update.get("callback_query"));
+            for (final Command com : this.commands) {
+                com.onUpdate(new DefaultUpdate(update));
             }
         }
     }
