@@ -27,7 +27,8 @@
  * */
 /*
  * @todo #60 Design/ Handling.
- * Base handling written we have to write the handling from messages.
+ * Base handling written we have to write the handling from messages after 91 line.
+ * Add handling for each type of response.
  * Warning implementation of handleUpdates is experimental!
  * */
 package com.l3r8yj.elegramapi.bot;
@@ -79,9 +80,20 @@ public final class DefaultBot implements Bot {
     /**
      * Handles the updates.
      */
-    private void handleUpdates() {
+    private void handleUpdates() throws InterruptedException {
         final BlockingQueue<JSONObject> updates = new LinkedBlockingQueue<>(0);
         this.getUpdateThread(updates).start();
+        while(true) {
+            final JSONObject update = updates.take();
+            if (update.has("message")) {
+                final JSONObject msg = update.getJSONObject("message");
+                final String txt = msg.getString("text");
+                final String sender =
+                    msg.getJSONObject("from").getString("username");
+            } else if (update.has("callback_query")) {
+                new JSONObject(update.get("callback_query"));
+            }
+        }
     }
 
     /**
