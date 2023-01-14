@@ -26,6 +26,7 @@
 * Implement mapping from/to JSON
 * with all fields from docs of telegram-api.
 * */
+
 package com.l3r8yj.elegramapi.update;
 
 import org.json.JSONObject;
