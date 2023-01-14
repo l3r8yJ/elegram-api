@@ -37,8 +37,8 @@ public interface Command {
     /**
      * Handler for update.
      *
-     * @param upd        The update
-     * @param defaultBot
+     * @param upd The update
+     * @param bot The bot for interacting with updates
      */
-    void onUpdate(Update upd, Bot defaultBot);
+    void onUpdate(Update upd, Bot bot);
 }

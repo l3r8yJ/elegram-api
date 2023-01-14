@@ -35,7 +35,7 @@ import com.l3r8yj.elegramapi.update.Update;
 public final class DefaultCommand implements Command {
 
     @Override
-    public void onUpdate(final Update upd, final Bot defaultBot) {
+    public void onUpdate(final Update upd, final Bot bot) {
         throw new UnsupportedOperationException("Not implemented!");
     }
 }
