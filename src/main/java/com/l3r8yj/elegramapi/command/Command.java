@@ -24,6 +24,7 @@
 
 package com.l3r8yj.elegramapi.command;
 
+import com.l3r8yj.elegramapi.bot.Bot;
 import com.l3r8yj.elegramapi.update.Update;
 
 /**
@@ -36,7 +37,8 @@ public interface Command {
     /**
      * Handler for update.
      *
-     * @param upd The update
+     * @param upd        The update
+     * @param defaultBot
      */
-    void onUpdate(Update upd);
+    void onUpdate(Update upd, Bot defaultBot);
 }

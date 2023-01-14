@@ -24,6 +24,7 @@
 
 package com.l3r8yj.elegramapi.command;
 
+import com.l3r8yj.elegramapi.bot.Bot;
 import com.l3r8yj.elegramapi.update.Update;
 
 /**
@@ -34,7 +35,7 @@ import com.l3r8yj.elegramapi.update.Update;
 public final class DefaultCommand implements Command {
 
     @Override
-    public void onUpdate(final Update upd) {
+    public void onUpdate(final Update upd, final Bot defaultBot) {
         throw new UnsupportedOperationException("Not implemented!");
     }
 }

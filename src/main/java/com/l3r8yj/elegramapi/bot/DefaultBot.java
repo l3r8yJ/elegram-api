@@ -95,7 +95,7 @@ public final class DefaultBot implements Bot {
         while (true) {
             final JSONObject update = updates.take();
             for (final Command com : this.commands) {
-                com.onUpdate(new DefaultUpdate(update));
+                com.onUpdate(new DefaultUpdate(update), this);
             }
             Thread.sleep(500L);
         }
