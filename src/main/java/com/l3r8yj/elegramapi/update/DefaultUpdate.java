@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2023 Ivanchuck Ivan.
+ * Copyright (c) 2022 Ivanchuck Ivan.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -26,8 +26,18 @@ package com.l3r8yj.elegramapi.update;
 
 import org.json.JSONObject;
 
+/**
+ * The default update.
+ *
+ * @since 0.0.0
+ */
 public class DefaultUpdate implements Update {
 
+    /**
+     * Handling for incoming update.
+     *
+     * @param update The update
+     */
     public DefaultUpdate(final JSONObject update) {
     }
 }

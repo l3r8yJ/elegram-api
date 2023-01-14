@@ -21,9 +21,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+/*
+* @todo #60 Core/ Implement message.
+* Implement all fields and mapping from/to JSON.
+* */
 
 package com.l3r8yj.elegramapi.message;
 
-public class Message {
+/**
+ * Just a message with all fields.
+ *
+ * @since 0.0.0
+ */
+public final class Message {
 
 }

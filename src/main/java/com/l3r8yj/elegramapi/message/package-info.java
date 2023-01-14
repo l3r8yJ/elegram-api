@@ -22,21 +22,9 @@
  * SOFTWARE.
  */
 
-package com.l3r8yj.elegramapi.command;
-
-import com.l3r8yj.elegramapi.update.Update;
-
 /**
- * The base command.
+ * The message package.
  *
  * @since 0.0.0
  */
-public interface Command {
-
-    /**
-     * Handler for update.
-     *
-     * @param upd The update
-     */
-    void onUpdate(Update upd);
-}
+package com.l3r8yj.elegramapi.message;
