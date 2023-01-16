@@ -80,7 +80,7 @@ public abstract class DefaultBot implements Bot {
     }
 
     @Override
-    public void run() {
+    public final void run() {
         try {
             this.handleUpdates();
         } catch (final InterruptedException ex) {

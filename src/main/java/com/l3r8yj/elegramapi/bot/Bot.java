@@ -39,5 +39,10 @@ public interface Bot {
      */
     void run() throws Exception;
 
+    /**
+     * Method for handling each update from api.
+     *
+     * @param update The update from server
+     */
     void onUpdate(Update update);
 }
