@@ -22,14 +22,8 @@
  * SOFTWARE.
  */
 /*
- * @todo #70 Design/ Implement run().
- * Need to design proper implementation for DefaultBot.
- * */
-/*
- * @todo #60 Design/ Handling.
- * Base handling written we have to write the handling from messages after 91 line.
- * Add handling for each type of response.
- * Warning implementation of handleUpdates is experimental!
+ * @todo #73 Design/ Implement or add methods.
+ * We have to add methods such as send message and etc.
  * */
 /*
  * @todo #60 Design/ Testing.
