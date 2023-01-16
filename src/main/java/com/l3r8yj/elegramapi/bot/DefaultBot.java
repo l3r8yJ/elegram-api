@@ -56,7 +56,7 @@ import org.json.JSONObject;
  *
  * @since 0.0.0
  */
-public final class DefaultBot implements Bot {
+public abstract class DefaultBot implements Bot {
 
     /**
      * All commands.
@@ -81,7 +81,11 @@ public final class DefaultBot implements Bot {
 
     @Override
     public void run() {
-        throw new UnsupportedOperationException("Operation not supported...");
+        try {
+            this.handleUpdates();
+        } catch (final InterruptedException ex) {
+            throw new IllegalStateException(ex);
+        }
     }
 
     /**
@@ -94,8 +98,12 @@ public final class DefaultBot implements Bot {
         this.getUpdateThread(updates).start();
         while (true) {
             final JSONObject update = updates.take();
-            for (final Command com : this.commands) {
-                com.onUpdate(new DefaultUpdate(update), this);
+            if (this.commands.isEmpty()) {
+                this.onUpdate(new DefaultUpdate(update));
+            } else {
+                for (final Command command : this.commands) {
+                    command.onUpdate(new DefaultUpdate(update), this);
+                }
             }
             Thread.sleep(500L);
         }

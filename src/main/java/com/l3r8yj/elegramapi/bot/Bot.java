@@ -23,6 +23,8 @@
  */
 package com.l3r8yj.elegramapi.bot;
 
+import com.l3r8yj.elegramapi.update.Update;
+
 /**
  * The Default bot.
  *
@@ -36,4 +38,6 @@ public interface Bot {
      * @throws Exception If something went wrong
      */
     void run() throws Exception;
+
+    void onUpdate(Update update);
 }
