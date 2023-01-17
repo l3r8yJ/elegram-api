@@ -22,22 +22,13 @@
  * SOFTWARE.
  */
 
-package com.l3r8yj.elegramapi.command;
-
-import com.l3r8yj.elegramapi.response.TgResponse;
+package com.l3r8yj.elegramapi.response;
 
 /**
- * The base command.
+ * The response for user.
  *
  * @since 0.0.0
  */
-public interface Command {
+public interface TgResponse {
 
-    /**
-     * Response to the chat.
-     *
-     * @param id The chat's id
-     * @return Response for telegram message
-     */
-    TgResponse createResponse(long id);
 }

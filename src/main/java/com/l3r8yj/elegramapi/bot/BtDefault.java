@@ -34,7 +34,9 @@ package com.l3r8yj.elegramapi.bot;
 
 import com.l3r8yj.elegramapi.command.Command;
 import com.l3r8yj.elegramapi.request.RqGetUpdatesTelegram;
+import com.l3r8yj.elegramapi.request.RqSendMessageTelegram;
 import com.l3r8yj.elegramapi.request.RqWithOffsetTelegram;
+import com.l3r8yj.elegramapi.response.TgResponse;
 import com.l3r8yj.elegramapi.update.UpdDefault;
 import java.io.IOException;
 import java.util.List;
@@ -77,7 +79,7 @@ public abstract class BtDefault implements Bot {
     public final void run() {
         try {
             this.handleUpdates();
-        } catch (final InterruptedException ex) {
+        } catch (final InterruptedException | IOException ex) {
             throw new IllegalStateException(ex);
         }
     }
@@ -85,17 +87,32 @@ public abstract class BtDefault implements Bot {
     /**
      * Handles the updates.
      *
-     * @throws InterruptedException When something went wrong
+     * @throws InterruptedException Thread interrupted
+     * @throws IOException When something went wrong
      */
-    private void handleUpdates() throws InterruptedException {
+    private void handleUpdates() throws InterruptedException, IOException {
         final BlockingQueue<JSONObject> updates = new LinkedBlockingQueue<>(0);
         this.updateThread(updates).start();
         while (true) {
             for (final Command command : this.commands) {
-                command.makeResponse(new UpdDefault(updates.take()).chatId());
+                final TgResponse rsp = command.createResponse(
+                    new UpdDefault(updates.take()).chatId()
+                );
+                this.sendResponse(rsp);
             }
             Thread.sleep(500L);
         }
+    }
+
+    /**
+     * Send response by id.
+     *
+     * @param response Prepared response
+     * @return Status of response as int
+     * @throws IOException When something went wrong
+     */
+    private int sendResponse(final TgResponse response) throws IOException {
+        return new RqSendMessageTelegram(this.token).response().status();
     }
 
     /**
