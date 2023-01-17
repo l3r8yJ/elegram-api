@@ -31,17 +31,17 @@ import org.cactoos.text.Concatenated;
 import org.cactoos.text.FormattedText;
 
 /**
- * Decorator for {@link RqTelegram}.
+ * Decorator for {@link TelegramRequest}.
  * Adds offset to request.
  *
  * @since 0.0.0
  */
-public final class TRqWithOffset implements RqTelegram {
+public final class TRqWithOffset implements TelegramRequest {
 
     /**
      * The origin.
      */
-    private final RqTelegram origin;
+    private final TelegramRequest origin;
 
     /**
      * The offset.
@@ -54,7 +54,7 @@ public final class TRqWithOffset implements RqTelegram {
      * @param origin The origin.
      * @param offset The offset.
      */
-    public TRqWithOffset(final RqTelegram origin, final int offset) {
+    public TRqWithOffset(final TelegramRequest origin, final int offset) {
         this.origin = origin;
         this.offset = offset;
     }

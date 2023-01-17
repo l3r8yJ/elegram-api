@@ -32,7 +32,7 @@ import java.io.IOException;
  *
  * @since 0.0.0
  */
-public interface RqTelegram {
+public interface TelegramRequest {
 
     /**
     * Represents RqTelegram in plain String.

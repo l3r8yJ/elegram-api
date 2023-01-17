@@ -35,7 +35,7 @@ import org.cactoos.text.Concatenated;
  *
  * @since 0.0.0
  */
-public abstract class TRqEnvelope implements RqTelegram {
+public abstract class TRqEnvelope implements TelegramRequest {
 
     /**
      * Default url.
