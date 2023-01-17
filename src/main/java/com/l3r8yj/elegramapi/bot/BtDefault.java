@@ -91,9 +91,8 @@ public abstract class BtDefault implements Bot {
         final BlockingQueue<JSONObject> updates = new LinkedBlockingQueue<>(0);
         this.updateThread(updates).start();
         while (true) {
-            final JSONObject update = updates.take();
             for (final Command command : this.commands) {
-                command.makeResponse(new UpdDefault(update).chatId());
+                command.makeResponse(new UpdDefault(updates.take()).chatId());
             }
             Thread.sleep(500L);
         }
