@@ -24,52 +24,31 @@
 
 package com.l3r8yj.elegramapi.request;
 
-import com.jcabi.http.Response;
-import com.jcabi.http.request.JdkRequest;
-import java.io.IOException;
 import org.cactoos.text.Concatenated;
-import org.cactoos.text.FormattedText;
 
 /**
- * Decorator for {@link RqTelegram}.
- * Adds offset to request.
+ * Request to file api.
  *
  * @since 0.0.0
  */
-public final class RqWithOffsetTelegram implements RqTelegram {
+public class TRqGetFile extends TRqEnvelope {
 
     /**
-     * The origin.
+     * The default address.
      */
-    private final RqTelegram origin;
-
-    /**
-     * The offset.
-     */
-    private final int offset;
+    private static final String ADDRESS = "https://api.telegram.org/file/bot";
 
     /**
      * Ctor.
      *
-     * @param origin The origin.
-     * @param offset The offset.
+     * @param token The token
+     * @param path The path
      */
-    public RqWithOffsetTelegram(final RqTelegram origin, final int offset) {
-        this.origin = origin;
-        this.offset = offset;
+    public TRqGetFile(final String token, final String path) {
+        super(
+            new Concatenated(token, "/", path).toString(),
+            TRqGetFile.ADDRESS
+        );
     }
 
-    @Override
-    public String plainText() {
-        return new Concatenated(
-            this.origin.plainText(),
-            "?offset=",
-            new FormattedText("%d", this.offset).toString()
-        ).toString();
-    }
-
-    @Override
-    public Response response() throws IOException {
-        return new JdkRequest(this.plainText()).fetch();
-    }
 }

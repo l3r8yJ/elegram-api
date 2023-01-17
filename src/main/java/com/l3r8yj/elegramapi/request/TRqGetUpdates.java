@@ -27,28 +27,18 @@ package com.l3r8yj.elegramapi.request;
 import org.cactoos.text.Concatenated;
 
 /**
- * Request to file api.
+ * GetUpdates request to telegram api.
  *
  * @since 0.0.0
  */
-public class RqGetFileTelegram extends RqEnvelopeTelegram {
-
-    /**
-     * The default address.
-     */
-    private static final String ADDRESS = "https://api.telegram.org/file/bot";
+public final class TRqGetUpdates extends TRqEnvelope {
 
     /**
      * Ctor.
      *
      * @param token The token
-     * @param path The path
      */
-    public RqGetFileTelegram(final String token, final String path) {
-        super(
-            new Concatenated(token, "/", path).toString(),
-            RqGetFileTelegram.ADDRESS
-        );
+    public TRqGetUpdates(final String token) {
+        super(new Concatenated(token, "/getUpdates").toString());
     }
-
 }

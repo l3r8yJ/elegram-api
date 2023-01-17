@@ -21,24 +21,24 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.l3r8yj.elegramapi.request;
 
 import org.cactoos.text.Concatenated;
 
 /**
- * GetUpdates request to telegram api.
+ * GetMe request to telegram api.
  *
  * @since 0.0.0
  */
-public final class RqGetUpdatesTelegram extends RqEnvelopeTelegram {
+public final class TRqGetMe extends TRqEnvelope {
 
     /**
      * Ctor.
      *
      * @param token The token
      */
-    public RqGetUpdatesTelegram(final String token) {
-        super(new Concatenated(token, "/getUpdates").toString());
+    public TRqGetMe(final String token) {
+        super(new Concatenated(token, "/getMe").toString());
     }
+
 }

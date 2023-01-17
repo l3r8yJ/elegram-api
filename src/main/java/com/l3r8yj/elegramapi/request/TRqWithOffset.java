@@ -21,24 +21,55 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 package com.l3r8yj.elegramapi.request;
 
+import com.jcabi.http.Response;
+import com.jcabi.http.request.JdkRequest;
+import java.io.IOException;
 import org.cactoos.text.Concatenated;
+import org.cactoos.text.FormattedText;
 
 /**
- * GetMe request to telegram api.
+ * Decorator for {@link RqTelegram}.
+ * Adds offset to request.
  *
  * @since 0.0.0
  */
-public final class RqGetMeTelegram extends RqEnvelopeTelegram {
+public final class TRqWithOffset implements RqTelegram {
+
+    /**
+     * The origin.
+     */
+    private final RqTelegram origin;
+
+    /**
+     * The offset.
+     */
+    private final int offset;
 
     /**
      * Ctor.
      *
-     * @param token The token
+     * @param origin The origin.
+     * @param offset The offset.
      */
-    public RqGetMeTelegram(final String token) {
-        super(new Concatenated(token, "/getMe").toString());
+    public TRqWithOffset(final RqTelegram origin, final int offset) {
+        this.origin = origin;
+        this.offset = offset;
     }
 
+    @Override
+    public String plainText() {
+        return new Concatenated(
+            this.origin.plainText(),
+            "?offset=",
+            new FormattedText("%d", this.offset).toString()
+        ).toString();
+    }
+
+    @Override
+    public Response response() throws IOException {
+        return new JdkRequest(this.plainText()).fetch();
+    }
 }

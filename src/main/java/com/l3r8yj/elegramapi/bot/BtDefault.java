@@ -33,9 +33,9 @@
 package com.l3r8yj.elegramapi.bot;
 
 import com.l3r8yj.elegramapi.command.Command;
-import com.l3r8yj.elegramapi.request.RqGetUpdatesTelegram;
-import com.l3r8yj.elegramapi.request.RqSendMessageTelegram;
-import com.l3r8yj.elegramapi.request.RqWithOffsetTelegram;
+import com.l3r8yj.elegramapi.request.TRqGetUpdates;
+import com.l3r8yj.elegramapi.request.TRqSendMessage;
+import com.l3r8yj.elegramapi.request.TRqWithOffset;
 import com.l3r8yj.elegramapi.response.TgResponse;
 import com.l3r8yj.elegramapi.update.UpdDefault;
 import java.io.IOException;
@@ -112,7 +112,7 @@ public abstract class BtDefault implements Bot {
      * @throws IOException When something went wrong
      */
     private int sendResponse(final TgResponse response) throws IOException {
-        return new RqSendMessageTelegram(this.token).response().status();
+        return new TRqSendMessage(this.token).response().status();
     }
 
     /**
@@ -159,8 +159,8 @@ public abstract class BtDefault implements Bot {
      * @throws IOException When something went wrong
      */
     private String getUpdatesBody(final AtomicInteger offset) throws IOException {
-        return new RqWithOffsetTelegram(
-            new RqGetUpdatesTelegram(this.token),
+        return new TRqWithOffset(
+            new TRqGetUpdates(this.token),
             offset.get()
         )
             .response()

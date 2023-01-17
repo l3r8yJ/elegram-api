@@ -31,14 +31,14 @@ import org.cactoos.text.Concatenated;
  *
  * @since 0.0.0
  */
-public class RqSendMessageTelegram extends RqEnvelopeTelegram {
+public class TRqSendMessage extends TRqEnvelope {
 
     /**
      * Ctor.
      *
      * @param token The token
      */
-    public RqSendMessageTelegram(final String token) {
+    public TRqSendMessage(final String token) {
         super(new Concatenated(token, "/sendMessage").toString());
     }
 }

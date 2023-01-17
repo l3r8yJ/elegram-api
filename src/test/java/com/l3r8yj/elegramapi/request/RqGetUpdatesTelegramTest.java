@@ -30,7 +30,7 @@ import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 
 /**
- * Test case for {@link RqGetUpdatesTelegram}.
+ * Test case for {@link TRqGetUpdates}.
  *
  * @since 0.0.0
  */
@@ -44,7 +44,7 @@ class RqGetUpdatesTelegramTest {
     @Test
     final void representsAsPlainText() {
         MatcherAssert.assertThat(
-            new RqGetUpdatesTelegram("tkn").plainText(),
+            new TRqGetUpdates("tkn").plainText(),
             Matchers.equalTo(RqGetUpdatesTelegramTest.LINK)
         );
     }
@@ -52,7 +52,7 @@ class RqGetUpdatesTelegramTest {
     @Test
     final void responsesFromRightApiWorks() throws IOException {
         MatcherAssert.assertThat(
-            new RqGetUpdatesTelegram("tkn")
+            new TRqGetUpdates("tkn")
                 .response().back().uri().toString(),
             Matchers.equalTo(RqGetUpdatesTelegramTest.LINK)
         );
