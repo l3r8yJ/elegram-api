@@ -35,4 +35,10 @@ package com.l3r8yj.elegramapi.update;
  */
 public interface Update {
 
+    /**
+     * Sent from.
+     *
+     * @return The id
+     */
+    long chatId();
 }

@@ -24,17 +24,33 @@
 
 package com.l3r8yj.elegramapi.command;
 
+import com.l3r8yj.elegramapi.action.Action;
+
 /**
- * The base command.
+ * The DefaultCommand.
  *
  * @since 0.0.0
  */
-public interface Command {
+public abstract class CmdDefault implements Command {
 
     /**
-     * Response to the chat.
-     *
-     * @param id The chat's id
+     * The name of command.
      */
-    void makeResponse(long id);
+    private final String name;
+
+    /**
+     * Action, for example send message.
+     */
+    private final Action action;
+
+    /**
+     * Ctor.
+     *
+     * @param name The name of command
+     * @param action The action to make
+     */
+    public CmdDefault(final String name, final Action action) {
+        this.name = name;
+        this.action = action;
+    }
 }

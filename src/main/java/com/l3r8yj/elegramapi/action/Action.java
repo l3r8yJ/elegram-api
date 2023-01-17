@@ -21,28 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-/*
-* @todo #60 Core/ Implement Update.
-* Implement mapping from/to JSON
-* with all fields from docs of telegram-api.
-* */
 
-package com.l3r8yj.elegramapi.update;
-
-import org.json.JSONObject;
+package com.l3r8yj.elegramapi.action;
 
 /**
- * The default update.
+ * The action.
  *
  * @since 0.0.0
  */
-public class DefaultUpdate implements Update {
+public interface Action {
 
-    /**
-     * Handling for incoming update.
-     *
-     * @param update The update
-     */
-    public DefaultUpdate(final JSONObject update) {
-    }
 }

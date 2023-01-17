@@ -35,7 +35,7 @@ package com.l3r8yj.elegramapi.bot;
 import com.l3r8yj.elegramapi.command.Command;
 import com.l3r8yj.elegramapi.request.RqGetUpdatesTelegram;
 import com.l3r8yj.elegramapi.request.RqWithOffsetTelegram;
-import com.l3r8yj.elegramapi.update.DefaultUpdate;
+import com.l3r8yj.elegramapi.update.UpdDefault;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
@@ -50,7 +50,7 @@ import org.json.JSONObject;
  *
  * @since 0.0.0
  */
-public abstract class DefaultBot implements Bot {
+public abstract class BtDefault implements Bot {
 
     /**
      * All commands.
@@ -68,7 +68,7 @@ public abstract class DefaultBot implements Bot {
      * @param token The token
      * @param commands All custom commands
      */
-    public DefaultBot(final String token, final Command... commands) {
+    public BtDefault(final String token, final Command... commands) {
         this.token = token;
         this.commands = new ListOf<>(commands);
     }
@@ -89,15 +89,11 @@ public abstract class DefaultBot implements Bot {
      */
     private void handleUpdates() throws InterruptedException {
         final BlockingQueue<JSONObject> updates = new LinkedBlockingQueue<>(0);
-        this.getUpdateThread(updates).start();
+        this.updateThread(updates).start();
         while (true) {
             final JSONObject update = updates.take();
-            if (this.commands.isEmpty()) {
-                this.onUpdate(new DefaultUpdate(update));
-            } else {
-                for (final Command command : this.commands) {
-                    command.onUpdate(new DefaultUpdate(update), this);
-                }
+            for (final Command command : this.commands) {
+                command.makeResponse(new UpdDefault(update).chatId());
             }
             Thread.sleep(500L);
         }
@@ -109,27 +105,27 @@ public abstract class DefaultBot implements Bot {
      * @param updates Queue with updates
      * @return The thread
      */
-    private Thread getUpdateThread(final BlockingQueue<JSONObject> updates) {
+    private Thread updateThread(final BlockingQueue<JSONObject> updates) {
         return new Thread(
             () -> {
                 while (!Thread.currentThread().isInterrupted()) {
-                    this.parseResponse(updates);
+                    this.fillUpdates(updates);
                 }
             }
         );
     }
 
     /**
-     * Parsing response for updates.
+     * Check new updates.
      *
      * @param updates Queue with updates
      */
-    private void parseResponse(final BlockingQueue<JSONObject> updates) {
+    private void fillUpdates(final BlockingQueue<JSONObject> updates) {
         final AtomicInteger offset = new AtomicInteger();
         try {
-            final JSONArray ups = new JSONObject(this.getUpdatesBody(offset))
+            final JSONArray server = new JSONObject(this.getUpdatesBody(offset))
                 .getJSONArray("result");
-            for (final Object upd : ups) {
+            for (final Object upd : server) {
                 final int id = new JSONObject(upd).getInt("update_id");
                 offset.set(id + 1);
                 updates.put(new JSONObject(upd));

@@ -21,21 +21,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+/*
+* @todo #60 Core/ Implement Update.
+* Implement mapping from/to JSON
+* with all fields from docs of telegram-api.
+* */
 
-package com.l3r8yj.elegramapi.command;
+package com.l3r8yj.elegramapi.update;
 
-import com.l3r8yj.elegramapi.bot.Bot;
-import com.l3r8yj.elegramapi.update.Update;
+import org.json.JSONObject;
 
 /**
- * The DefaultCommand.
+ * The default update.
  *
  * @since 0.0.0
  */
-public final class DefaultCommand implements Command {
+public final class UpdDefault implements Update {
+
+    /**
+     * Handling for incoming update.
+     *
+     * @param update The update
+     */
+    public UpdDefault(final JSONObject update) {
+    }
 
     @Override
-    public void onUpdate(final Update upd, final Bot bot) {
-        throw new UnsupportedOperationException("Not implemented!");
+    public long chatId() {
+        return 0;
     }
 }

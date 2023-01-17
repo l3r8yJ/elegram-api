@@ -22,19 +22,9 @@
  * SOFTWARE.
  */
 
-package com.l3r8yj.elegramapi.command;
-
 /**
- * The base command.
+ * The Actions.
  *
  * @since 0.0.0
  */
-public interface Command {
-
-    /**
-     * Response to the chat.
-     *
-     * @param id The chat's id
-     */
-    void makeResponse(long id);
-}
+package com.l3r8yj.elegramapi.action;
