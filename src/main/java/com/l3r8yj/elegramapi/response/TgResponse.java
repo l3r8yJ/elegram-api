@@ -24,6 +24,8 @@
 
 package com.l3r8yj.elegramapi.response;
 
+import org.json.JSONObject;
+
 /**
  * The response for user.
  *
@@ -31,4 +33,10 @@ package com.l3r8yj.elegramapi.response;
  */
 public interface TgResponse {
 
+    /**
+     * Message data.
+     *
+     * @return Message data as json
+     */
+    JSONObject messageData();
 }

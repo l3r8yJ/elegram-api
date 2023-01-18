@@ -98,21 +98,10 @@ public abstract class BtDefault implements Bot {
                 final TgResponse rsp = command.createResponse(
                     new UpdDefault(updates.take()).chatId()
                 );
-                this.sendResponse(rsp);
+                new TRqSendMessage(this.token);
             }
             Thread.sleep(500L);
         }
-    }
-
-    /**
-     * Send response by id.
-     *
-     * @param response Prepared response
-     * @return Status of response as int
-     * @throws IOException When something went wrong
-     */
-    private int sendResponse(final TgResponse response) throws IOException {
-        return new TRqSendMessage(this.token).response().status();
     }
 
     /**
