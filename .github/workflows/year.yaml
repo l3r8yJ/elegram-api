@@ -13,5 +13,5 @@ jobs:
         with:
           token: ${{ secrets.TOKEN_GH }}
           path: | #add new path with glob pattern https://www.npmjs.com/package/glob
-            **/*
+            **/^((?!.yaml).)*$
           commitTitle: "update license year"
