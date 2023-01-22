@@ -28,11 +28,27 @@
 
 package com.l3r8yj.elegramapi.message;
 
+import org.json.JSONObject;
+
 /**
  * Just a message with all fields.
  *
  * @since 0.0.0
  */
 public final class Message {
+
+    /**
+     * The json.
+     */
+    private final JSONObject json;
+
+    /**
+     * Ctor.
+     *
+     * @param json Data from server
+     */
+    public Message(final JSONObject json) {
+        this.json = json;
+    }
 
 }
