@@ -21,13 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-/*
-* @todo #60 Core/ Implement message.
-* Implement all fields and mapping from/to JSON.
-* */
 
 package com.l3r8yj.elegramapi.message;
 
+import java.time.Instant;
 import org.json.JSONObject;
 
 /**
@@ -51,4 +48,48 @@ public final class Message {
         this.json = json;
     }
 
+    /**
+     * The message id.
+     *
+     * @return Just message id.
+     */
+    public Long messageId() {
+        return this.json.getLong("message_id");
+    }
+
+    /**
+     * The message id.
+     *
+     * @return Just message id.
+     */
+    public Long senderId() {
+        return this.json.getJSONObject("from").getLong("id");
+    }
+
+    /**
+     * The chat id.
+     *
+     * @return Just chat id.
+     */
+    public Long chatId() {
+        return this.json.getJSONObject("chat").getLong("id");
+    }
+
+    /**
+     * Get text of the message.
+     *
+     * @return Text of the message
+     */
+    public String text() {
+        return this.json.getString("text");
+    }
+
+    /**
+     * Get the date the message was sent in Unix time.
+     *
+     * @return Un
+     */m
+    public Instant date() {
+        return Instant.ofEpochSecond(this.json.getLong("date"));
+    }
 }
