@@ -25,7 +25,6 @@
 package com.l3r8yj.elegramapi.request;
 
 import com.jcabi.http.Response;
-import com.jcabi.http.request.JdkRequest;
 import java.io.IOException;
 
 /**
@@ -57,7 +56,8 @@ public final class TRqPost implements TelegramRequest {
 
     @Override
     public Response response() throws IOException {
-        return new JdkRequest(this.plainText())
+        return this.origin.response()
+            .back()
             .method("POST")
             .fetch();
     }
