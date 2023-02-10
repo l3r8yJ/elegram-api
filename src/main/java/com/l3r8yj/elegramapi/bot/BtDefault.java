@@ -35,7 +35,11 @@ package com.l3r8yj.elegramapi.bot;
 import com.jcabi.log.Logger;
 import com.l3r8yj.elegramapi.command.Command;
 import com.l3r8yj.elegramapi.request.TRqGetUpdates;
+import com.l3r8yj.elegramapi.request.TRqPost;
+import com.l3r8yj.elegramapi.request.TRqSendMessage;
+import com.l3r8yj.elegramapi.request.TRqWithChatId;
 import com.l3r8yj.elegramapi.request.TRqWithOffset;
+import com.l3r8yj.elegramapi.request.TRqWithText;
 import com.l3r8yj.elegramapi.update.UpdDefault;
 import java.io.IOException;
 import java.util.List;
@@ -88,6 +92,29 @@ public abstract class BtDefault implements Bot {
                 ).toString()
             );
             throw new IllegalStateException(ex);
+        }
+    }
+
+    @Override
+    public final void sendMessage(final long chat, final String text) {
+        try {
+            new TRqPost(
+                new TRqWithChatId(
+                    new TRqWithText(
+                        new TRqSendMessage(this.token),
+                        text
+                    ),
+                    chat
+                )
+            ).response();
+        } catch (final IOException ex) {
+            Logger.error(
+                this,
+                new Concatenated(
+                    "An error occurred while sending message:\n",
+                    ex.getMessage()
+                ).toString()
+            );
         }
     }
 

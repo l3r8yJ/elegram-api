@@ -28,15 +28,14 @@ import com.jcabi.http.Response;
 import com.jcabi.http.request.JdkRequest;
 import java.io.IOException;
 import org.cactoos.text.Concatenated;
-import org.cactoos.text.FormattedText;
 
 /**
- * Decorator for {@link TelegramRequest}.
- * Adds offset to request.
+ * Telegram request with text.
+ * This is a decorator for {@link TelegramRequest} inheritors.
  *
  * @since 0.0.0
  */
-public final class TRqWithOffset implements TelegramRequest {
+public final class TRqWithText implements TelegramRequest {
 
     /**
      * The origin.
@@ -44,26 +43,27 @@ public final class TRqWithOffset implements TelegramRequest {
     private final TelegramRequest origin;
 
     /**
-     * The offset.
+     * The text.
      */
-    private final int offset;
+    private final String text;
 
     /**
      * Ctor.
      *
-     * @param origin The origin.
-     * @param offset The offset.
+     * @param origin The origin request
+     * @param text The text to add
      */
-    public TRqWithOffset(final TelegramRequest origin, final int offset) {
+    public TRqWithText(final TelegramRequest origin, final String text) {
         this.origin = origin;
-        this.offset = offset;
+        this.text = text;
     }
 
     @Override
     public String plainText() {
         return new Concatenated(
             this.origin.plainText(),
-            new FormattedText("?offset=%d", this.offset).toString()
+            "?text=",
+            this.text
         ).toString();
     }
 

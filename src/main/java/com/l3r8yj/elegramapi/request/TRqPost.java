@@ -27,48 +27,38 @@ package com.l3r8yj.elegramapi.request;
 import com.jcabi.http.Response;
 import com.jcabi.http.request.JdkRequest;
 import java.io.IOException;
-import org.cactoos.text.Concatenated;
-import org.cactoos.text.FormattedText;
 
 /**
- * Decorator for {@link TelegramRequest}.
- * Adds offset to request.
+ * Telegram request with POST.
+ * This is a decorator for {@link TelegramRequest}
  *
  * @since 0.0.0
  */
-public final class TRqWithOffset implements TelegramRequest {
+public final class TRqPost implements TelegramRequest {
 
     /**
-     * The origin.
+     * The origin request.
      */
     private final TelegramRequest origin;
 
     /**
-     * The offset.
-     */
-    private final int offset;
-
-    /**
      * Ctor.
      *
-     * @param origin The origin.
-     * @param offset The offset.
+     * @param origin The origin
      */
-    public TRqWithOffset(final TelegramRequest origin, final int offset) {
+    public TRqPost(final TelegramRequest origin) {
         this.origin = origin;
-        this.offset = offset;
     }
 
     @Override
     public String plainText() {
-        return new Concatenated(
-            this.origin.plainText(),
-            new FormattedText("?offset=%d", this.offset).toString()
-        ).toString();
+        return this.origin.plainText();
     }
 
     @Override
     public Response response() throws IOException {
-        return new JdkRequest(this.plainText()).fetch();
+        return new JdkRequest(this.plainText())
+            .method("POST")
+            .fetch();
     }
 }

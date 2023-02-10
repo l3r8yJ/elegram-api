@@ -31,12 +31,12 @@ import org.cactoos.text.Concatenated;
 import org.cactoos.text.FormattedText;
 
 /**
- * Decorator for {@link TelegramRequest}.
- * Adds offset to request.
+ * Telegram request with chat id as param.
+ * This is a decorator for {@link TelegramRequest} inheritors.
  *
  * @since 0.0.0
  */
-public final class TRqWithOffset implements TelegramRequest {
+public final class TRqWithChatId implements TelegramRequest {
 
     /**
      * The origin.
@@ -44,26 +44,26 @@ public final class TRqWithOffset implements TelegramRequest {
     private final TelegramRequest origin;
 
     /**
-     * The offset.
+     * The chat.
      */
-    private final int offset;
+    private final long chat;
 
     /**
      * Ctor.
      *
-     * @param origin The origin.
-     * @param offset The offset.
+     * @param origin Origin request
+     * @param chat Chat id to add
      */
-    public TRqWithOffset(final TelegramRequest origin, final int offset) {
+    public TRqWithChatId(final TelegramRequest origin, final long chat) {
         this.origin = origin;
-        this.offset = offset;
+        this.chat = chat;
     }
 
     @Override
     public String plainText() {
         return new Concatenated(
             this.origin.plainText(),
-            new FormattedText("?offset=%d", this.offset).toString()
+            new FormattedText("?chat_id=%d", this.chat).toString()
         ).toString();
     }
 
