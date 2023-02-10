@@ -51,12 +51,26 @@ SOFTWARE.
     <json.version>20220924</json.version>
     <jcabi-log.version>0.22.0</jcabi-log.version>
     <qulice-maven-plugin.version>0.22.0</qulice-maven-plugin.version>
+    <jersey-common.version>2.22.2</jersey-common.version>
+    <javax.ws.rs-api.version>2.1</javax.ws.rs-api.version>
   </properties>
   <dependencies>
     <dependency>
       <groupId>org.cactoos</groupId>
       <artifactId>cactoos</artifactId>
       <version>${cactoos.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.ws.rs</groupId>
+      <artifactId>javax.ws.rs-api</artifactId>
+      <version>${javax.ws.rs-api.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.glassfish.jersey.core</groupId>
+      <artifactId>jersey-common</artifactId>
+      <version>${jersey-common.version}</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>com.jcabi</groupId>

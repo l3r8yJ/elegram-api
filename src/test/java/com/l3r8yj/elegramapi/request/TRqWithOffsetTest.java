@@ -27,33 +27,27 @@ package com.l3r8yj.elegramapi.request;
 import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * Test case for {@link TRqWithText}.
+ * Test case for {@link TRqWithOffset}.
  *
  * @since 0.0.0
  */
-final class TRqWithTextTest {
-
-    /**
-     * The under test request.
-     */
-    private TelegramRequest request;
-
-    @BeforeEach
-    void setUp() {
-        this.request = new TRqWithText(
-            new TRqSendMessage("tkn"),
-            "Hi, i'm Sonya!"
-        );
-    }
+final class TRqWithOffsetTest {
 
     @Test
     void responsesFromRightUri() throws IOException {
         MatcherAssert.assertThat(
-            this.request.response().back().uri().toString().contains("text="),
+            new TRqWithOffset(
+                new TRqSendMessage("tkn"),
+                32
+            )
+                .response()
+                .back()
+                .uri()
+                .toString()
+                .contains("offset=32"),
             Matchers.equalTo(true)
         );
     }
