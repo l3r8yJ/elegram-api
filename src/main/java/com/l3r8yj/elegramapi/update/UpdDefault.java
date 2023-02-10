@@ -34,6 +34,9 @@ import org.json.JSONObject;
  */
 public final class UpdDefault implements Update {
 
+    /**
+     * Update as json.
+     */
     private final JSONObject json;
 
     /**

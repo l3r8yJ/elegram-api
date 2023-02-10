@@ -38,6 +38,9 @@ public interface Command {
      * The action of this command.
      * This method should be overloaded
      * to add new functionality to your bot.
+     *
+     * @param update The update
+     * @param bot Bot to interact
      */
     void act(Update update, Bot bot);
 }
