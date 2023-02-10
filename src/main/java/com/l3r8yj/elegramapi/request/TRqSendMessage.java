@@ -21,10 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-/*
-* @todo #72 TRqSendMessage change design.
-* Change ctor for sending message data via JSON.
-* */
 package com.l3r8yj.elegramapi.request;
 
 import org.cactoos.text.Concatenated;
