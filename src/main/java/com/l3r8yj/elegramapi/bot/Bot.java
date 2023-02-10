@@ -37,4 +37,11 @@ public interface Bot {
      */
     void run() throws Exception;
 
+    /**
+     * Sends the message.
+     *
+     * @param chat Chat to send message.
+     * @param text Text for message.
+     */
+    void sendMessage(long chat, String text);
 }
