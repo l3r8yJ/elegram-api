@@ -21,14 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-/*
-* @todo #60 Core/ Implement Update.
-* Implement mapping from/to JSON
-* with all fields from docs of telegram-api.
-* */
 
 package com.l3r8yj.elegramapi.update;
 
+import com.l3r8yj.elegramapi.message.Message;
 import org.json.JSONObject;
 
 /**
@@ -38,16 +34,24 @@ import org.json.JSONObject;
  */
 public final class UpdDefault implements Update {
 
+    private final JSONObject json;
+
     /**
      * Handling for incoming update.
      *
      * @param update The update
      */
     public UpdDefault(final JSONObject update) {
+        this.json = update;
     }
 
     @Override
-    public long chatId() {
-        return 0;
+    public long updateId() {
+        return this.json.getLong("update_id");
+    }
+
+    @Override
+    public Message message() {
+        return new Message(new JSONObject("message"));
     }
 }

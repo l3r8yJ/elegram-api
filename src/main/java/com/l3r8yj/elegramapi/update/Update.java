@@ -21,12 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-/*
- * @todo #60 Design/ Update change.
- * We have to rework design of Update interface.
- * Write all fields from telegram api documentation.
- * */
+
 package com.l3r8yj.elegramapi.update;
+
+import com.l3r8yj.elegramapi.message.Message;
 
 /**
  * The update from api.
@@ -36,9 +34,16 @@ package com.l3r8yj.elegramapi.update;
 public interface Update {
 
     /**
-     * Sent from.
+     * The update id.
      *
      * @return The id
      */
-    long chatId();
+    long updateId();
+
+    /**
+     * The message.
+     *
+     * @return Just message from update
+     */
+    Message message();
 }

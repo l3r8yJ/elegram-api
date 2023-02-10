@@ -35,9 +35,7 @@ package com.l3r8yj.elegramapi.bot;
 import com.jcabi.log.Logger;
 import com.l3r8yj.elegramapi.command.Command;
 import com.l3r8yj.elegramapi.request.TRqGetUpdates;
-import com.l3r8yj.elegramapi.request.TRqSendMessage;
 import com.l3r8yj.elegramapi.request.TRqWithOffset;
-import com.l3r8yj.elegramapi.response.TgResponse;
 import com.l3r8yj.elegramapi.update.UpdDefault;
 import java.io.IOException;
 import java.util.List;
@@ -97,31 +95,12 @@ public abstract class BtDefault implements Bot {
      * Handles the updates.
      *
      * @throws InterruptedException Thread interrupted
-     * @throws IOException When something went wrong
+     * @throws IOException When getting updates went wrong
      */
     private void handleUpdates() throws InterruptedException, IOException {
         final BlockingQueue<JSONObject> updates = new LinkedBlockingQueue<>(0);
         this.updatingThread(updates).start();
         this.checkOnNewUpdates(updates);
-    }
-
-    /**
-     * Updates count check.
-     *
-     * @param updates The queue
-     * @throws InterruptedException When thread was interrupted
-     */
-    private void checkOnNewUpdates(final BlockingQueue<JSONObject> updates)
-        throws InterruptedException {
-        while (true) {
-            for (final Command command : this.commands) {
-                final TgResponse rsp = command.createResponse(
-                    new UpdDefault(updates.take()).chatId()
-                );
-                new TRqSendMessage(this.token);
-            }
-            Thread.sleep(500L);
-        }
     }
 
     /**
@@ -141,6 +120,22 @@ public abstract class BtDefault implements Bot {
     }
 
     /**
+     * Updates count check.
+     *
+     * @param updates The queue
+     * @throws InterruptedException When thread was interrupted
+     */
+    private void checkOnNewUpdates(final BlockingQueue<JSONObject> updates)
+        throws InterruptedException {
+        while (true) {
+            for (final Command command : this.commands) {
+                command.act(new UpdDefault(updates.take()), this);
+            }
+            Thread.sleep(500L);
+        }
+    }
+
+    /**
      * Check new updates.
      *
      * @param accum Queue with updates
@@ -155,7 +150,7 @@ public abstract class BtDefault implements Bot {
             Logger.error(
                 this,
                 new Concatenated(
-                    "Error occurred while filling updates",
+                    "Error occurred while filling updates:\n",
                     ex.getMessage()
                 ).toString()
             );

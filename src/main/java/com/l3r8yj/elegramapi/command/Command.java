@@ -24,7 +24,8 @@
 
 package com.l3r8yj.elegramapi.command;
 
-import com.l3r8yj.elegramapi.response.TgResponse;
+import com.l3r8yj.elegramapi.bot.Bot;
+import com.l3r8yj.elegramapi.update.Update;
 
 /**
  * The base command.
@@ -34,10 +35,9 @@ import com.l3r8yj.elegramapi.response.TgResponse;
 public interface Command {
 
     /**
-     * Response to the chat.
-     *
-     * @param id The chat's id
-     * @return Response for telegram message
+     * The action of this command.
+     * This method should be overloaded
+     * to add new functionality to your bot.
      */
-    TgResponse createResponse(long id);
+    void act(Update update, Bot bot);
 }
