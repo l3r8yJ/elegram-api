@@ -49,6 +49,8 @@ SOFTWARE.
     <jcabi.http.version>1.20.1</jcabi.http.version>
     <hamcrest.version>2.2</hamcrest.version>
     <json.version>20220924</json.version>
+    <jcabi-log.version>0.22.0</jcabi-log.version>
+    <qulice-maven-plugin.version>0.22.0</qulice-maven-plugin.version>
   </properties>
   <dependencies>
     <dependency>
@@ -60,6 +62,11 @@ SOFTWARE.
       <groupId>com.jcabi</groupId>
       <artifactId>jcabi-http</artifactId>
       <version>${jcabi.http.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.jcabi</groupId>
+      <artifactId>jcabi-log</artifactId>
+      <version>${jcabi-log.version}</version>
     </dependency>
     <dependency>
       <groupId>org.json</groupId>
@@ -113,7 +120,7 @@ SOFTWARE.
       <plugin>
         <groupId>com.qulice</groupId>
         <artifactId>qulice-maven-plugin</artifactId>
-        <version>0.22.0</version>
+        <version>${qulice-maven-plugin.version}</version>
         <configuration>
           <license>file:${basedir}/LICENSE.txt</license>
           <excludes>

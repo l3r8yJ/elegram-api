@@ -32,6 +32,7 @@
 
 package com.l3r8yj.elegramapi.bot;
 
+import com.jcabi.log.Logger;
 import com.l3r8yj.elegramapi.command.Command;
 import com.l3r8yj.elegramapi.request.TRqGetUpdates;
 import com.l3r8yj.elegramapi.request.TRqSendMessage;
@@ -44,6 +45,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.cactoos.list.ListOf;
+import org.cactoos.text.Concatenated;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -80,6 +82,13 @@ public abstract class BtDefault implements Bot {
         try {
             this.handleUpdates();
         } catch (final InterruptedException | IOException ex) {
+            Logger.error(
+                this,
+                new Concatenated(
+                    "An error occurred while handling updates:\n",
+                    ex.getMessage()
+                ).toString()
+            );
             throw new IllegalStateException(ex);
         }
     }
@@ -92,7 +101,18 @@ public abstract class BtDefault implements Bot {
      */
     private void handleUpdates() throws InterruptedException, IOException {
         final BlockingQueue<JSONObject> updates = new LinkedBlockingQueue<>(0);
-        this.updateThread(updates).start();
+        this.updatingThread(updates).start();
+        this.checkOnNewUpdates(updates);
+    }
+
+    /**
+     * Updates count check.
+     *
+     * @param updates The queue
+     * @throws InterruptedException When thread was interrupted
+     */
+    private void checkOnNewUpdates(final BlockingQueue<JSONObject> updates)
+        throws InterruptedException {
         while (true) {
             for (final Command command : this.commands) {
                 final TgResponse rsp = command.createResponse(
@@ -110,7 +130,7 @@ public abstract class BtDefault implements Bot {
      * @param updates Queue with updates
      * @return The thread
      */
-    private Thread updateThread(final BlockingQueue<JSONObject> updates) {
+    private Thread updatingThread(final BlockingQueue<JSONObject> updates) {
         return new Thread(
             () -> {
                 while (!Thread.currentThread().isInterrupted()) {
@@ -123,20 +143,43 @@ public abstract class BtDefault implements Bot {
     /**
      * Check new updates.
      *
-     * @param updates Queue with updates
+     * @param accum Queue with updates
      */
-    private void fillUpdates(final BlockingQueue<JSONObject> updates) {
+    private void fillUpdates(final BlockingQueue<JSONObject> accum) {
         final AtomicInteger offset = new AtomicInteger();
         try {
-            final JSONArray server = new JSONObject(this.getUpdatesBody(offset))
+            final JSONArray updates = new JSONObject(this.getUpdatesBody(offset))
                 .getJSONArray("result");
-            for (final Object upd : server) {
-                final int id = new JSONObject(upd).getInt("update_id");
-                offset.set(id + 1);
-                updates.put(new JSONObject(upd));
-            }
+            BtDefault.putUpdatesWithOffset(accum, offset, updates);
         } catch (final IOException | InterruptedException ex) {
+            Logger.error(
+                this,
+                new Concatenated(
+                    "Error occurred while filling updates",
+                    ex.getMessage()
+                ).toString()
+            );
             throw new IllegalStateException(ex);
+        }
+    }
+
+    /**
+     * Iterating through updates with offset calculation.
+     *
+     * @param updates The updates queue
+     * @param offset The offset for each update
+     * @param server The data from server as JSON
+     * @throws InterruptedException When interrupted
+     */
+    private static void putUpdatesWithOffset(
+        final BlockingQueue<JSONObject> updates,
+        final AtomicInteger offset,
+        final JSONArray server
+    ) throws InterruptedException {
+        for (final Object upd : server) {
+            final int id = new JSONObject(upd).getInt("update_id");
+            offset.set(id + 1);
+            updates.put(new JSONObject(upd));
         }
     }
 
