@@ -22,46 +22,9 @@
  * SOFTWARE.
  */
 
-package com.l3r8yj.elegramapi.fake;
-
-import java.util.HashMap;
-import java.util.Map;
-import org.json.JSONObject;
-
 /**
- * The fake Message JSONObject with data.
+ * Message test package.
  *
  * @since 0.0.0
  */
-public final class FkJMessage {
-
-    /**
-     * Just test data.
-     */
-    private final JSONObject wrapped;
-
-    /**
-     * Ctor.
-     */
-    public FkJMessage() {
-        this.wrapped = new JSONObject();
-    }
-
-    /**
-     * Represents data as json.
-     *
-     *  @return The data
-     */
-    public JSONObject asJson() {
-        final Map<String, Long> from = new HashMap<>();
-        from.put("id", 213L);
-        final Map<String, Long> chat = new HashMap<>();
-        chat.put("id", 132L);
-        this.wrapped.put("message_id", 21L);
-        this.wrapped.put("from", from);
-        this.wrapped.put("chat", new JSONObject(chat));
-        this.wrapped.put("text", "Ruby, bark!");
-        this.wrapped.put("date", System.currentTimeMillis());
-        return this.wrapped;
-    }
-}
+package com.l3r8yj.elegramapi.message;

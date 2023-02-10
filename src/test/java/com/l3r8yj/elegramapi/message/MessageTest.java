@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) $originalComment.match("Copyright \(c\) (\d+)", 1, "-", "$today.year")2023 Ivanchuck Ivan.
+ * Copyright (c) 2022-2023 Ivanchuck Ivan.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -27,7 +27,6 @@ package com.l3r8yj.elegramapi.message;
 import com.l3r8yj.elegramapi.fake.FkJMessage;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -41,17 +40,17 @@ class MessageTest {
     /**
      * Under test message.
      */
-    private Message underTest;
+    private Message msg;
 
     @BeforeEach
     void setUp() {
-        this.underTest = new Message(new FkJMessage().asJson());
+        this.msg = new Message(new FkJMessage().asJson());
     }
 
     @Test
     void containsMessageId() {
         MatcherAssert.assertThat(
-            this.underTest.messageId(),
+            this.msg.messageId(),
             Matchers.equalTo(
                 new FkJMessage().asJson().getLong("message_id")
             )
@@ -61,7 +60,7 @@ class MessageTest {
     @Test
     void containsSenderId() {
         MatcherAssert.assertThat(
-            this.underTest.senderId(),
+            this.msg.senderId(),
             Matchers.equalTo(
                 new FkJMessage()
                     .asJson()
@@ -74,7 +73,7 @@ class MessageTest {
     @Test
     void containsChatId() {
         MatcherAssert.assertThat(
-            this.underTest.chatId(),
+            this.msg.chatId(),
             Matchers.equalTo(
                 new FkJMessage()
                     .asJson()
@@ -87,7 +86,7 @@ class MessageTest {
     @Test
     void containsText() {
         MatcherAssert.assertThat(
-            this.underTest.text(),
+            this.msg.text(),
             Matchers.equalTo(
                 new FkJMessage()
                     .asJson()
@@ -99,7 +98,7 @@ class MessageTest {
     @Test
     void containsDate() {
         MatcherAssert.assertThat(
-            this.underTest.date(),
+            this.msg.date(),
             Matchers.notNullValue()
         );
     }
