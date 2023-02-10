@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2022-2023 Ivanchuck Ivan.
+ * Copyright (c) $originalComment.match("Copyright \(c\) (\d+)", 1, "-", "$today.year")2023 Ivanchuck Ivan.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,50 +24,39 @@
 
 package com.l3r8yj.elegramapi.request;
 
-import com.jcabi.http.Response;
-import java.io.IOException;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
- * Telegram request with text.
- * This is a decorator for {@link TelegramRequest} inheritors.
+ * Test case for {@link TRqWithText}.
  *
  * @since 0.0.0
  */
-public final class TRqWithText implements TelegramRequest {
+class TRqWithTextTest {
 
-    /**
-     * The origin.
-     */
-    private final TelegramRequest origin;
+    TelegramRequest request;
 
-    /**
-     * The text.
-     */
-    private final String text;
-
-    /**
-     * Ctor.
-     *
-     * @param origin The origin request
-     * @param text The text to add
-     */
-    public TRqWithText(final TelegramRequest origin, final String text) {
-        this.origin = origin;
-        this.text = text;
+    @BeforeEach
+    void setUp() {
+        this.request = new TRqWithText(
+            new TRqSendMessage("tkn"),
+            "Hi, i'm Sonya!"
+        );
     }
 
-    @Override
-    public String plainText() {
-        return this.origin.plainText();
+    @Test
+    void representsAsPlainText() {
+        MatcherAssert.assertThat(
+            this.request.plainText(),
+            Matchers.equalTo(
+                "https://api.telegram.org/bottkn/sendMessage?text=tkn"
+            )
+        );
     }
 
-    @Override
-    public Response response() throws IOException {
-        return this.origin.response()
-            .back()
-            .uri()
-            .queryParam("text", this.text)
-            .back()
-            .fetch();
+    @Test
+    void responsesFromRightUri() {
     }
 }

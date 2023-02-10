@@ -25,10 +25,7 @@
 package com.l3r8yj.elegramapi.request;
 
 import com.jcabi.http.Response;
-import com.jcabi.http.request.JdkRequest;
 import java.io.IOException;
-import org.cactoos.text.Concatenated;
-import org.cactoos.text.FormattedText;
 
 /**
  * Telegram request with chat id as param.
@@ -61,14 +58,16 @@ public final class TRqWithChatId implements TelegramRequest {
 
     @Override
     public String plainText() {
-        return new Concatenated(
-            this.origin.plainText(),
-            new FormattedText("?chat_id=%d", this.chat).toString()
-        ).toString();
+        return this.origin.plainText();
     }
 
     @Override
     public Response response() throws IOException {
-        return new JdkRequest(this.plainText()).fetch();
+        return this.origin.response()
+            .back()
+            .uri()
+            .queryParam("chat_id", this.chat)
+            .back()
+            .fetch();
     }
 }
