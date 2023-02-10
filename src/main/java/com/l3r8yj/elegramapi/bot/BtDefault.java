@@ -22,10 +22,6 @@
  * SOFTWARE.
  */
 /*
- * @todo #73 Design/ Implement or add methods.
- * We have to add methods such as send message and etc.
- * */
-/*
  * @todo #60 Design/ Testing.
  * Write tests for DefaultBot class after closing other issues in DefaultBot class.
  * */
