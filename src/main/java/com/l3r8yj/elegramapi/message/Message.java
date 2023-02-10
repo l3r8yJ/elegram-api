@@ -87,8 +87,8 @@ public final class Message {
     /**
      * Get the date the message was sent in Unix time.
      *
-     * @return Un
-     */m
+     * @return Unix time
+     */
     public Instant date() {
         return Instant.ofEpochSecond(this.json.getLong("date"));
     }
