@@ -63,9 +63,9 @@ SOFTWARE.
     </developer>
   </developers>
   <properties>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
     <project.java.version>1.8</project.java.version>
+    <maven.compiler.source>${project.java.version}</maven.compiler.source>
+    <maven.compiler.target>${project.java.version}</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <junit.version>5.9.2</junit.version>
     <cactoos.version>0.55.0</cactoos.version>
