@@ -25,6 +25,7 @@
 package com.l3r8yj.elegramapi.request;
 
 import com.jcabi.http.Request;
+import com.jcabi.http.RequestURI;
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.JsonResponse;
 import java.io.IOException;
@@ -121,6 +122,11 @@ public abstract class TRqEnvelope implements TelegramRequest {
 
     @Override
     public final JsonResponse response() throws IOException {
-        return this.request.fetch().as(JsonResponse.class);
+        return new JdkRequest(this.uri().get()).fetch().as(JsonResponse.class);
+    }
+
+    @Override
+    public final RequestURI uri() {
+        return this.request.uri();
     }
 }

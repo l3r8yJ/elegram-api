@@ -24,6 +24,8 @@
 
 package com.l3r8yj.elegramapi.request;
 
+import com.jcabi.http.RequestURI;
+import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.JsonResponse;
 import java.io.IOException;
 
@@ -58,17 +60,18 @@ public final class TRqWithOffset implements TelegramRequest {
 
     @Override
     public String plainText() {
-        return this.origin.plainText();
+        return this.uri().toString();
     }
 
     @Override
     public JsonResponse response() throws IOException {
-        return this.origin.response()
-            .back()
-            .uri()
-            .queryParam("offset", this.offset)
-            .back()
+        return new JdkRequest(this.uri().toString())
             .fetch()
             .as(JsonResponse.class);
+    }
+
+    @Override
+    public RequestURI uri() {
+        return this.origin.uri().queryParam("offset", this.offset);
     }
 }

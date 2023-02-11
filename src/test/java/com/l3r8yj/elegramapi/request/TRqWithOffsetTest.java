@@ -24,7 +24,6 @@
 
 package com.l3r8yj.elegramapi.request;
 
-import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -37,14 +36,12 @@ import org.junit.jupiter.api.Test;
 final class TRqWithOffsetTest {
 
     @Test
-    void responsesFromRightUri() throws IOException {
+    void responsesFromRightUri() {
         MatcherAssert.assertThat(
             new TRqWithOffset(
                 new TRqSendMessage("tkn"),
                 32
             )
-                .response()
-                .back()
                 .uri()
                 .toString()
                 .contains("offset=32"),

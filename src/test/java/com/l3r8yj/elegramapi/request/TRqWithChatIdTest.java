@@ -24,7 +24,6 @@
 
 package com.l3r8yj.elegramapi.request;
 
-import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -37,14 +36,12 @@ import org.junit.jupiter.api.Test;
 final class TRqWithChatIdTest {
 
     @Test
-    void responsesFromRightUri() throws IOException {
+    void responsesFromRightUri() {
         MatcherAssert.assertThat(
             new TRqWithChatId(
                 new TRqSendMessage("tkn"),
                 34
             )
-                .response()
-                .back()
                 .uri()
                 .toString()
                 .contains("chat_id=34"),

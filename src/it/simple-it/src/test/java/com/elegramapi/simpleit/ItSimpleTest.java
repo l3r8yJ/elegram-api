@@ -24,6 +24,7 @@
 
 package com.elegramapi.simpleit;
 
+import com.jcabi.http.response.JsonResponse;
 import com.l3r8yj.elegramapi.bot.Bot;
 import com.l3r8yj.elegramapi.bot.BtDefault;
 import com.l3r8yj.elegramapi.command.Command;
@@ -31,6 +32,8 @@ import com.l3r8yj.elegramapi.update.Update;
 import javax.ws.rs.core.Response;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -40,16 +43,39 @@ import org.junit.jupiter.api.Test;
  */
 final class ItSimpleTest {
 
+    /**
+     * Under test bot.
+     */
+    private Bot bot;
+
+    @BeforeEach
+    void setUp() {
+        this.bot = new BtDefault(
+            "5735860614:AAHsneN3fWj76dfXejtdSmNGLf4kq-bUGgg",
+            new CmdStart(),
+            new CmdEcho()
+        );
+    }
+
+    @Test
+    @Disabled
+    void runsTheBot() throws Exception {
+        this.bot.start();
+    }
+
     @Test
     void sendsTheMessage() {
+        final JsonResponse response = this.bot.sendMessage(
+            389_133_054,
+            "Hi, i'm Ruby!"
+        );
         MatcherAssert.assertThat(
-            new BtDefault(
-                "5735860614:AAHsneN3fWj76dfXejtdSmNGLf4kq-bUGgg",
-                new TestCommand()
-            )
-                .sendMessage(389_133_054, "Hi, i'm Ruby!")
-                .status(),
+            response.status(),
             Matchers.equalTo(Response.Status.OK.getStatusCode())
+        );
+        MatcherAssert.assertThat(
+            response.back().toString().contains("POST"),
+            Matchers.equalTo(true)
         );
     }
 
@@ -58,12 +84,30 @@ final class ItSimpleTest {
      *
      * @since 0.0.0
      */
-    static class TestCommand implements Command {
+    static class CmdStart implements Command {
 
         @Override
         public final void act(final Update update, final Bot bot) {
             if (update.message().text().equals("/start")) {
                 bot.sendMessage(update.message().chatId(), "Hi!");
+            }
+        }
+    }
+
+    /**
+     * The echo command.
+     *
+     * @since 0.0.0
+     */
+    static class CmdEcho implements Command {
+
+        @Override
+        public void act(final Update update, final Bot bot) {
+            if (!update.message().text().isEmpty()) {
+                bot.sendMessage(
+                    update.message().chatId(),
+                    update.message().text()
+                );
             }
         }
     }

@@ -25,7 +25,11 @@
  * @todo #60 Design/ Testing.
  * Write tests for DefaultBot class after closing other issues in DefaultBot class.
  * */
-
+/*
+* @todo #106 Fix #handleUpdates.
+* This method work unpredictable,
+* need to fix work with incoming updates.
+* */
 package com.l3r8yj.elegramapi.bot;
 
 import com.jcabi.http.response.JsonResponse;
@@ -35,11 +39,13 @@ import com.l3r8yj.elegramapi.request.TRqGetUpdates;
 import com.l3r8yj.elegramapi.request.TRqPost;
 import com.l3r8yj.elegramapi.request.TRqSendMessage;
 import com.l3r8yj.elegramapi.request.TRqWithChatId;
-import com.l3r8yj.elegramapi.request.TRqWithOffset;
 import com.l3r8yj.elegramapi.request.TRqWithText;
 import com.l3r8yj.elegramapi.update.UpdDefault;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -66,6 +72,11 @@ public class BtDefault implements Bot {
     private final String token;
 
     /**
+     * The processed updates.
+     */
+    private final Set<Long> processed;
+
+    /**
      * Ctor.
      *
      * @param token The token
@@ -74,10 +85,11 @@ public class BtDefault implements Bot {
     public BtDefault(final String token, final Command... commands) {
         this.token = token;
         this.commands = new ListOf<>(commands);
+        this.processed = Collections.synchronizedSet(new HashSet<>());
     }
 
     @Override
-    public final void run() {
+    public final void start() {
         try {
             this.handleUpdates();
         } catch (final InterruptedException | IOException ex) {
@@ -112,8 +124,8 @@ public class BtDefault implements Bot {
                     ex.getMessage()
                 ).toString()
             );
+            throw new IllegalStateException("Can't send a message to user!", ex);
         }
-        throw new IllegalStateException("Can't send a message to user!");
     }
 
     /**
@@ -125,7 +137,18 @@ public class BtDefault implements Bot {
     private void handleUpdates() throws InterruptedException, IOException {
         final BlockingQueue<JSONObject> updates = new LinkedBlockingQueue<>();
         this.updatingThread(updates).start();
-        this.actWithNewUpdates(updates);
+        while (true) {
+            final JSONObject upd = updates.take();
+            Logger.info(this, this.processed.toString());
+            for (final Command command : this.commands) {
+                if (this.processed.contains(upd.getLong("update_id"))) {
+                    continue;
+                }
+                this.processed.add(upd.getLong("update_id"));
+                command.act(new UpdDefault(upd), this);
+            }
+            Thread.sleep(500L);
+        }
     }
 
     /**
@@ -145,22 +168,6 @@ public class BtDefault implements Bot {
     }
 
     /**
-     * Updates count check.
-     *
-     * @param updates The queue
-     * @throws InterruptedException When thread was interrupted
-     */
-    private void actWithNewUpdates(final BlockingQueue<JSONObject> updates)
-        throws InterruptedException {
-        while (true) {
-            for (final Command command : this.commands) {
-                command.act(new UpdDefault(updates.take()), this);
-            }
-            Thread.sleep(500L);
-        }
-    }
-
-    /**
      * Check new updates.
      *
      * @param accum Queue with updates
@@ -168,7 +175,11 @@ public class BtDefault implements Bot {
     private void fillUpdates(final BlockingQueue<JSONObject> accum) {
         final AtomicInteger offset = new AtomicInteger();
         try {
-            final JSONArray updates = new JSONObject(this.getUpdatesBody(offset))
+            final JSONArray updates = new JSONObject(
+                new TRqGetUpdates(this.token)
+                    .response()
+                    .body()
+            )
                 .getJSONArray("result");
             BtDefault.putUpdatesWithOffset(accum, offset, updates);
         } catch (final IOException | InterruptedException ex) {
@@ -201,21 +212,5 @@ public class BtDefault implements Bot {
             offset.set(id + 1);
             updates.put(new JSONObject(upd.toString()));
         }
-    }
-
-    /**
-     * Just update body.
-     *
-     * @param offset The offset
-     * @return The body as string
-     * @throws IOException When something went wrong
-     */
-    private String getUpdatesBody(final AtomicInteger offset) throws IOException {
-        return new TRqWithOffset(
-            new TRqGetUpdates(this.token),
-            offset.get()
-        )
-            .response()
-            .body();
     }
 }

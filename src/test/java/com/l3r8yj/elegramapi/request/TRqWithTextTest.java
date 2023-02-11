@@ -24,7 +24,6 @@
 
 package com.l3r8yj.elegramapi.request;
 
-import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
@@ -51,9 +50,9 @@ final class TRqWithTextTest {
     }
 
     @Test
-    void responsesFromRightUri() throws IOException {
+    void responsesFromRightUri() {
         MatcherAssert.assertThat(
-            this.request.response().back().uri().toString().contains("text="),
+            this.request.uri().toString().contains("text="),
             Matchers.equalTo(true)
         );
     }
