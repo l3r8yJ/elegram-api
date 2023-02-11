@@ -46,7 +46,7 @@ SOFTWARE.
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <junit.version>5.9.2</junit.version>
     <cactoos.version>0.55.0</cactoos.version>
-    <jcabi.http.version>2.0-SNAPSHOT</jcabi.http.version>
+    <jcabi.http.version>1.20.1</jcabi.http.version>
     <hamcrest.version>2.2</hamcrest.version>
     <json.version>20220924</json.version>
     <jcabi-log.version>0.22.0</jcabi-log.version>
