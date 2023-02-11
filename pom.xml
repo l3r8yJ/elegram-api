@@ -52,7 +52,7 @@ SOFTWARE.
     <jcabi-log.version>0.22.0</jcabi-log.version>
     <qulice-maven-plugin.version>0.22.0</qulice-maven-plugin.version>
     <jersey-common.version>2.22.2</jersey-common.version>
-    <javax.ws.rs-api.version>2.1</javax.ws.rs-api.version>
+    <javax.ws.rs-api.version>2.1.1</javax.ws.rs-api.version>
     <javax.json-api.version>1.1.4</javax.json-api.version>
   </properties>
   <dependencies>
