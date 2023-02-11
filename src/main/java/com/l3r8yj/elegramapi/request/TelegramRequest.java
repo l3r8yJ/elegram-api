@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-/**
+/*
  * @todo #94 Change request to send message.
  * Need to change this {@link com.l3r8yj.elegramapi.request.TRqWithChatId},
  * {@link com.l3r8yj.elegramapi.request.TRqWithOffset},
