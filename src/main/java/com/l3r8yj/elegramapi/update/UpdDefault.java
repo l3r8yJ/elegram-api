@@ -55,6 +55,6 @@ public final class UpdDefault implements Update {
 
     @Override
     public Message message() {
-        return new Message(new JSONObject("message"));
+        return new Message(this.json.getJSONObject("message"));
     }
 }

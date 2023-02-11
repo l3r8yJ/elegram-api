@@ -28,6 +28,7 @@
 
 package com.l3r8yj.elegramapi.bot;
 
+import com.jcabi.http.response.JsonResponse;
 import com.jcabi.log.Logger;
 import com.l3r8yj.elegramapi.command.Command;
 import com.l3r8yj.elegramapi.request.TRqGetUpdates;
@@ -52,7 +53,7 @@ import org.json.JSONObject;
  *
  * @since 0.0.0
  */
-public abstract class BtDefault implements Bot {
+public class BtDefault implements Bot {
 
     /**
      * All commands.
@@ -92,9 +93,9 @@ public abstract class BtDefault implements Bot {
     }
 
     @Override
-    public final void sendMessage(final long chat, final String text) {
+    public final JsonResponse sendMessage(final long chat, final String text) {
         try {
-            new TRqPost(
+            return new TRqPost(
                 new TRqWithChatId(
                     new TRqWithText(
                         new TRqSendMessage(this.token),
@@ -112,6 +113,7 @@ public abstract class BtDefault implements Bot {
                 ).toString()
             );
         }
+        throw new IllegalStateException("Can't send a message to user!");
     }
 
     /**
@@ -121,9 +123,9 @@ public abstract class BtDefault implements Bot {
      * @throws IOException When getting updates went wrong
      */
     private void handleUpdates() throws InterruptedException, IOException {
-        final BlockingQueue<JSONObject> updates = new LinkedBlockingQueue<>(0);
+        final BlockingQueue<JSONObject> updates = new LinkedBlockingQueue<>();
         this.updatingThread(updates).start();
-        this.checkOnNewUpdates(updates);
+        this.actWithNewUpdates(updates);
     }
 
     /**
@@ -148,7 +150,7 @@ public abstract class BtDefault implements Bot {
      * @param updates The queue
      * @throws InterruptedException When thread was interrupted
      */
-    private void checkOnNewUpdates(final BlockingQueue<JSONObject> updates)
+    private void actWithNewUpdates(final BlockingQueue<JSONObject> updates)
         throws InterruptedException {
         while (true) {
             for (final Command command : this.commands) {
@@ -195,9 +197,9 @@ public abstract class BtDefault implements Bot {
         final JSONArray server
     ) throws InterruptedException {
         for (final Object upd : server) {
-            final int id = new JSONObject(upd).getInt("update_id");
+            final int id = new JSONObject(upd.toString()).getInt("update_id");
             offset.set(id + 1);
-            updates.put(new JSONObject(upd));
+            updates.put(new JSONObject(upd.toString()));
         }
     }
 

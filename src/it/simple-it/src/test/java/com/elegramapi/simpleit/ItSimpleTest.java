@@ -24,6 +24,11 @@
 
 package com.elegramapi.simpleit;
 
+import com.l3r8yj.elegramapi.bot.Bot;
+import com.l3r8yj.elegramapi.bot.BtDefault;
+import com.l3r8yj.elegramapi.command.Command;
+import com.l3r8yj.elegramapi.update.Update;
+import javax.ws.rs.core.Response;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -36,10 +41,30 @@ import org.junit.jupiter.api.Test;
 final class ItSimpleTest {
 
     @Test
-    void simpleTest() {
+    void sendsTheMessage() {
         MatcherAssert.assertThat(
-            "Hello!".contains("el"),
-            Matchers.equalTo(true)
+            new BtDefault(
+                "5735860614:AAHsneN3fWj76dfXejtdSmNGLf4kq-bUGgg",
+                new TestCommand()
+            )
+                .sendMessage(389_133_054, "Hi, i'm Ruby!")
+                .status(),
+            Matchers.equalTo(Response.Status.OK.getStatusCode())
         );
+    }
+
+    /**
+     * The test command.
+     *
+     * @since 0.0.0
+     */
+    static class TestCommand implements Command {
+
+        @Override
+        public final void act(final Update update, final Bot bot) {
+            if (update.message().text().equals("/start")) {
+                bot.sendMessage(update.message().chatId(), "Hi!");
+            }
+        }
     }
 }

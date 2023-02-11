@@ -23,6 +23,8 @@
  */
 package com.l3r8yj.elegramapi.bot;
 
+import com.jcabi.http.response.JsonResponse;
+
 /**
  * The Default bot.
  *
@@ -42,6 +44,7 @@ public interface Bot {
      *
      * @param chat Chat to send message.
      * @param text Text for message.
+     * @return Response as Json.
      */
-    void sendMessage(long chat, String text);
+    JsonResponse sendMessage(long chat, String text);
 }

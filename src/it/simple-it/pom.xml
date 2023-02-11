@@ -36,17 +36,34 @@ SOFTWARE.
     <junit.version>5.9.2</junit.version>
     <hamcrest.version>2.2</hamcrest.version>
     <commons-lang3.version>3.12.0</commons-lang3.version>
+    <javax.json-api.version>1.1.4</javax.json-api.version>
+    <javax.ws.rs-api.version>2.1</javax.ws.rs-api.version>
+    <jersey-common.version>2.22.2</jersey-common.version>
+    <maven-surefire-plugin.version>3.0.0-M8</maven-surefire-plugin.version>
   </properties>
   <dependencies>
-    <dependency>
-      <groupId>@project.groupId@</groupId>
-      <artifactId>@project.artifactId@</artifactId>
-      <version>@project.version@</version>
-    </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
       <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/javax.json/javax.json-api -->
+    <dependency>
+      <groupId>javax.json</groupId>
+      <artifactId>javax.json-api</artifactId>
+      <version>${javax.json-api.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.ws.rs</groupId>
+      <artifactId>javax.ws.rs-api</artifactId>
+      <version>${javax.ws.rs-api.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.glassfish.jersey.core</groupId>
+      <artifactId>jersey-common</artifactId>
+      <version>${jersey-common.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -67,5 +84,26 @@ SOFTWARE.
       <version>RELEASE</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.l3r8yj</groupId>
+      <artifactId>elegram-api</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${maven-surefire-plugin.version}</version>
+        <configuration>
+          <includes>
+            <include>**/*Spec.*</include>
+            <include>**/*Test.*</include>
+          </includes>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>

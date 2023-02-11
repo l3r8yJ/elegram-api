@@ -63,8 +63,8 @@ SOFTWARE.
     </developer>
   </developers>
   <properties>
-    <maven.compiler.source>17</maven.compiler.source>
-    <maven.compiler.target>17</maven.compiler.target>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <junit.version>5.9.2</junit.version>
     <cactoos.version>0.55.0</cactoos.version>
@@ -80,6 +80,9 @@ SOFTWARE.
     <jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
     <test-naming-conventions.version>0.1.7</test-naming-conventions.version>
     <slf4j-jdk14.version>2.0.0-alpha0</slf4j-jdk14.version>
+    <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
+    <maven-surefire-plugin.version>3.0.0-M8</maven-surefire-plugin.version>
+    <maven-invoker-plugin.version>3.4.0</maven-invoker-plugin.version>
   </properties>
   <dependencies>
     <dependency>
@@ -157,10 +160,10 @@ SOFTWARE.
       </plugin>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.10.1</version>
+        <version>${maven-compiler-plugin.version}</version>
         <configuration combine.self="override">
-          <source>1.8</source>
-          <target>1.8</target>
+          <source>${maven.compiler.source}</source>
+          <target>${maven.compiler.target}</target>
           <compilerArgs>
             <arg>-Xpkginfo:always</arg>
           </compilerArgs>
@@ -169,7 +172,7 @@ SOFTWARE.
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.0.0-M8</version>
+        <version>${maven-surefire-plugin.version}</version>
         <configuration>
           <includes>
             <include>**/*Spec.*</include>
@@ -179,10 +182,11 @@ SOFTWARE.
       </plugin>
       <plugin>
         <artifactId>maven-invoker-plugin</artifactId>
-        <version>3.4.0</version>
+        <version>${maven-invoker-plugin.version}</version>
         <configuration>
           <settingsFile>src/it/settings.xml</settingsFile>
           <postBuildHookScript>verify</postBuildHookScript>
+          <streamLogs>true</streamLogs>
         </configuration>
         <executions>
           <execution>
