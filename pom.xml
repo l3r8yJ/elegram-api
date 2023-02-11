@@ -28,6 +28,28 @@ SOFTWARE.
   <artifactId>elegram-api</artifactId>
   <packaging>jar</packaging>
   <description>The EO styled wrapper of Telegram bots api</description>
+  <url>http://github.com/l3r8yJ/elegram-api</url>
+  <version>1.0-SNAPSHOT</version>
+  <name>elegram-api</name>
+  <licenses>
+    <license>
+      <name>MIT</name>
+      <url>https://github.com/l3r8yJ/elegram-api/blob/master/LICENSE.txt</url>
+    </license>
+  </licenses>
+  <issueManagement>
+    <system>github</system>
+    <url>https://github.com/l3r8yJ/elegram-api/issues</url>
+  </issueManagement>
+  <scm>
+    <connection>scm:git:git@github.com:l3r8y/elegram-api.git</connection>
+    <developerConnection>scm:git:git@github.com:l3r8y/elegram-api.git</developerConnection>
+    <url>http://github.com/l3r8yJ/elegram-api</url>
+  </scm>
+  <ciManagement>
+    <system>rultor</system>
+    <url>https://www.rultor.com/s/elegram-api</url>
+  </ciManagement>
   <developers>
     <developer>
       <id>1</id>
@@ -54,6 +76,10 @@ SOFTWARE.
     <jersey-common.version>2.22.2</jersey-common.version>
     <javax.ws.rs-api.version>2.1</javax.ws.rs-api.version>
     <javax.json-api.version>1.1.4</javax.json-api.version>
+    <maven-javadoc-plugin.version>3.4.1</maven-javadoc-plugin.version>
+    <jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
+    <test-naming-conventions.version>0.1.7</test-naming-conventions.version>
+    <slf4j-jdk14.version>2.0.0-alpha0</slf4j-jdk14.version>
   </properties>
   <dependencies>
     <dependency>
@@ -86,6 +112,12 @@ SOFTWARE.
       <version>${jcabi.http.version}</version>
     </dependency>
     <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-jdk14</artifactId>
+      <version>${slf4j-jdk14.version}</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
       <groupId>com.jcabi</groupId>
       <artifactId>jcabi-log</artifactId>
       <version>${jcabi-log.version}</version>
@@ -108,7 +140,6 @@ SOFTWARE.
       <scope>test</scope>
     </dependency>
   </dependencies>
-  <version>1.0-SNAPSHOT</version>
   <pluginRepositories>
     <pluginRepository>
       <id>oss.sonatype.org</id>
@@ -117,6 +148,13 @@ SOFTWARE.
   </pluginRepositories>
   <build>
     <plugins>
+      <plugin>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>${maven-javadoc-plugin.version}</version>
+        <configuration>
+          <source>17</source>
+        </configuration>
+      </plugin>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.10.1</version>
@@ -167,6 +205,7 @@ SOFTWARE.
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
+        <version>${jacoco-maven-plugin.version}</version>
         <executions>
           <execution>
             <goals>
@@ -185,7 +224,7 @@ SOFTWARE.
       <plugin>
         <groupId>com.github.volodya-lombrozo</groupId>
         <artifactId>test-naming-conventions</artifactId>
-        <version>0.1.7</version>
+        <version>${test-naming-conventions.version}</version>
         <executions>
           <execution>
             <goals>
