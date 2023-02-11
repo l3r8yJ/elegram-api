@@ -46,13 +46,14 @@ SOFTWARE.
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <junit.version>5.9.2</junit.version>
     <cactoos.version>0.55.0</cactoos.version>
-    <jcabi.http.version>1.20.1</jcabi.http.version>
+    <jcabi.http.version>2.0-SNAPSHOT</jcabi.http.version>
     <hamcrest.version>2.2</hamcrest.version>
     <json.version>20220924</json.version>
     <jcabi-log.version>0.22.0</jcabi-log.version>
     <qulice-maven-plugin.version>0.22.0</qulice-maven-plugin.version>
     <jersey-common.version>2.22.2</jersey-common.version>
     <javax.ws.rs-api.version>2.1</javax.ws.rs-api.version>
+    <javax.json-api.version>1.1.4</javax.json-api.version>
   </properties>
   <dependencies>
     <dependency>
@@ -70,6 +71,13 @@ SOFTWARE.
       <groupId>org.glassfish.jersey.core</groupId>
       <artifactId>jersey-common</artifactId>
       <version>${jersey-common.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/javax.json/javax.json-api -->
+    <dependency>
+      <groupId>javax.json</groupId>
+      <artifactId>javax.json-api</artifactId>
+      <version>${javax.json-api.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>

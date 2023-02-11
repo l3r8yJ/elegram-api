@@ -24,7 +24,7 @@
 
 package com.l3r8yj.elegramapi.request;
 
-import com.jcabi.http.Response;
+import com.jcabi.http.response.JsonResponse;
 import java.io.IOException;
 
 /**
@@ -47,5 +47,5 @@ public interface TelegramRequest {
      * @return The response
      * @throws IOException When something went wrong
      */
-    Response response() throws IOException;
+    JsonResponse response() throws IOException;
 }

@@ -24,7 +24,7 @@
 
 package com.l3r8yj.elegramapi.request;
 
-import com.jcabi.http.Response;
+import com.jcabi.http.response.JsonResponse;
 import java.io.IOException;
 
 /**
@@ -62,12 +62,13 @@ public final class TRqWithChatId implements TelegramRequest {
     }
 
     @Override
-    public Response response() throws IOException {
+    public JsonResponse response() throws IOException {
         return this.origin.response()
             .back()
             .uri()
             .queryParam("chat_id", this.chat)
             .back()
-            .fetch();
+            .fetch()
+            .as(JsonResponse.class);
     }
 }
