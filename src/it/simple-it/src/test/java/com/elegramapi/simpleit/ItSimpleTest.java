@@ -53,8 +53,8 @@ final class ItSimpleTest {
     void setUp() {
         this.bot = new BtDefault(
             "5735860614:AAHsneN3fWj76dfXejtdSmNGLf4kq-bUGgg",
-            new CmdStart(),
-            new CmdEcho()
+            new ItSimpleTest.CmdStart(),
+            new ItSimpleTest.CmdEcho()
         );
     }
 
@@ -69,7 +69,7 @@ final class ItSimpleTest {
     @Test
     void sendsTheMessage() {
         final JsonResponse response = this.bot.sendMessage(
-            389_133_054,
+            389_133_054L,
             "Hi, i'm Ruby!"
         );
         MatcherAssert.assertThat(
@@ -105,7 +105,7 @@ final class ItSimpleTest {
     private static class CmdEcho implements Command {
 
         @Override
-        public void act(final Update update, final Bot bot) {
+        public final void act(final Update update, final Bot bot) {
             if (!update.message().text().isEmpty()) {
                 bot.sendMessage(
                     update.message().chatId(),
