@@ -178,6 +178,23 @@ SOFTWARE.
         </configuration>
       </plugin>
       <plugin>
+        <artifactId>maven-invoker-plugin</artifactId>
+        <version>3.4.0</version>
+        <configuration>
+          <settingsFile>src/it/settings.xml</settingsFile>
+          <postBuildHookScript>verify</postBuildHookScript>
+        </configuration>
+        <executions>
+          <execution>
+            <id>integration-test</id>
+            <goals>
+              <goal>install</goal>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
         <groupId>com.qulice</groupId>
         <artifactId>qulice-maven-plugin</artifactId>
         <version>${qulice-maven-plugin.version}</version>
