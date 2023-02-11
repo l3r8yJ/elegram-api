@@ -25,8 +25,10 @@
 package com.l3r8yj.elegramapi.request;
 
 import java.io.IOException;
+import javax.ws.rs.core.Response;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -36,18 +38,31 @@ import org.junit.jupiter.api.Test;
  */
 final class TRqWithChatIdTest {
 
+    /**
+     * Under test request.
+     */
+    private TelegramRequest request;
+
+    @BeforeEach
+    void setUp() {
+        this.request = new TRqWithChatId(
+            new TRqSendMessage("tkn"),
+            34
+        );
+    }
+
     @Test
-    void responsesFromRightUri() throws IOException {
+    void responsesWithNotFound() throws IOException {
         MatcherAssert.assertThat(
-            new TRqWithChatId(
-                new TRqSendMessage("tkn"),
-                34
-            )
-                .response()
-                .back()
-                .uri()
-                .toString()
-                .contains("chat_id=34"),
+            this.request.response().status(),
+            Matchers.equalTo(Response.Status.NOT_FOUND.getStatusCode())
+        );
+    }
+
+    @Test
+    void createsUriWithRightParam() {
+        MatcherAssert.assertThat(
+            this.request.uri().toString().contains("chat_id=34"),
             Matchers.equalTo(true)
         );
     }

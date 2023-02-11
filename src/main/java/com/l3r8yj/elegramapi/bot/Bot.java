@@ -37,7 +37,7 @@ public interface Bot {
      *
      * @throws Exception If something went wrong
      */
-    void run() throws Exception;
+    void start() throws Exception;
 
     /**
      * Sends the message.

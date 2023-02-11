@@ -24,48 +24,28 @@
 
 package com.l3r8yj.elegramapi.request;
 
-import com.jcabi.http.RequestURI;
-import com.jcabi.http.request.JdkRequest;
-import com.jcabi.http.response.JsonResponse;
 import java.io.IOException;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Test;
 
 /**
- * Telegram request with POST.
- * This is a decorator for {@link TelegramRequest}
+ * Test case for {@link TRqPost}.
  *
  * @since 0.0.0
  */
-public final class TRqPost implements TelegramRequest {
+class TRqPostTest {
 
-    /**
-     * The origin request.
-     */
-    private final TelegramRequest origin;
-
-    /**
-     * Ctor.
-     *
-     * @param origin The origin
-     */
-    public TRqPost(final TelegramRequest origin) {
-        this.origin = origin;
-    }
-
-    @Override
-    public String plainText() {
-        return this.origin.plainText();
-    }
-
-    @Override
-    public JsonResponse response() throws IOException {
-        return new JdkRequest(this.uri().toString())
-            .method("POST")
-            .fetch()
-            .as(JsonResponse.class);
-    }
-
-    @Override
-    public RequestURI uri() {
-        return this.origin.uri();
+    @Test
+    void responsesWithPost() throws IOException {
+        MatcherAssert.assertThat(
+            "Is a POST request",
+            new TRqPost(new TRqGetUpdates("tkn"))
+                .response()
+                .back()
+                .toString()
+                .contains("POST"),
+            Matchers.equalTo(true)
+        );
     }
 }
