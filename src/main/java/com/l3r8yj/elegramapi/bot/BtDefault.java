@@ -51,7 +51,6 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.cactoos.list.ListOf;
 import org.cactoos.text.Concatenated;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -85,7 +84,7 @@ public class BtDefault implements Bot {
     public BtDefault(final String token, final Command... commands) {
         this.token = token;
         this.commands = new ListOf<>(commands);
-        this.processed = Collections.synchronizedSet(new HashSet<>());
+        this.processed = Collections.synchronizedSet(new HashSet<>(0));
     }
 
     @Override
@@ -214,11 +213,11 @@ public class BtDefault implements Bot {
     private static void putUpdatesWithOffset(
         final BlockingQueue<JSONObject> updates,
         final AtomicInteger offset,
-        final JSONArray server
+        final Iterable<Object> server
     ) throws InterruptedException {
         for (final Object upd : server) {
-            final int id = new JSONObject(upd.toString()).getInt("update_id");
-            offset.set(id + 1);
+            final int update = new JSONObject(upd.toString()).getInt("update_id");
+            offset.set(update + 1);
             updates.put(new JSONObject(upd.toString()));
         }
     }
