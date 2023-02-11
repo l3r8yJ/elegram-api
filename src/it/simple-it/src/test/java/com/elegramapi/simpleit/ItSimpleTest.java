@@ -91,7 +91,7 @@ final class ItSimpleTest {
 
         @Override
         public final void act(final Update update, final Bot bot) {
-            if (update.message().text().equals("/start")) {
+            if ("/start".equals(update.message().text())) {
                 bot.sendMessage(update.message().chatId(), "Hi!");
             }
         }
