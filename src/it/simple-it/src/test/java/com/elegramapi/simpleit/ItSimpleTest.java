@@ -87,7 +87,7 @@ final class ItSimpleTest {
      *
      * @since 0.0.0
      */
-    static class CmdStart implements Command {
+    private static class CmdStart implements Command {
 
         @Override
         public final void act(final Update update, final Bot bot) {
@@ -102,7 +102,7 @@ final class ItSimpleTest {
      *
      * @since 0.0.0
      */
-    static class CmdEcho implements Command {
+    private static class CmdEcho implements Command {
 
         @Override
         public void act(final Update update, final Bot bot) {
