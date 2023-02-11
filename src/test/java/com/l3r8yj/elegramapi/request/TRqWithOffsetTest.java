@@ -52,7 +52,7 @@ final class TRqWithOffsetTest {
     }
 
     @Test
-    void responses() throws IOException {
+    void responsesWithNotFound() throws IOException {
         MatcherAssert.assertThat(
             this.request.response().status(),
             Matchers.equalTo(Response.Status.NOT_FOUND.getStatusCode())
