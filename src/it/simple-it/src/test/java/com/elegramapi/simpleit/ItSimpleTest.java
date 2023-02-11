@@ -32,6 +32,7 @@ import com.l3r8yj.elegramapi.update.Update;
 import javax.ws.rs.core.Response;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -59,8 +60,10 @@ final class ItSimpleTest {
 
     @Test
     @Disabled
-    void runsTheBot() throws Exception {
-        this.bot.start();
+    void runsTheBot() {
+        Assertions.assertDoesNotThrow(
+            () -> this.bot.start()
+        );
     }
 
     @Test

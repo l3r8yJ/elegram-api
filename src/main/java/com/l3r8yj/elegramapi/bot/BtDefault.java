@@ -137,15 +137,24 @@ public class BtDefault implements Bot {
     private void handleUpdates() throws InterruptedException, IOException {
         final BlockingQueue<JSONObject> updates = new LinkedBlockingQueue<>();
         this.updatingThread(updates).start();
+        this.processUpdates(updates);
+    }
+
+    /**
+     * Processing updates.
+     *
+     * @param updates The queue with updates
+     * @throws InterruptedException When thread interrupted
+     */
+    private void processUpdates(final BlockingQueue<JSONObject> updates)
+        throws InterruptedException {
         while (true) {
             final JSONObject upd = updates.take();
-            Logger.info(this, this.processed.toString());
-            for (final Command command : this.commands) {
-                if (this.processed.contains(upd.getLong("update_id"))) {
-                    continue;
+            if (!this.processed.contains(upd.getLong("update_id"))) {
+                for (final Command command : this.commands) {
+                    this.processed.add(upd.getLong("update_id"));
+                    command.act(new UpdDefault(upd), this);
                 }
-                this.processed.add(upd.getLong("update_id"));
-                command.act(new UpdDefault(upd), this);
             }
             Thread.sleep(500L);
         }
@@ -175,13 +184,13 @@ public class BtDefault implements Bot {
     private void fillUpdates(final BlockingQueue<JSONObject> accum) {
         final AtomicInteger offset = new AtomicInteger();
         try {
-            final JSONArray updates = new JSONObject(
-                new TRqGetUpdates(this.token)
-                    .response()
-                    .body()
-            )
-                .getJSONArray("result");
-            BtDefault.putUpdatesWithOffset(accum, offset, updates);
+            BtDefault.putUpdatesWithOffset(
+                accum,
+                offset,
+                new JSONObject(
+                    new TRqGetUpdates(this.token).response().body()
+                ).getJSONArray("result")
+            );
         } catch (final IOException | InterruptedException ex) {
             Logger.error(
                 this,
