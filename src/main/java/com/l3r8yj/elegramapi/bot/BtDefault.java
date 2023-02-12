@@ -227,7 +227,7 @@ public class BtDefault implements Bot {
     }
 
     /**
-     * Just logging
+     * Just logging.
      *
      * @param method Method name
      * @param exc The exception
