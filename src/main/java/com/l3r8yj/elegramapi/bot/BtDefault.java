@@ -39,6 +39,7 @@ import com.l3r8yj.elegramapi.request.TRqGetUpdates;
 import com.l3r8yj.elegramapi.request.TRqPost;
 import com.l3r8yj.elegramapi.request.TRqSendMessage;
 import com.l3r8yj.elegramapi.request.TRqWithChatId;
+import com.l3r8yj.elegramapi.request.TRqWithOffset;
 import com.l3r8yj.elegramapi.request.TRqWithText;
 import com.l3r8yj.elegramapi.update.UpdDefault;
 import java.io.IOException;
@@ -49,6 +50,7 @@ import java.util.Set;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 import org.cactoos.list.ListOf;
 import org.cactoos.text.Concatenated;
 import org.json.JSONObject;
@@ -76,6 +78,11 @@ public class BtDefault implements Bot {
     private final Set<Long> processed;
 
     /**
+     * Read-write lock.
+     */
+    private final ReentrantReadWriteLock rwlock;
+
+    /**
      * Ctor.
      *
      * @param token The token
@@ -85,6 +92,7 @@ public class BtDefault implements Bot {
         this.token = token;
         this.commands = new ListOf<>(commands);
         this.processed = Collections.synchronizedSet(new HashSet<>(0));
+        this.rwlock = new ReentrantReadWriteLock();
     }
 
     @Override
@@ -148,14 +156,9 @@ public class BtDefault implements Bot {
     private void processUpdates(final BlockingQueue<JSONObject> updates)
         throws InterruptedException {
         while (true) {
-            final JSONObject upd = updates.take();
-            if (!this.processed.contains(upd.getLong("update_id"))) {
-                for (final Command command : this.commands) {
-                    this.processed.add(upd.getLong("update_id"));
-                    command.act(new UpdDefault(upd), this);
-                }
+            for (final Command command : this.commands) {
+                command.act(new UpdDefault(updates.take()), this);
             }
-            Thread.sleep(500L);
         }
     }
 
@@ -169,7 +172,12 @@ public class BtDefault implements Bot {
         return new Thread(
             () -> {
                 while (!Thread.currentThread().isInterrupted()) {
-                    this.fillUpdates(updates);
+                    this.rwlock.writeLock().lock();
+                    try {
+                        this.fillUpdates(updates);
+                    } finally {
+                        this.rwlock.writeLock().unlock();
+                    }
                 }
             }
         );
@@ -183,11 +191,14 @@ public class BtDefault implements Bot {
     private void fillUpdates(final BlockingQueue<JSONObject> accum) {
         final AtomicInteger offset = new AtomicInteger();
         try {
-            BtDefault.putUpdatesWithOffset(
+            this.putNewUpdates(
                 accum,
                 offset,
                 new JSONObject(
-                    new TRqGetUpdates(this.token).response().body()
+                    new TRqWithOffset(
+                        new TRqGetUpdates(this.token),
+                        offset.get()
+                    ).response().body()
                 ).getJSONArray("result")
             );
         } catch (final IOException | InterruptedException ex) {
@@ -210,14 +221,18 @@ public class BtDefault implements Bot {
      * @param server The data from server as JSON
      * @throws InterruptedException When interrupted
      */
-    private static void putUpdatesWithOffset(
+    private void putNewUpdates(
         final BlockingQueue<JSONObject> updates,
         final AtomicInteger offset,
         final Iterable<Object> server
     ) throws InterruptedException {
         for (final Object upd : server) {
-            final int update = new JSONObject(upd.toString()).getInt("update_id");
-            offset.set(update + 1);
+            final int idx = new JSONObject(upd.toString()).getInt("update_id");
+            if (this.processed.contains((long) idx)) {
+                continue;
+            }
+            this.processed.add((long) idx);
+            offset.set(idx + 1);
             updates.put(new JSONObject(upd.toString()));
         }
     }
