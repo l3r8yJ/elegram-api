@@ -25,6 +25,7 @@
 package com.l3r8yj.elegramapi.update;
 
 import com.l3r8yj.elegramapi.message.Message;
+import java.util.Objects;
 import org.json.JSONObject;
 
 /**
@@ -56,5 +57,22 @@ public final class UpdDefault implements Update {
     @Override
     public Message message() {
         return new Message(this.json.getJSONObject("message"));
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(this.updateId());
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (null == obj || !this.getClass().equals(obj.getClass())) {
+            return false;
+        }
+        final Update update = Update.class.cast(obj);
+        return update.updateId() == this.updateId();
     }
 }
