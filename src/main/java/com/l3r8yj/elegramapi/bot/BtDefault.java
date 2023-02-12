@@ -52,7 +52,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import org.cactoos.list.ListOf;
-import org.cactoos.text.Concatenated;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -100,13 +100,7 @@ public class BtDefault implements Bot {
         try {
             this.handleUpdates();
         } catch (final InterruptedException | IOException ex) {
-            Logger.error(
-                this,
-                new Concatenated(
-                    "An error occurred while handling updates:\n",
-                    ex.getMessage()
-                ).toString()
-            );
+            this.logErrorWhile("handling updates", ex);
             throw new IllegalStateException(ex);
         }
     }
@@ -124,13 +118,7 @@ public class BtDefault implements Bot {
                 )
             ).response();
         } catch (final IOException ex) {
-            Logger.error(
-                this,
-                new Concatenated(
-                    "An error occurred while sending message:\n",
-                    ex.getMessage()
-                ).toString()
-            );
+            this.logErrorWhile("sending message", ex);
             throw new IllegalStateException("Can't send a message to user!", ex);
         }
     }
@@ -191,26 +179,27 @@ public class BtDefault implements Bot {
     private void fillUpdates(final BlockingQueue<JSONObject> accum) {
         final AtomicInteger offset = new AtomicInteger();
         try {
-            this.putNewUpdates(
-                accum,
-                offset,
-                new JSONObject(
-                    new TRqWithOffset(
-                        new TRqGetUpdates(this.token),
-                        offset.get()
-                    ).response().body()
-                ).getJSONArray("result")
-            );
+            this.putNewUpdates(accum, offset, this.updates(offset));
         } catch (final IOException | InterruptedException ex) {
-            Logger.error(
-                this,
-                new Concatenated(
-                    "Error occurred while filling updates:\n",
-                    ex.getMessage()
-                ).toString()
-            );
+            this.logErrorWhile("filling updates:\n%s", ex);
             throw new IllegalStateException(ex);
         }
+    }
+
+    /**
+     * Updates as json.
+     *
+     * @param offset The offset
+     * @return The updates
+     * @throws IOException When connection went wrong
+     */
+    private JSONArray updates(final AtomicInteger offset) throws IOException {
+        return new JSONObject(
+            new TRqWithOffset(
+                new TRqGetUpdates(this.token),
+                offset.get()
+            ).response().body()
+        ).getJSONArray("result");
     }
 
     /**
@@ -235,5 +224,18 @@ public class BtDefault implements Bot {
             offset.set(idx + 1);
             updates.put(new JSONObject(upd.toString()));
         }
+    }
+
+    /**
+     * Just logging
+     *
+     * @param method Method name
+     * @param exc The exception
+     */
+    private void logErrorWhile(final String method, final Exception exc) {
+        Logger.error(
+            this,
+            "An error occurred while %s:\n%s", method, exc.getMessage()
+        );
     }
 }
