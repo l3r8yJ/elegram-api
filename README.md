@@ -11,21 +11,38 @@
 __Elegram-api__ it's a wrapper over the telegram bots api, but in the style of [EO](https://www.eolang.org). More object-oriented, more maintainable.
 ## Concept
 This is a concept, if you have ideas, feel free to create an issue!
+
 ```java
-new Bot(
-  "your token",
-  new TxtCommand(
-    "start",
-    new RpPicture(
-      "image.png",
-      new RpText("Hi body!")
-    )
-  ),
-  new TxtCommand(
-    "help",
-    new RpText("I'll help you!")
-  )
-).start();
+import com.l3r8yj.elegramapi.bot.Bot;
+import com.l3r8yj.elegramapi.command.Command;
+import com.l3r8yj.elegramapi.update.Update;
+import com.l3r8yj.elegramapi.bot.BtDefault;
+import java.util.Objects;
+
+/**
+ * Simple example.
+ */
+class App() {
+    public static void main(String[] args) {
+        new BtDefault(
+            "your token",
+            new CmdStart()
+        ).start();
+    }
+}
+
+// this is a temporary solution, it will be changed later
+class CmdStart() extends Command {
+    @Override
+    public void act(final Update update, final Bot bot) {
+        if (Objects.equals("/start", update.message().text())) {
+            bot.sendMessage(
+                update.message().chatId(),
+                "Hi, this is a start command"
+            );
+        }
+    }
+}
 ```
 ## Why this project exist?
 This project solves the problem of the existing telegram-bots-api, which for some reason isn't _"Object-Oriented"_,
