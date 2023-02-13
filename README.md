@@ -44,7 +44,7 @@ class CmdStart() extends Command {
     }
 }
 ```
-## Why this project exist?
+## Why does this project exist?
 This project solves the problem of the existing telegram-bots-api, which for some reason isn't _"Object-Oriented"_,
 here we can create a wrapper around the original API and make it more _"Object-Oriented"_. 
 
