@@ -77,7 +77,7 @@ SOFTWARE.
     <jersey-common.version>2.38</jersey-common.version>
     <javax.ws.rs-api.version>2.1.1</javax.ws.rs-api.version>
     <javax.json-api.version>1.1.4</javax.json-api.version>
-    <maven-javadoc-plugin.version>3.4.1</maven-javadoc-plugin.version>
+    <maven-javadoc-plugin.version>3.5.0</maven-javadoc-plugin.version>
     <jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
     <test-naming-conventions.version>0.1.7</test-naming-conventions.version>
     <slf4j-jdk14.version>2.0.6</slf4j-jdk14.version>
