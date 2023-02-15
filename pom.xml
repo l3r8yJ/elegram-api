@@ -147,12 +147,6 @@ SOFTWARE.
       <scope>test</scope>
     </dependency>
   </dependencies>
-  <pluginRepositories>
-    <pluginRepository>
-      <id>oss.sonatype.org</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-    </pluginRepository>
-  </pluginRepositories>
   <build>
     <plugins>
       <plugin>
