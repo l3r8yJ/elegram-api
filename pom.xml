@@ -83,7 +83,7 @@ SOFTWARE.
     <slf4j-jdk14.version>2.0.6</slf4j-jdk14.version>
     <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
     <maven-surefire-plugin.version>3.0.0-M9</maven-surefire-plugin.version>
-    <maven-invoker-plugin.version>3.4.0</maven-invoker-plugin.version>
+    <maven-invoker-plugin.version>3.5.0</maven-invoker-plugin.version>
     <jcabi-aspects.version>0.24.1</jcabi-aspects.version>
     <aspectjrt.version>1.6.12</aspectjrt.version>
     <jcabi-maven-plugin.version>0.8</jcabi-maven-plugin.version>
