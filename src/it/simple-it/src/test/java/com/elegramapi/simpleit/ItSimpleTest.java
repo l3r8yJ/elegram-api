@@ -25,10 +25,10 @@
 package com.elegramapi.simpleit;
 
 import com.jcabi.http.response.JsonResponse;
-import com.l3r8yj.elegramapi.bot.Bot;
+import com.l3r8yj.elegramapi.Bot;
+import com.l3r8yj.elegramapi.Command;
+import com.l3r8yj.elegramapi.Update;
 import com.l3r8yj.elegramapi.bot.BtDefault;
-import com.l3r8yj.elegramapi.command.Command;
-import com.l3r8yj.elegramapi.update.Update;
 import javax.ws.rs.core.Response;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -105,7 +105,7 @@ final class ItSimpleTest {
     private static class CmdEcho implements Command {
 
         @Override
-        public final void act(final Update update, final Bot bot) {
+        public void act(final Update update, final Bot bot) {
             if (!update.message().text().isEmpty()) {
                 bot.sendMessage(
                     update.message().chatId(),

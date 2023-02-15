@@ -24,6 +24,7 @@
 
 package com.l3r8yj.elegramapi.request;
 
+import com.l3r8yj.elegramapi.TelegramRequest;
 import java.io.IOException;
 import javax.ws.rs.core.Response;
 import org.hamcrest.MatcherAssert;

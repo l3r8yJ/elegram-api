@@ -21,26 +21,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package com.l3r8yj.elegramapi;
 
-package com.l3r8yj.elegramapi.command;
-
-import com.l3r8yj.elegramapi.bot.Bot;
-import com.l3r8yj.elegramapi.update.Update;
+import com.jcabi.http.response.JsonResponse;
 
 /**
- * The base command.
+ * The Default bot.
  *
  * @since 0.0.0
  */
-public interface Command {
+public interface Bot {
 
     /**
-     * The action of this command.
-     * This method should be overloaded
-     * to add new functionality to your bot.
+     * Runs the bot.
      *
-     * @param update The update
-     * @param bot Bot to interact
+     * @throws Exception If something went wrong
      */
-    void act(Update update, Bot bot);
+    void start() throws Exception;
+
+    /**
+     * Sends the message.
+     *
+     * @param chat Chat to send message.
+     * @param text Text for message.
+     * @return Response as Json.
+     */
+    JsonResponse sendMessage(long chat, String text);
 }

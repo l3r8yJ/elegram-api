@@ -22,38 +22,28 @@
  * SOFTWARE.
  */
 
-package com.l3r8yj.elegramapi.request;
+package com.l3r8yj.elegramapi;
 
-import com.jcabi.http.RequestURI;
-import com.jcabi.http.response.JsonResponse;
-import java.io.IOException;
+import com.l3r8yj.elegramapi.message.Message;
 
 /**
- * Request to telegram-api.
+ * The update from api.
  *
  * @since 0.0.0
  */
-public interface TelegramRequest {
+public interface Update {
 
     /**
-    * Represents RqTelegram in plain String.
-    *
-    * @return String value of RqTelegram
-    */
-    String plainText();
-
-    /**
-     * The response from request.
+     * The update id.
      *
-     * @return The response
-     * @throws IOException When something went wrong
+     * @return The id
      */
-    JsonResponse response() throws IOException;
+    long updateId();
 
     /**
-     * The uri from request.
+     * The message.
      *
-     * @return The uri
+     * @return Just message from update
      */
-    RequestURI uri();
+    Message message();
 }

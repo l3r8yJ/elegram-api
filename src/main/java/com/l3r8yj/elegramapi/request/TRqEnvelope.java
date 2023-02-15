@@ -28,6 +28,7 @@ import com.jcabi.http.Request;
 import com.jcabi.http.RequestURI;
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.JsonResponse;
+import com.l3r8yj.elegramapi.TelegramRequest;
 import java.io.IOException;
 import org.cactoos.text.Concatenated;
 

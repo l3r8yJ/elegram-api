@@ -21,30 +21,39 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.l3r8yj.elegramapi.bot;
 
+package com.l3r8yj.elegramapi;
+
+import com.jcabi.http.RequestURI;
 import com.jcabi.http.response.JsonResponse;
+import java.io.IOException;
 
 /**
- * The Default bot.
+ * Request to telegram-api.
  *
  * @since 0.0.0
  */
-public interface Bot {
+public interface TelegramRequest {
 
     /**
-     * Runs the bot.
-     *
-     * @throws Exception If something went wrong
-     */
-    void start() throws Exception;
+    * Represents RqTelegram in plain String.
+    *
+    * @return String value of RqTelegram
+    */
+    String plainText();
 
     /**
-     * Sends the message.
+     * The response from request.
      *
-     * @param chat Chat to send message.
-     * @param text Text for message.
-     * @return Response as Json.
+     * @return The response
+     * @throws IOException When something went wrong
      */
-    JsonResponse sendMessage(long chat, String text);
+    JsonResponse response() throws IOException;
+
+    /**
+     * The uri from request.
+     *
+     * @return The uri
+     */
+    RequestURI uri();
 }

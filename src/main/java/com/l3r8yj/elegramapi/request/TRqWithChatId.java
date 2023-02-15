@@ -27,6 +27,7 @@ package com.l3r8yj.elegramapi.request;
 import com.jcabi.http.RequestURI;
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.JsonResponse;
+import com.l3r8yj.elegramapi.TelegramRequest;
 import java.io.IOException;
 
 /**

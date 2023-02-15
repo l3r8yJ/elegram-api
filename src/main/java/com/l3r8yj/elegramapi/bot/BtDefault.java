@@ -34,7 +34,8 @@ package com.l3r8yj.elegramapi.bot;
 
 import com.jcabi.http.response.JsonResponse;
 import com.jcabi.log.Logger;
-import com.l3r8yj.elegramapi.command.Command;
+import com.l3r8yj.elegramapi.Bot;
+import com.l3r8yj.elegramapi.Command;
 import com.l3r8yj.elegramapi.request.TRqGetUpdates;
 import com.l3r8yj.elegramapi.request.TRqPost;
 import com.l3r8yj.elegramapi.request.TRqSendMessage;

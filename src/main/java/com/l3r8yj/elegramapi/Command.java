@@ -22,28 +22,22 @@
  * SOFTWARE.
  */
 
-package com.l3r8yj.elegramapi.update;
-
-import com.l3r8yj.elegramapi.message.Message;
+package com.l3r8yj.elegramapi;
 
 /**
- * The update from api.
+ * The base command.
  *
  * @since 0.0.0
  */
-public interface Update {
+public interface Command {
 
     /**
-     * The update id.
+     * The action of this command.
+     * This method should be overloaded
+     * to add new functionality to your bot.
      *
-     * @return The id
+     * @param update The update
+     * @param bot Bot to interact
      */
-    long updateId();
-
-    /**
-     * The message.
-     *
-     * @return Just message from update
-     */
-    Message message();
+    void act(Update update, Bot bot);
 }
