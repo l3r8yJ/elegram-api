@@ -28,7 +28,7 @@ SOFTWARE.
   <artifactId>elegram-api</artifactId>
   <packaging>jar</packaging>
   <description>The EO styled wrapper of Telegram bots api</description>
-  <url>http://github.com/l3r8yJ/elegram-api</url>
+  <url>https://l3r8yj.github.io/elegram-api/</url>
   <version>1.0-SNAPSHOT</version>
   <name>elegram-api</name>
   <licenses>
