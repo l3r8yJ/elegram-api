@@ -42,7 +42,7 @@ public abstract class TRqEnvelope implements TelegramRequest {
     /**
      * Default url.
      */
-    private static final String ADDR = "https://api.telegram.org/bot";
+    private static final String DEFAULT_URL = "https://api.telegram.org/bot";
 
     /**
      * Default telegram address.
@@ -67,13 +67,8 @@ public abstract class TRqEnvelope implements TelegramRequest {
     protected TRqEnvelope(final String token) {
         this(
             token,
-            TRqEnvelope.ADDR,
-            new JdkRequest(
-                new Concatenated(
-                    TRqEnvelope.ADDR,
-                    token
-                ).toString()
-            )
+            TRqEnvelope.DEFAULT_URL,
+            new JdkRequest(new Concatenated(TRqEnvelope.DEFAULT_URL, token).toString())
         );
     }
 
@@ -87,12 +82,7 @@ public abstract class TRqEnvelope implements TelegramRequest {
         this(
             token,
             address,
-            new JdkRequest(
-                new Concatenated(
-                    address,
-                    token
-                ).toString()
-            )
+            new JdkRequest(new Concatenated(address, token).toString())
         );
     }
 
@@ -115,10 +105,7 @@ public abstract class TRqEnvelope implements TelegramRequest {
 
     @Override
     public final String plainText() {
-        return new Concatenated(
-            this.address,
-            this.token
-        ).toString();
+        return new Concatenated(this.address, this.token).toString();
     }
 
     @Override
