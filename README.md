@@ -73,3 +73,8 @@ This short list is supposed to make you understand that __we aren't picking on y
 We're using [this plugin](https://github.com/volodya-lombrozo/test-naming-conventions) to control naming for tests, please note that.
 
 _Looking forward to your pull-request!_
+
+
+## Stargazers over time
+
+[![Stargazers over time](https://starchart.cc/l3r8yJ/elegram-api.svg)](https://starchart.cc/l3r8yJ/elegram-api)
