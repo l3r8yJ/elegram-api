@@ -44,7 +44,7 @@ SOFTWARE.
   <scm>
     <connection>scm:git:git@github.com:l3r8y/elegram-api.git</connection>
     <developerConnection>scm:git:git@github.com:l3r8y/elegram-api.git</developerConnection>
-    <url>http://github.com/l3r8yJ/elegram-api</url>
+    <url>https://github.com/l3r8yJ/elegram-api</url>
   </scm>
   <ciManagement>
     <system>rultor</system>
