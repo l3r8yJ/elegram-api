@@ -146,7 +146,7 @@ public class BtDefault implements Bot {
         throws InterruptedException {
         while (true) {
             for (final Command command : this.commands) {
-                command.act(new UpdDefault(updates.take()), this);
+                command.react(new UpdDefault(updates.take()), this);
             }
         }
     }

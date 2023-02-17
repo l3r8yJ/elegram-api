@@ -25,7 +25,7 @@
 package com.l3r8yj.elegramapi.command;
 
 import com.l3r8yj.elegramapi.Command;
-import com.l3r8yj.elegramapi.action.Action;
+import com.l3r8yj.elegramapi.Action;
 
 /**
  * The DefaultCommand.

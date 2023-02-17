@@ -24,11 +24,46 @@
 
 package com.l3r8yj.elegramapi.action;
 
+import com.l3r8yj.elegramapi.Action;
+import com.l3r8yj.elegramapi.Bot;
+
 /**
- * The action.
+ * Send text message.
  *
  * @since 0.0.0
  */
-public interface Action {
+public final class ActSendTextMessage implements Action {
 
+    /**
+     * The sender.
+     */
+    private final Bot bot;
+
+    /**
+     * Text to send.
+     */
+    private final String text;
+
+    /**
+     * The id of consumer.
+     */
+    private final long chat;
+
+    /**
+     * Ctor.
+     *
+     * @param bot The sender
+     * @param text Text to send
+     * @param chat The id of consumer
+     */
+    public ActSendTextMessage(final Bot bot, final String text, final long chat) {
+        this.bot = bot;
+        this.text = text;
+        this.chat = chat;
+    }
+
+    @Override
+    public void act() {
+        this.bot.sendMessage(this.chat, this.text);
+    }
 }

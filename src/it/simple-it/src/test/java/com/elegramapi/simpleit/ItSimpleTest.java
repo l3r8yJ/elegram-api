@@ -28,6 +28,7 @@ import com.jcabi.http.response.JsonResponse;
 import com.l3r8yj.elegramapi.Bot;
 import com.l3r8yj.elegramapi.Command;
 import com.l3r8yj.elegramapi.Update;
+import com.l3r8yj.elegramapi.action.ActSendTextMessage;
 import com.l3r8yj.elegramapi.bot.BtDefault;
 import javax.ws.rs.core.Response;
 import org.hamcrest.MatcherAssert;
@@ -89,10 +90,17 @@ final class ItSimpleTest {
      */
     private static class CmdStart implements Command {
 
+        CmdStart() {
+        }
+
         @Override
-        public final void act(final Update update, final Bot bot) {
+        public final void react(final Update update, final Bot bot) {
             if ("/start".equals(update.message().text())) {
-                bot.sendMessage(update.message().chatId(), "Hi!");
+                new ActSendTextMessage(
+                    bot,
+                    "Hi",
+                    update.message().chatId()
+                ).act();
             }
         }
     }
@@ -104,13 +112,17 @@ final class ItSimpleTest {
      */
     private static class CmdEcho implements Command {
 
+        CmdEcho() {
+        }
+
         @Override
-        public void act(final Update update, final Bot bot) {
+        public final void react(final Update update, final Bot bot) {
             if (!update.message().text().isEmpty()) {
-                bot.sendMessage(
-                    update.message().chatId(),
-                    update.message().text()
-                );
+                new ActSendTextMessage(
+                    bot,
+                    update.message().text(),
+                    update.message().chatId()
+                ).act();
             }
         }
     }

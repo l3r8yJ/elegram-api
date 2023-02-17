@@ -25,19 +25,25 @@
 package com.l3r8yj.elegramapi;
 
 /**
- * The base command.
+ * The action.
  *
  * @since 0.0.0
  */
-public interface Command {
+public interface Action {
 
     /**
-     * The action of this command.
-     * This method should be overloaded
-     * to add new functionality to your bot.
+     * <p>
+     *     Method which will be called inside a bot.
+     *     For example, we want to send message
+     *     inside a {@link Command} method #act().
+     * </p>
+     * <p>
+     *     <h3>Example:</h3>
+     *     <code> new ActSendMessage(bot, "text", id).act();</code>
+     * </p>
+     * <p>All implementations this interface must be named with prefix Act.</p>
      *
-     * @param update The update
-     * @param bot Bot to interact
      */
-    void react(Update update, Bot bot);
+    void act();
+
 }
