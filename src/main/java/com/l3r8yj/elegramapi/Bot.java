@@ -24,6 +24,7 @@
 package com.l3r8yj.elegramapi;
 
 import com.jcabi.http.response.JsonResponse;
+import java.io.IOException;
 
 /**
  * The Default bot.
@@ -35,16 +36,18 @@ public interface Bot {
     /**
      * Runs the bot.
      *
-     * @throws Exception If something went wrong
+     * @throws IOException If something went wrong
+     * @throws InterruptedException If something was interrupted
      */
-    void start() throws Exception;
+    void start() throws InterruptedException, IOException;
 
     /**
      * Sends the message.
      *
-     * @param chat Chat to send message.
-     * @param text Text for message.
-     * @return Response as Json.
+     * @param chat Chat to send message
+     * @param text Text for message
+     * @return Response as Json
+     * @throws IOException When something went wrong
      */
-    JsonResponse sendMessage(long chat, String text);
+    JsonResponse sendMessage(long chat, String text) throws IOException;
 }
