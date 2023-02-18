@@ -32,34 +32,7 @@
     <link rel="shortcut icon"
           href="https://raw.githubusercontent.com/l3r8yJ/elegram-api/7635ce3009e6a699a5d740dbfd44d17298baf637/docs/icon/telecactoos.svg"/>
     <link rel="author" href=""/>
-    <style>
-        * {
-            font-family: monospace;
-            font-size: 24px;
-            padding: 0;
-            margin: 0;
-            border: 0;
-            box-sizing: border-box;
-        }
-
-        .center {
-            text-align: center;
-            width: 20em;
-            max-width: 100%;
-            padding: 1em;
-            height: 20em;
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            margin: auto;
-        }
-
-        p {
-            margin: 1em 0;
-        }
-    </style>
+    <link rel="stylesheet" href="main.css">
     <script>
       (function (i, s, o, g, r, a, m) {
         i['GoogleAnalyticsObject'] = r;
@@ -77,20 +50,40 @@
     </script>
 </head>
 <body>
-<div class="center">
-    <p>
-        <img src="https://raw.githubusercontent.com/l3r8yJ/elegram-api/7635ce3009e6a699a5d740dbfd44d17298baf637/docs/icon/telecactoos.svg"
-             style="width:150px;height:150px;" alt="logo"/></p>
-    <p>
-        <strong>elegram-api</strong>
-        <br>
-        <br>
-            Elegram-api is a wrapper over the telegram bots api, but in the style of EO. More object-oriented, more maintainable.
-        <br>
-    </p>
-    <p>
-        Check us out at <a href="https://github.com/l3r8yJ/elegram-api">Github</a>.
-    </p>
-</div>
+    <div>
+        <section>
+            <p>
+                <img src="https://raw.githubusercontent.com/l3r8yJ/elegram-api/7635ce3009e6a699a5d740dbfd44d17298baf637/docs/icon/telecactoos.svg"
+                     class="logo" alt="logo"/>
+            </p>
+            <h2>elegram-api</h2>
+            <p>
+                Elegram-api is a wrapper over the telegram bots api, but in the style of EO. More object-oriented, more maintainable.
+            </p>
+            <p>
+                Check us out at <a href="https://github.com/l3r8yJ/elegram-api">Github</a>.
+            </p>
+        </section>
+    </div>
+    <div>
+        <section>
+            <h3>How was the idea for this project born?</h3>
+            <p>
+                I was puzzled after trying out the libs for telegram bots because I'd never written such bad code before. Libraries are forcing us to write this garbage. This is how the idea of elegram-api came about.
+            </p>
+        </section>
+        <section>
+            <p>Here some problems that I found in other projects:</p>
+            <ul>
+                <li><a href="https://www.yegor256.com/2014/11/03/empty-line-code-smell.html">Empty lines</a></li>
+                <li><a href="https://www.yegor256.com/2015/01/12/compound-name-is-code-smell.html">Compound names</a></li>
+                <li><a href="https://www.yegor256.com/2014/10/23/paired-brackets-notation.html">Incorrect formatting</a></li>
+                <li><a href="https://www.yegor256.com/2014/06/09/objects-should-be-immutable.html">Mutability</a></li>
+                <li><a href="https://www.yegor256.com/2014/09/16/getters-and-setters-are-evil.html">Getters and Setters</a></li>
+                <li><a href="https://www.yegor256.com/2017/02/07/private-method-is-new-class.html">Static methods</a></li>
+                <li><a href="https://www.yegor256.com/2022/08/04/code-and-tests-different-pull-requests.html">Pull request without a unit-tests</a></li>
+            </ul>
+        </section>
+    </div>
 </body>
 </html>

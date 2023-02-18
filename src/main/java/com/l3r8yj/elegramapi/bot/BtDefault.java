@@ -33,7 +33,6 @@
 package com.l3r8yj.elegramapi.bot;
 
 import com.jcabi.http.response.JsonResponse;
-import com.jcabi.log.Logger;
 import com.l3r8yj.elegramapi.Bot;
 import com.l3r8yj.elegramapi.Command;
 import com.l3r8yj.elegramapi.request.TRqGetUpdates;
@@ -53,6 +52,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import org.cactoos.list.ListOf;
+import org.cactoos.text.Concatenated;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -97,31 +97,21 @@ public class BtDefault implements Bot {
     }
 
     @Override
-    public final void start() {
-        try {
-            this.handleUpdates();
-        } catch (final InterruptedException | IOException ex) {
-            this.logErrorWhile("handling updates", ex);
-            throw new IllegalStateException(ex);
-        }
+    public final void start() throws IOException, InterruptedException {
+        this.handleUpdates();
     }
 
     @Override
-    public final JsonResponse sendMessage(final long chat, final String text) {
-        try {
-            return new TRqPost(
-                new TRqWithChatId(
-                    new TRqWithText(
-                        new TRqSendMessage(this.token),
-                        text
-                    ),
-                    chat
-                )
-            ).response();
-        } catch (final IOException ex) {
-            this.logErrorWhile("sending message", ex);
-            throw new IllegalStateException("Can't send a message to user!", ex);
-        }
+    public final JsonResponse sendMessage(final long chat, final String text) throws IOException {
+        return new TRqPost(
+            new TRqWithChatId(
+                new TRqWithText(
+                    new TRqSendMessage(this.token),
+                    text
+                ),
+                chat
+            )
+        ).response();
     }
 
     /**
@@ -141,9 +131,10 @@ public class BtDefault implements Bot {
      *
      * @param updates The queue with updates
      * @throws InterruptedException When thread interrupted
+     * @throws IOException When something went wrong
      */
     private void processUpdates(final BlockingQueue<JSONObject> updates)
-        throws InterruptedException {
+        throws InterruptedException, IOException {
         while (true) {
             for (final Command command : this.commands) {
                 command.act(new UpdDefault(updates.take()), this);
@@ -164,6 +155,14 @@ public class BtDefault implements Bot {
                     this.rwlock.writeLock().lock();
                     try {
                         this.fillUpdates(updates);
+                    } catch (final InterruptedException | IOException ex) {
+                        throw new IllegalStateException(
+                            new Concatenated(
+                                "An error occurred while handling updates. Cause: ",
+                                ex.getMessage()
+                            ).toString(),
+                            ex
+                        );
                     } finally {
                         this.rwlock.writeLock().unlock();
                     }
@@ -176,15 +175,13 @@ public class BtDefault implements Bot {
      * Check new updates.
      *
      * @param accum Queue with updates
+     * @throws IOException When something went wrong
+     * @throws InterruptedException When was interrupted
      */
-    private void fillUpdates(final BlockingQueue<JSONObject> accum) {
+    private void fillUpdates(final BlockingQueue<JSONObject> accum)
+        throws IOException, InterruptedException {
         final AtomicInteger offset = new AtomicInteger();
-        try {
-            this.putNewUpdates(accum, offset, this.updates(offset));
-        } catch (final IOException | InterruptedException ex) {
-            this.logErrorWhile("filling updates:\n%s", ex);
-            throw new IllegalStateException(ex);
-        }
+        this.putNewUpdates(accum, offset, this.updates(offset));
     }
 
     /**
@@ -209,7 +206,7 @@ public class BtDefault implements Bot {
      * @param updates The updates queue
      * @param offset The offset for each update
      * @param server The data from server as JSON
-     * @throws InterruptedException When interrupted
+     * @throws InterruptedException When was interrupted
      */
     private void putNewUpdates(
         final BlockingQueue<JSONObject> updates,
@@ -225,18 +222,5 @@ public class BtDefault implements Bot {
             offset.set(idx + 1);
             updates.put(new JSONObject(upd.toString()));
         }
-    }
-
-    /**
-     * Just logging.
-     *
-     * @param method Method name
-     * @param exc The exception
-     */
-    private void logErrorWhile(final String method, final Exception exc) {
-        Logger.error(
-            this,
-            "An error occurred while %s:\n%s", method, exc.getMessage()
-        );
     }
 }

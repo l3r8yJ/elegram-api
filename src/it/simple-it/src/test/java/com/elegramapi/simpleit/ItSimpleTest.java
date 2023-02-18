@@ -29,6 +29,8 @@ import com.l3r8yj.elegramapi.Bot;
 import com.l3r8yj.elegramapi.Command;
 import com.l3r8yj.elegramapi.Update;
 import com.l3r8yj.elegramapi.bot.BtDefault;
+import com.l3r8yj.elegramapi.bot.BtLogged;
+import java.io.IOException;
 import javax.ws.rs.core.Response;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -51,10 +53,12 @@ final class ItSimpleTest {
 
     @BeforeEach
     void setUp() {
-        this.bot = new BtDefault(
-            "5735860614:AAHsneN3fWj76dfXejtdSmNGLf4kq-bUGgg",
-            new ItSimpleTest.CmdStart(),
-            new ItSimpleTest.CmdEcho()
+        this.bot = new BtLogged(
+            new BtDefault(
+                "5735860614:AAHsneN3fWj76dfXejtdSmNGLf4kq-bUGgg",
+                new ItSimpleTest.CmdStart(),
+                new ItSimpleTest.CmdEcho()
+            )
         );
     }
 
@@ -67,7 +71,7 @@ final class ItSimpleTest {
     }
 
     @Test
-    void sendsTheMessage() {
+    void sendsTheMessage() throws IOException {
         final JsonResponse response = this.bot.sendMessage(
             389_133_054L,
             "Hi, i'm Ruby!"
@@ -89,8 +93,15 @@ final class ItSimpleTest {
      */
     private static class CmdStart implements Command {
 
+        /**
+         * Ctor.
+         */
+        CmdStart() {
+            // Test ctor.
+        }
+
         @Override
-        public final void act(final Update update, final Bot bot) {
+        public final void act(final Update update, final Bot bot) throws IOException {
             if ("/start".equals(update.message().text())) {
                 bot.sendMessage(update.message().chatId(), "Hi!");
             }
@@ -104,8 +115,15 @@ final class ItSimpleTest {
      */
     private static class CmdEcho implements Command {
 
+        /**
+         * Ctor.
+         */
+        CmdEcho() {
+            // Test ctor.
+        }
+
         @Override
-        public void act(final Update update, final Bot bot) {
+        public final void act(final Update update, final Bot bot) throws IOException {
             if (!update.message().text().isEmpty()) {
                 bot.sendMessage(
                     update.message().chatId(),

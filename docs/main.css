@@ -21,26 +21,60 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-package com.l3r8yj.elegramapi;
-
-import java.io.IOException;
-
-/**
- * The base command.
- *
- * @since 0.0.0
- */
-public interface Command {
-
-    /**
-     * The action of this command.
-     * This method should be overloaded
-     * to add new functionality to your bot.
-     *
-     * @param update The update
-     * @param bot Bot to interact
-     * @throws IOException When something went wrong.
-     */
-    void act(Update update, Bot bot) throws IOException;
+@import url('//fonts.googleapis.com/css?family=Inconsolata');
+body {
+    font-family: 'Inconsolata', monospace;
+    font-size: 20px;
+    line-height: 1.3em;
+    padding: 1em;
+}
+section {
+    width: 32em;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.logo {
+    height: 128px;
+    width: 128px;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+    background-image: linear-gradient(#000,#000);
+    background-position: 0 0.95em;
+    background-repeat: repeat-x;
+    background-size: 1px 1px;
+}
+a:visited {
+    color: inherit;
+}
+a:hover {
+    text-decoration: none;
+    background-image: linear-gradient(#268714,#268714);
+    background-size: 2px 2px;
+}
+.center {
+    text-align: center;
+    width: 20em;
+    max-width: 100%;
+    padding: 1em;
+    height: 10em;
+    position: page;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    font-family: monospace;
+    font-size: 24px;
+    border: 0;
+    box-sizing: border-box;
+}
+p {
+    margin: 1em 0;
+}
+div {
+    padding: 10px;
+    margin: 5px;
+    display: block;
 }
