@@ -1,4 +1,4 @@
-[<img alt="logo" src="docs/icon/telecactoos.svg" height="100px" />](https://www.l3r8y.ru)
+[<img alt="logo" src="docs/icon/telecactoos.svg" height="100px" />](https://www.elegram-api.ru/)
 
 [![EO principles respected here](https://www.elegantobjects.org/badge.svg)](https://www.elegantobjects.org)
 [![DevOps By Rultor.com](http://www.rultor.com/b/objectionary/eo)](http://www.rultor.com/p/objectionary/eo)
