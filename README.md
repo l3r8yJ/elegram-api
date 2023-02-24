@@ -8,6 +8,7 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/1c07f17c43f840758e9eed12be5e02af)](https://www.codacy.com/gh/l3r8yJ/elegram-api/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=l3r8yJ/elegram-api&amp;utm_campaign=Badge_Grade)
 [![codecov](https://codecov.io/gh/l3r8yJ/elegram-api/branch/master/graph/badge.svg?token=JTWR1LR9QX)](https://codecov.io/gh/l3r8yJ/elegram-api)
 [![Hits-of-Code](https://hitsofcode.com/github/l3r8yJ/elegram-api)](https://hitsofcode.com/github/l3r8yJ/elegram-api/view)
+![](https://img.shields.io/github/repo-size/l3r8yJ/elegram-api)
 
 __Elegram-api__ is a wrapper over the telegram bots api, but in the style of [EO](https://www.eolang.org). More object-oriented, more maintainable.
 ## Concept
