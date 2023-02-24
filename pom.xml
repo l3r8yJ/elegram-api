@@ -79,7 +79,7 @@ SOFTWARE.
     <javax.json-api.version>1.1.4</javax.json-api.version>
     <maven-javadoc-plugin.version>3.5.0</maven-javadoc-plugin.version>
     <jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
-    <test-naming-conventions.version>0.1.7</test-naming-conventions.version>
+    <test-naming-conventions.version>0.1.8</test-naming-conventions.version>
     <slf4j-jdk14.version>2.0.6</slf4j-jdk14.version>
     <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
     <maven-surefire-plugin.version>3.0.0-M9</maven-surefire-plugin.version>
