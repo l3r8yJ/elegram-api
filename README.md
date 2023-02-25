@@ -58,7 +58,7 @@ We will review your changes and apply them to the `master` branch shortly,
 provided they don't violate our quality standards. To avoid frustration,
 before sending us your pull request please run full Maven build:
 ```bash
-mvn clean install
+mvn clean install -Pqulice
 ```
 You will need [Maven 3.3+](https://maven.apache.org) and Java 8+ installed
 ## Reasons to reject your code

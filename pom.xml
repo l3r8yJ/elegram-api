@@ -197,31 +197,6 @@ SOFTWARE.
         </executions>
       </plugin>
       <plugin>
-        <groupId>com.qulice</groupId>
-        <artifactId>qulice-maven-plugin</artifactId>
-        <version>${qulice-maven-plugin.version}</version>
-        <configuration>
-          <license>file:${basedir}/LICENSE.txt</license>
-          <excludes>
-            <exclude>duplicatefinder:.*</exclude>
-          </excludes>
-        </configuration>
-        <dependencies>
-          <dependency>
-            <groupId>org.l3r8yj</groupId>
-            <artifactId>elegram-api</artifactId>
-            <version>1.0-SNAPSHOT</version>
-          </dependency>
-        </dependencies>
-        <executions>
-          <execution>
-            <goals>
-              <goal>check</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
         <version>${jacoco-maven-plugin.version}</version>
@@ -240,18 +215,52 @@ SOFTWARE.
           </execution>
         </executions>
       </plugin>
-      <plugin>
-        <groupId>com.github.volodya-lombrozo</groupId>
-        <artifactId>test-naming-conventions</artifactId>
-        <version>${test-naming-conventions.version}</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>check</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
     </plugins>
   </build>
+  <profiles>
+    <profile>
+      <id>qulice</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>com.qulice</groupId>
+            <artifactId>qulice-maven-plugin</artifactId>
+            <version>${qulice-maven-plugin.version}</version>
+            <configuration>
+              <license>file:${basedir}/LICENSE.txt</license>
+              <excludes>
+                <exclude>duplicatefinder:.*</exclude>
+              </excludes>
+            </configuration>
+            <dependencies>
+              <dependency>
+                <groupId>org.l3r8yj</groupId>
+                <artifactId>elegram-api</artifactId>
+                <version>1.0-SNAPSHOT</version>
+              </dependency>
+            </dependencies>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>check</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>com.github.volodya-lombrozo</groupId>
+            <artifactId>test-naming-conventions</artifactId>
+            <version>${test-naming-conventions.version}</version>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>check</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>
