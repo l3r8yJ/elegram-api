@@ -43,16 +43,13 @@ import com.l3r8yj.elegramapi.request.TRqWithOffset;
 import com.l3r8yj.elegramapi.request.TRqWithText;
 import com.l3r8yj.elegramapi.update.UpdDefault;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
 import org.cactoos.list.ListOf;
-import org.cactoos.text.Concatenated;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -81,7 +78,7 @@ public class BtDefault implements Bot {
     /**
      * Read-write lock.
      */
-    private final ReentrantReadWriteLock rwlock;
+    private Thread thread;
 
     /**
      * Ctor.
@@ -92,8 +89,8 @@ public class BtDefault implements Bot {
     public BtDefault(final String token, final Command... commands) {
         this.token = token;
         this.commands = new ListOf<>(commands);
-        this.processed = Collections.synchronizedSet(new HashSet<>(0));
-        this.rwlock = new ReentrantReadWriteLock();
+        this.processed = new HashSet<>(0);
+        this.thread = new Thread();
     }
 
     @Override
@@ -122,7 +119,7 @@ public class BtDefault implements Bot {
      */
     private void handleUpdates() throws InterruptedException, IOException {
         final BlockingQueue<JSONObject> updates = new LinkedBlockingQueue<>();
-        this.updatingThread(updates).start();
+        this.updatingThread(updates);
         this.processUpdates(updates);
     }
 
@@ -146,42 +143,34 @@ public class BtDefault implements Bot {
      * Creates thread for handling updates.
      *
      * @param updates Queue with updates
-     * @return The thread
      */
-    private Thread updatingThread(final BlockingQueue<JSONObject> updates) {
-        return new Thread(
-            () -> {
-                while (!Thread.currentThread().isInterrupted()) {
-                    this.rwlock.writeLock().lock();
-                    try {
+    private void updatingThread(final BlockingQueue<JSONObject> updates) {
+        if (!this.thread.isAlive()) {
+            this.thread = new Thread(
+                () -> {
+                    while (!Thread.currentThread().isInterrupted()) {
                         this.fillUpdates(updates);
-                    } catch (final InterruptedException | IOException ex) {
-                        throw new IllegalStateException(
-                            new Concatenated(
-                                "An error occurred while handling updates. Cause: ",
-                                ex.getMessage()
-                            ).toString(),
-                            ex
-                        );
-                    } finally {
-                        this.rwlock.writeLock().unlock();
                     }
                 }
-            }
-        );
+            );
+            this.thread.start();
+        }
     }
 
     /**
      * Check new updates.
      *
      * @param accum Queue with updates
-     * @throws IOException When something went wrong
-     * @throws InterruptedException When was interrupted
      */
-    private void fillUpdates(final BlockingQueue<JSONObject> accum)
-        throws IOException, InterruptedException {
+    private void fillUpdates(final BlockingQueue<JSONObject> accum) {
         final AtomicInteger offset = new AtomicInteger();
         this.putNewUpdates(accum, offset, this.updates(offset));
+        try {
+            Thread.sleep(1500L);
+        } catch (final InterruptedException ex) {
+            Thread.currentThread().interrupt();
+            throw new IllegalStateException(ex);
+        }
     }
 
     /**
@@ -189,15 +178,18 @@ public class BtDefault implements Bot {
      *
      * @param offset The offset
      * @return The updates
-     * @throws IOException When connection went wrong
      */
-    private JSONArray updates(final AtomicInteger offset) throws IOException {
-        return new JSONObject(
-            new TRqWithOffset(
-                new TRqGetUpdates(this.token),
-                offset.get()
-            ).response().body()
-        ).getJSONArray("result");
+    private JSONArray updates(final AtomicInteger offset) {
+        try {
+            return new JSONObject(
+                new TRqWithOffset(
+                    new TRqGetUpdates(this.token),
+                    offset.get()
+                ).response().body()
+            ).getJSONArray("result");
+        } catch (final IOException ex) {
+            throw new IllegalStateException("Error while getting updates", ex);
+        }
     }
 
     /**
@@ -206,13 +198,12 @@ public class BtDefault implements Bot {
      * @param updates The updates queue
      * @param offset The offset for each update
      * @param server The data from server as JSON
-     * @throws InterruptedException When was interrupted
      */
     private void putNewUpdates(
         final BlockingQueue<JSONObject> updates,
         final AtomicInteger offset,
         final Iterable<Object> server
-    ) throws InterruptedException {
+    ) {
         for (final Object upd : server) {
             final int idx = new JSONObject(upd.toString()).getInt("update_id");
             if (this.processed.contains((long) idx)) {
@@ -220,7 +211,12 @@ public class BtDefault implements Bot {
             }
             this.processed.add((long) idx);
             offset.set(idx + 1);
-            updates.put(new JSONObject(upd.toString()));
+            try {
+                updates.put(new JSONObject(upd.toString()));
+            } catch (final InterruptedException ex) {
+                Thread.currentThread().interrupt();
+                throw new IllegalStateException("Interrupted while filling updates", ex);
+            }
         }
     }
 }
