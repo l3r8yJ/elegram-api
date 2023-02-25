@@ -237,13 +237,6 @@ SOFTWARE.
                 <exclude>duplicatefinder:.*</exclude>
               </excludes>
             </configuration>
-            <dependencies>
-              <dependency>
-                <groupId>org.l3r8yj</groupId>
-                <artifactId>elegram-api</artifactId>
-                <version>1.0-SNAPSHOT</version>
-              </dependency>
-            </dependencies>
             <executions>
               <execution>
                 <goals>
