@@ -24,12 +24,11 @@ SOFTWARE.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.l3r8yj</groupId>
+  <groupId>ru.l3r8y</groupId>
   <artifactId>elegram-api</artifactId>
   <packaging>jar</packaging>
   <description>The EO styled wrapper of Telegram bots api</description>
-  <url>https://l3r8yj.github.io/elegram-api/</url>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.1-SNAPSHOT</version>
   <name>elegram-api</name>
   <licenses>
     <license>
@@ -50,6 +49,12 @@ SOFTWARE.
     <system>rultor</system>
     <url>https://www.rultor.com/s/elegram-api</url>
   </ciManagement>
+  <distributionManagement>
+    <site>
+      <id>www.elegram-api.ru</id>
+      <url>https://www.elegram-api.ru</url>
+    </site>
+  </distributionManagement>
   <developers>
     <developer>
       <id>1</id>
@@ -232,13 +237,6 @@ SOFTWARE.
                 <exclude>duplicatefinder:.*</exclude>
               </excludes>
             </configuration>
-            <dependencies>
-              <dependency>
-                <groupId>org.l3r8yj</groupId>
-                <artifactId>elegram-api</artifactId>
-                <version>1.0-SNAPSHOT</version>
-              </dependency>
-            </dependencies>
             <executions>
               <execution>
                 <goals>
