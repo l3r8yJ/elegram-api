@@ -42,7 +42,7 @@ SOFTWARE.
     <javax.ws.rs-api.version>2.1</javax.ws.rs-api.version>
     <jersey-common.version>2.39</jersey-common.version>
     <maven-surefire-plugin.version>3.0.0-M9</maven-surefire-plugin.version>
-    <elegram-api.version>1.0-SNAPSHOT</elegram-api.version>
+    <elegram-api.version>0.0.1</elegram-api.version>
   </properties>
   <dependencies>
     <dependency>
@@ -75,7 +75,6 @@ SOFTWARE.
       <version>${hamcrest.version}</version>
       <scope>test</scope>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
@@ -106,25 +105,6 @@ SOFTWARE.
             <include>**/*Test.*</include>
           </includes>
         </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.jacoco</groupId>
-        <artifactId>jacoco-maven-plugin</artifactId>
-        <version>${jacoco-maven-plugin.version}</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>prepare-agent</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>report</id>
-            <phase>prepare-package</phase>
-            <goals>
-              <goal>report</goal>
-            </goals>
-          </execution>
-        </executions>
       </plugin>
     </plugins>
   </build>

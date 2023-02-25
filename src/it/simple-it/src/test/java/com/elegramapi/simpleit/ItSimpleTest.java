@@ -25,11 +25,6 @@
 package com.elegramapi.simpleit;
 
 import com.jcabi.http.response.JsonResponse;
-import com.l3r8yj.elegramapi.Bot;
-import com.l3r8yj.elegramapi.Command;
-import com.l3r8yj.elegramapi.Update;
-import com.l3r8yj.elegramapi.bot.BtDefault;
-import com.l3r8yj.elegramapi.bot.BtLogged;
 import java.io.IOException;
 import javax.ws.rs.core.Response;
 import org.hamcrest.MatcherAssert;
@@ -38,6 +33,11 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import ru.elegramapi.www.Bot;
+import ru.elegramapi.www.Command;
+import ru.elegramapi.www.Update;
+import ru.elegramapi.www.bot.BtDefault;
+import ru.elegramapi.www.bot.BtLogged;
 
 /**
  * Just simple integration test.
