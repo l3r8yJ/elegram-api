@@ -42,7 +42,7 @@ SOFTWARE.
     <javax.ws.rs-api.version>2.1</javax.ws.rs-api.version>
     <jersey-common.version>2.39</jersey-common.version>
     <maven-surefire-plugin.version>3.0.0-M9</maven-surefire-plugin.version>
-    <elegram-api.version>0.0.1</elegram-api.version>
+    <elegram-api.version>1.0-SNAPSHOT</elegram-api.version>
   </properties>
   <dependencies>
     <dependency>
