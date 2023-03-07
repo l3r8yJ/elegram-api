@@ -41,6 +41,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.cactoos.list.ListOf;
+import org.cactoos.text.FormattedText;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import ru.elegramapi.www.Bot;
@@ -76,7 +77,7 @@ public class BtDefault implements Bot {
     private final Set<Long> processed;
 
     /**
-     * Read-write lock.
+     * Thread for updates.
      */
     private Thread thread;
 
@@ -94,8 +95,17 @@ public class BtDefault implements Bot {
     }
 
     @Override
-    public final void start() throws IOException, InterruptedException {
-        this.handleUpdates();
+    public final void start() throws IOException {
+        try {
+            this.handleUpdates();
+        } catch (final InterruptedException ex) {
+            throw new IllegalStateException(
+                new FormattedText(
+                    "#hanleUpdates: interrupted: %s", ex.getMessage()
+                ).toString(),
+                ex
+            );
+        };
     }
 
     @Override

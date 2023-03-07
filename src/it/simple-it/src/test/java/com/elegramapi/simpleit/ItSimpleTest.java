@@ -38,6 +38,7 @@ import ru.elegramapi.www.Command;
 import ru.elegramapi.www.Update;
 import ru.elegramapi.www.bot.BtDefault;
 import ru.elegramapi.www.bot.BtLogged;
+import ru.elegramapi.www.command.CmdStart;
 
 /**
  * Just simple integration test.
@@ -56,8 +57,7 @@ final class ItSimpleTest {
         this.bot = new BtLogged(
             new BtDefault(
                 "5735860614:AAHsneN3fWj76dfXejtdSmNGLf4kq-bUGgg",
-                new ItSimpleTest.CmdStart(),
-                new ItSimpleTest.CmdEcho()
+                new CmdStart("This is a message that responses to /start.")
             )
         );
     }
@@ -84,52 +84,5 @@ final class ItSimpleTest {
             response.back().toString().contains("POST"),
             Matchers.equalTo(true)
         );
-    }
-
-    /**
-     * The test command.
-     *
-     * @since 0.0.0
-     */
-    private static class CmdStart implements Command {
-
-        /**
-         * Ctor.
-         */
-        CmdStart() {
-            // Test ctor.
-        }
-
-        @Override
-        public final void act(final Update update, final Bot bot) throws IOException {
-            if ("/start".equals(update.message().text())) {
-                bot.sendMessage(update.message().chatId(), "Hi!");
-            }
-        }
-    }
-
-    /**
-     * The echo command.
-     *
-     * @since 0.0.0
-     */
-    private static class CmdEcho implements Command {
-
-        /**
-         * Ctor.
-         */
-        CmdEcho() {
-            // Test ctor.
-        }
-
-        @Override
-        public final void act(final Update update, final Bot bot) throws IOException {
-            if (!update.message().text().isEmpty()) {
-                bot.sendMessage(
-                    update.message().chatId(),
-                    update.message().text()
-                );
-            }
-        }
     }
 }
