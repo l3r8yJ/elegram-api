@@ -105,7 +105,7 @@ public class BtDefault implements Bot {
                 ).toString(),
                 ex
             );
-        };
+        }
     }
 
     @Override
