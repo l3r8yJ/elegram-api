@@ -85,7 +85,7 @@ SOFTWARE.
     <maven-javadoc-plugin.version>3.5.0</maven-javadoc-plugin.version>
     <jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
     <test-naming-conventions.version>0.1.8</test-naming-conventions.version>
-    <slf4j-jdk14.version>2.0.6</slf4j-jdk14.version>
+    <slf4j-jdk14.version>2.0.7</slf4j-jdk14.version>
     <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
     <maven-surefire-plugin.version>3.0.0</maven-surefire-plugin.version>
     <maven-invoker-plugin.version>3.4.0</maven-invoker-plugin.version>
