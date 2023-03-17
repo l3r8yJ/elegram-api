@@ -53,9 +53,9 @@ public final class FkJMessage {
      *  @return The data
      */
     public JSONObject asJson() {
-        final Map<String, Long> from = new HashMap<>();
+        final Map<String, Long> from = new HashMap<>(0);
         from.put("id", 213L);
-        final Map<String, Long> chat = new HashMap<>();
+        final Map<String, Long> chat = new HashMap<>(0);
         chat.put("id", 132L);
         this.wrapped.put("message_id", 21L);
         this.wrapped.put("from", from);
