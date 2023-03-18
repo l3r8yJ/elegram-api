@@ -1,7 +1,7 @@
 [<img alt="logo" src="docs/icon/telecactoos.svg" height="100px" />](https://www.elegram-api.ru/)
 
 [![EO principles respected here](https://www.elegantobjects.org/badge.svg)](https://www.elegantobjects.org)
-[![DevOps By Rultor.com](http://www.rultor.com/b/objectionary/eo)](http://www.rultor.com/p/objectionary/eo)
+[![DevOps By Rultor.com](http://www.rultor.com/b/objectionary/eo)](http://www.rultor.com/p/l3r8yJ/elegram-api)
 [![We recommend IntelliJ IDEA](https://www.elegantobjects.org/intellij-idea.svg)](https://www.jetbrains.com/idea/)
 
 [![PDD status](https://www.0pdd.com/svg?name=l3r8yJ/elegram-api)](https://www.0pdd.com/p?name=l3r8yJ/elegram-api)
