@@ -72,7 +72,7 @@ SOFTWARE.
     <maven.compiler.source>${project.java.version}</maven.compiler.source>
     <maven.compiler.target>${project.java.version}</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <junit.version>5.9.2</junit.version>
+    <junit.version>5.9.3</junit.version>
     <cactoos.version>0.55.0</cactoos.version>
     <jcabi.http.version>1.20.1</jcabi.http.version>
     <hamcrest.version>2.2</hamcrest.version>
