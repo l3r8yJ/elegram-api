@@ -76,7 +76,7 @@ SOFTWARE.
     <cactoos.version>0.55.0</cactoos.version>
     <jcabi.http.version>1.20.1</jcabi.http.version>
     <hamcrest.version>2.2</hamcrest.version>
-    <json.version>20230227</json.version>
+    <json.version>20240303</json.version>
     <jcabi-log.version>0.22.0</jcabi-log.version>
     <qulice-maven-plugin.version>0.22.0</qulice-maven-plugin.version>
     <jersey-common.version>2.39.1</jersey-common.version>
