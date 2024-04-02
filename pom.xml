@@ -83,7 +83,7 @@ SOFTWARE.
     <javax.ws.rs-api.version>2.1.1</javax.ws.rs-api.version>
     <javax.json-api.version>1.1.4</javax.json-api.version>
     <maven-javadoc-plugin.version>3.5.0</maven-javadoc-plugin.version>
-    <jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
+    <jacoco-maven-plugin.version>0.8.12</jacoco-maven-plugin.version>
     <test-naming-conventions.version>0.1.8</test-naming-conventions.version>
     <slf4j-jdk14.version>2.0.7</slf4j-jdk14.version>
     <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
