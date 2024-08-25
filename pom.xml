@@ -77,7 +77,7 @@ SOFTWARE.
     <jcabi.http.version>1.20.1</jcabi.http.version>
     <hamcrest.version>2.2</hamcrest.version>
     <json.version>20230227</json.version>
-    <jcabi-log.version>0.22.0</jcabi-log.version>
+    <jcabi-log.version>0.24.2</jcabi-log.version>
     <qulice-maven-plugin.version>0.22.0</qulice-maven-plugin.version>
     <jersey-common.version>2.39.1</jersey-common.version>
     <javax.ws.rs-api.version>2.1.1</javax.ws.rs-api.version>
