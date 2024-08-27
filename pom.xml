@@ -79,7 +79,7 @@ SOFTWARE.
     <json.version>20230227</json.version>
     <jcabi-log.version>0.22.0</jcabi-log.version>
     <qulice-maven-plugin.version>0.22.0</qulice-maven-plugin.version>
-    <jersey-common.version>2.39.1</jersey-common.version>
+    <jersey-common.version>2.45</jersey-common.version>
     <javax.ws.rs-api.version>2.1.1</javax.ws.rs-api.version>
     <javax.json-api.version>1.1.4</javax.json-api.version>
     <maven-javadoc-plugin.version>3.5.0</maven-javadoc-plugin.version>
