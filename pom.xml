@@ -87,7 +87,7 @@ SOFTWARE.
     <test-naming-conventions.version>0.1.8</test-naming-conventions.version>
     <slf4j-jdk14.version>2.0.7</slf4j-jdk14.version>
     <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
-    <maven-surefire-plugin.version>3.0.0</maven-surefire-plugin.version>
+    <maven-surefire-plugin.version>3.5.1</maven-surefire-plugin.version>
     <maven-invoker-plugin.version>3.5.1</maven-invoker-plugin.version>
     <jcabi-aspects.version>0.24.1</jcabi-aspects.version>
     <aspectjrt.version>1.6.12</aspectjrt.version>
