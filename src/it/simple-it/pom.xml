@@ -41,7 +41,7 @@ SOFTWARE.
     <javax.json-api.version>1.1.4</javax.json-api.version>
     <javax.ws.rs-api.version>2.1</javax.ws.rs-api.version>
     <jersey-common.version>2.39.1</jersey-common.version>
-    <maven-surefire-plugin.version>3.0.0</maven-surefire-plugin.version>
+    <maven-surefire-plugin.version>3.5.1</maven-surefire-plugin.version>
   </properties>
   <dependencies>
     <dependency>
